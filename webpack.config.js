@@ -1,6 +1,6 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 
-var path = require("path");
+const path = require("path");
 
 
 module.exports = {
@@ -10,9 +10,15 @@ module.exports = {
 
     // This is the entry point or start of our react applicaton
     entry:[
-        "webpack-hot-middleware/client",
+        "eventsource-polyfill",
+        "webpack-hot-middleware/client?reload=true",
         "./front/index.js"
     ],
+
+    target:'web',
+    devServer: {
+      contentBase: path.resolve(__dirname, 'front')
+    },
 
     // The plain compiled JavaScript will be output into this file
     output: {
