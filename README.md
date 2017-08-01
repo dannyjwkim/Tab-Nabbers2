@@ -131,10 +131,6 @@ The above command will install all the dependencies you need!
   }
 
 }
-
-```
-
-
 ```
 
 ##### Step 3
