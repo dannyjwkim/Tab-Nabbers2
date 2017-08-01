@@ -135,17 +135,10 @@ The above command will install all the dependencies you need!
 ```
 
 
+```
+
 ##### Step 3
-> npm install
-```
-Open your terminal in the working directory, and run the above command in your
- 
-terminal
-
-```
-
-##### Step 4
-> node server.js
+> npm start
 
 By running the above command, the app will be starting, and you can view it by
 
@@ -153,7 +146,7 @@ clicking on this link [localhost](http://localhost:8080) or type http://localhos
 
 
 
-##### Step 5 
+##### Step 4
 
 You should see this screen below on your browser. If not, you ran into some errors
 
