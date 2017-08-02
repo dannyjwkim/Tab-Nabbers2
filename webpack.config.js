@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+var webpack = require('webpack');
 
 const path = require("path");
 

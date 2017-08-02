@@ -33,6 +33,11 @@ app.use(bodyParser.json());
 //Models
 var db = require("./back/models");
 
+
+var getthemin = require("./back/controllers/authentication");
+app.use("/sign", getthemin);
+
+
 // Routes for students and secure routes for students
 var authenticateStudent = require("./back/controllers/securestudent");
 app.use("/api", authenticateStudent);
@@ -40,7 +45,10 @@ app.use("/api", authenticateStudent);
 var student = require("./back/controllers/studentcredentials");
 app.use("/", student);
 
+
 // Routes for Recruiters and secure routes
+
+
 var authenticateRecruiter = require("./back/controllers/securerecruiter");
 app.use("/rsecure", authenticateRecruiter);
 
@@ -62,7 +70,7 @@ db.sequelize.sync({ force: true }).then(function() {
 
     });
 
-    open(`http://localhost:${PORT}`, 'chrome');
+    open(`http://localhost:${PORT}`);
 
 }).catch(function(err) {
     console.log(err, "Something went wrong with the Database Update!");
