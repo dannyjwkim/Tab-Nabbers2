@@ -4,23 +4,11 @@ var path = require("path");
 
 
 module.exports = {
-<<<<<<< HEAD
-   
-    // This is the entry point or start of our react applicaton
-    entry: "./app/frontend/app.js",
-    
-    
-=======
-
-
-
-
     // This is the entry point or start of our react applicaton
     entry:[
         "webpack-hot-middleware/client",
         "./front/index.js"
     ],
->>>>>>> d1cc9b43e093865f0e8c60bc9b2013f119df15e0
 
     // The plain compiled JavaScript will be output into this file
     output: {
