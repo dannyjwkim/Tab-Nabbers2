@@ -4,7 +4,8 @@ var express = require('express'),
     env = require('dotenv').load(),
     secret = require("./back/config/secrets"),
     path = require("path"),
-    webpack = require("webpack");
+    webpack = require("webpack"),
+    open = require("open");
 
 var config = require("./webpack.config");
 
@@ -14,6 +15,7 @@ var app = express(),
 var compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo:true,
     publicPath:config.output.publicPath
 }));
 
@@ -51,16 +53,20 @@ var server;
 db.sequelize.sync({ force: true }).then(function() {
     console.log('Nice! Database looks fine');
 
+
     server = app.listen(PORT, function(err) {
 
         if (!err)
             console.log("Site is live");
-        else console.log(err)
+        else console.log("Database started fine!!!");
 
     });
 
+    open(`http://localhost:${PORT}`, 'chrome');
+
 }).catch(function(err) {
     console.log(err, "Something went wrong with the Database Update!");
+
 });
 
 
