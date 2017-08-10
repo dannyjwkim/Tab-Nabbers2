@@ -34,26 +34,7 @@ app.use(bodyParser.json());
 var db = require("./back/models");
 
 
-var getthemin = require("./back/controllers/authentication");
-app.use("/sign", getthemin);
 
-
-// Routes for students and secure routes for students
-var authenticateStudent = require("./back/controllers/securestudent");
-app.use("/api", authenticateStudent);
-
-var student = require("./back/controllers/studentcredentials");
-app.use("/", student);
-
-
-// Routes for Recruiters and secure routes
-
-
-var authenticateRecruiter = require("./back/controllers/securerecruiter");
-app.use("/rsecure", authenticateRecruiter);
-
-var recruiter = require("./back/controllers/recruitercredentials");
-app.use("/recruiter", recruiter);
 
 var server;
 
