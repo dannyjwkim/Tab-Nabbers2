@@ -34,6 +34,8 @@ app.use(bodyParser.json());
 var db = require("./back/models");
 
 
+var html = require("./back/routes/html");
+app.use("/", html);
 
 
 var server;

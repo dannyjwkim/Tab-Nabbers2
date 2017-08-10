@@ -187,7 +187,7 @@ There are different ways to contribute
   
 ## API
   - Meet up api : https://www.meetup.com/meetup_api/
-  - Github api : https://api.github.com/search/users?q=accimeesterlin
+  - Github api : https://developer.github.com/v3/search/#search-users
   
   
 
