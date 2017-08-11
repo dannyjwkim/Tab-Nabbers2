@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-polyfill": "^6.23.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "chai": "^3.5.0",
@@ -62,13 +63,12 @@
     "webpack-hot-middleware": "^2.18.2"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "jest",
     "start": "npm-run-all --parallel open:front lint:watch",
     "open:front": "babel-node server.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch",
-    "dev": "nodemon server.js",
-    "test": "jest"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",

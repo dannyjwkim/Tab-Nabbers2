@@ -10,10 +10,17 @@ import React from "react";
 import {combineReducers} from "redux";
 
 
-import Test from "./small";
+
+
+import test from "./small";
+import studentInfo from "./studentInfo";
 
 const allReducers = combineReducers({
-    test:Test
+
+    test:test,
+
+    student_info: studentInfo
+
 });
 
 
