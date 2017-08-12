@@ -4,10 +4,12 @@
 
 import Signin from "../components/Student";
 import Recruiter from "../components/Recruiter";
-import Profile from "../components/profile";
+import Profile from "../containers/profile/Profile";
 import About from "../components/About";
 import D3Map from "../components/D3Map";
 import Event from "../components/Event";
+
+import Home from "../containers/Home";
 
 const pages = {
         about:About,
@@ -15,7 +17,8 @@ const pages = {
         profile:Profile,
         map:D3Map,
         recruiter:Recruiter,
-        event:Event
+        event:Event,
+        home:Home
 };
 
 

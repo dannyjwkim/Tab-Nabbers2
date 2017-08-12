@@ -13,13 +13,12 @@ import {combineReducers} from "redux";
 
 
 import test from "./small";
-import studentInfo from "./studentInfo";
+import overview from "./overview";
 
 const allReducers = combineReducers({
 
     test:test,
-
-    student_info: studentInfo
+    overview: overview
 
 });
 

@@ -80,7 +80,7 @@ class Profile extends React.Component{
         console.log(event.target);
         console.log(event.target);
 
-    }
+    };
 
 
     sendUpload = (event) => {

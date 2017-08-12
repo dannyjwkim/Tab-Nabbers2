@@ -35,13 +35,7 @@ const Routes = ({store}) => (
 
 Routes.propTypes = {
     store: PropTypes.object.isRequired
-}
+};
 
 export default Routes;
 
-
-
-
-{/*<Route path="map" component={D3Map}></Route>*/}
-{/*<Route path="recruiter" component={Recruiter}></Route>*/}
-{/*<Route path="event" component={Event}></Route>*/}

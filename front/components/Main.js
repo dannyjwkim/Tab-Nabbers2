@@ -9,19 +9,19 @@ import css from "../public/css/main.scss";
 
 
 class Main extends Component {
-    state = { visible: false }
+    state = { visible: false };
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
     handleSidebarItemClick(redirectUrl){
       return () => {
-        browserHistory.push(redirectUrl)
+        browserHistory.push(redirectUrl);
         this.setState({ visible: false })
       }
     }
 
     render() {
-        const { visible } = this.state
+        const { visible } = this.state;
 
         return (
           <div>

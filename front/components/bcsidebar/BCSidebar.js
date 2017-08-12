@@ -6,12 +6,12 @@ import SidebarItem from './sidebar-item/SidebarItem'
 
 const BCSidebar = (props) => (
   <Sidebar {...props}>
-    {props.children.map(item => <SidebarItem {...item}/>)}
+    {props.children.map((item, index) => <SidebarItem {...item} key={index}/>)}
   </Sidebar>
-)
+);
 
 BCSidebar.propTypes = {
   children: PropTypes.array.isRequired,
-}
+};
 
 export default BCSidebar
