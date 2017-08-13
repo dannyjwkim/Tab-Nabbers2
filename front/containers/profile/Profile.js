@@ -63,6 +63,8 @@ class Profile extends React.Component {
             lastname:'Accime'
         };
 
+        console.log(overview);
+
 
 
 

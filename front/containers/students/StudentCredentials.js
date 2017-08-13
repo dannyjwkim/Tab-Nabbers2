@@ -140,7 +140,7 @@ class StudentCredentials extends React.Component {
                     <h2 className="center aligned header form-head">{active ? "Student - Sign in" : "Student - Sign up"}</h2>
 
                     {
-                        active ?
+                        this.state.active ?
                             <Signin {...credentials} handleSubmit = {this.handleSubmit}/>
 
                             : <Signup {...credentials}
