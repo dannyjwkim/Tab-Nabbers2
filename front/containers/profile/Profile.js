@@ -2,7 +2,7 @@
  * Created by ea375w on 7/19/2017.
  */
 import React from "react";
-
+import "../../public/css/profile.scss";
 
 // Import pieces of components for Profile Pages
 import About from "./pieces/About";
@@ -17,6 +17,10 @@ class Profile extends React.Component {
 
     constructor(){
         super();
+
+        this.state = {
+            activeItem:'About'
+        };
 
     }
 
@@ -46,6 +50,8 @@ class Profile extends React.Component {
 
     };
 
+    handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
     render() {
 
         console.log(this.props.overview);
@@ -63,9 +69,9 @@ class Profile extends React.Component {
         return (
             <section className="profile">
 
-                <About {...overview} dataChanged = {this.dataChanged} getIn = {this.getIn}/>
+                <About {...overview} dataChanged = {this.dataChanged} getIn = {this.getIn} />
 
-                <Content {...overview} dataChanged = {this.dataChanged}/>
+                <Content {...overview} dataChanged = {this.dataChanged} handleItemClick={this.handleItemClick}/>
 
             </section>
         );

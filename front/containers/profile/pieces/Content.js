@@ -2,10 +2,11 @@
  * Created by esterlingaccime on 8/12/17.
  */
 import React from "react";
+import { Grid, Menu, Segment, Dropdown, Rating } from 'semantic-ui-react';
 
 import InlineEdit from "react-edit-inline";
 
-const Content = ({firstname, lastname, job, street, dataChanged}) =>{
+const Content = ({firstname, lastname, job, street, dataChanged, activeItem, handleItemClick}) =>{
 
     return(
 
@@ -49,7 +50,7 @@ const Content = ({firstname, lastname, job, street, dataChanged}) =>{
             <div className="profile__content--ranking">
                 <h3>Rankings</h3>
                 <div>
-                    {/*<Rating maxRating={5} clearable />*/}
+                    <Rating maxRating={5} clearable />
                 </div>
             </div>
 
@@ -64,24 +65,15 @@ const Content = ({firstname, lastname, job, street, dataChanged}) =>{
                 {/*<p><i className="unhide icon"> </i> Timeline</p>*/}
                 {/*<p> <i className="user icon"> </i>About</p>*/}
 
-                {/*<Menu pointing secondary>*/}
-                    {/*<Menu.Item name='Meetup Events' active={activeItem === 'Timeline'} onClick={this.handleItemClick}/>*/}
-                    {/*<Menu.Item name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />*/}
+                <Menu pointing secondary>
+                    <Menu.Item name='Meetup Events' active={activeItem === 'Timeline'} onClick={handleItemClick}/>
+                    <Menu.Item name='About' active={activeItem === 'About'} onClick={handleItemClick} />
 
-                {/*</Menu>*/}
+                </Menu>
 
-                {/*<div>*/}
-                    {/*{(activeItem === 'About') ? <About*/}
-                        {/*phoneNumber = {phoneNumber }*/}
-                        {/*homeaddress = {homeaddress}*/}
-                        {/*email = {email}*/}
-                        {/*site = {site}*/}
-                        {/*birthday = {birthday}*/}
-                        {/*gender = {gender}*/}
-                        {/*dataChanged = {this.dataChanged}*/}
-
-                    {/*/> :  <Event />}*/}
-                {/*</div>*/}
+                <div>
+                    {(activeItem === 'About') ? <p>Works</p> :  <p>Testing</p>}
+                </div>
 
             </div>
 
