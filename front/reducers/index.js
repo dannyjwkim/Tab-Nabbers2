@@ -6,20 +6,14 @@
 import React from "react";
 
 
-// Using Combine Reducers to combine all the reducers together.
 import {combineReducers} from "redux";
 
-
-
-
-import test from "./small";
 import overview from "./overview";
+import credentials from "./credentials";
 
 const allReducers = combineReducers({
-
-    test:test,
-    overview: overview
-
+    overview,
+    credentials
 });
 
 

@@ -2,7 +2,7 @@
  * Created by ea375w on 7/19/2017.
  */
 
-import Signin from "../components/Student";
+import Signin from "../containers/students/StudentCredentials";
 import Recruiter from "../components/Recruiter";
 import Profile from "../containers/profile/Profile";
 import About from "../components/About";
