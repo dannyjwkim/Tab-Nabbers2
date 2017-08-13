@@ -23,7 +23,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 
 // // Static directory
-// app.use(express.static(path.join(__dirname + "/app/public")));
+app.use(express.static(path.join(__dirname + "/app/public")));
 
 //For BodyParser
 app.use(bodyParser({ defer: true }));
@@ -38,14 +38,12 @@ var html = require("./back/routes/html");
 app.use("/", html);
 
 
-var server;
-
 //Sync Database
 db.sequelize.sync({  }).then(function() {
     console.log('Nice! Database looks fine');
 
 
-    server = app.listen(PORT, function(err) {
+    app.listen(PORT, function(err) {
 
         if (!err)
             console.log("Site is live");
@@ -60,5 +58,3 @@ db.sequelize.sync({  }).then(function() {
 
 });
 
-
-module.exports =  server;
