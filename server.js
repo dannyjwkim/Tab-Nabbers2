@@ -5,7 +5,9 @@ var express = require('express'),
     secret = require("./back/config/secrets"),
     path = require("path"),
     webpack = require("webpack"),
-    open = require("open");
+    open = require("open"),
+    passport = require("passport"),
+    session = require('express-session');
 
 var config = require("./webpack.config");
 
@@ -30,12 +32,27 @@ app.use(bodyParser({ defer: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+app.use(session({
+    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Models
 var db = require("./back/models");
 
+var authenticate = require("./back/routes/authenticate");
+
+app.use("/authenticate", authenticate);
 
 var html = require("./back/routes/html");
 app.use("/", html);
+
+
 
 
 //Sync Database
@@ -51,7 +68,7 @@ db.sequelize.sync({  }).then(function() {
 
     });
 
-    open(`http://localhost:${PORT}`);
+    //open(`http://localhost:${PORT}`);
 
 }).catch(function(err) {
     console.log(err, "Something went wrong with the Database Update!");

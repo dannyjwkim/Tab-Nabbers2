@@ -4,7 +4,7 @@ import { Route, IndexRoute, Router, browserHistory } from "react-router";
 import {Provider} from "react-redux";
 
 import Main from "../components/Main";
-import Home from "../components/Home";
+import Home from "../containers/Home";
 
 
 import PropTypes from 'prop-types'

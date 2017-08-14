@@ -4,7 +4,9 @@
 
 var express = require("express"),
     router = express.Router(),
-    path = require("path");
+    path = require("path"),
+    key = require("../config/key");
+
 
 
 
@@ -12,7 +14,10 @@ router.get("*", function(req, res) {
 
     res.sendFile(path.join(__dirname + "/../../front/public/index.html"));
 
+
 });
+
+
 
 
 module.exports = router;

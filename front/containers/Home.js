@@ -1,44 +1,39 @@
-/**
- * Created by ea375w on 7/19/2017.
- */
 import React from "react";
-//
-// import {connect} from "react-redux";
-//
-// import {bindActionCreators} from "redux";
 
-// import * as courseActions from "../../action/courseAction";
+import { Link } from "react-router";
 
-class Home extends React.Component {
+import "../public/css/signup.scss";
 
 
-    render() {
-        var test = 'I am happy to be here and practicing whatever you think I am practicing';
+class Home extends React.Component{
 
-        console.log(test);
+    render(){
+        return(
+            <div className="content ui centered grid">
+                <div className="content">
+                    <div className="center">
 
-        // JSX go below
-        return (
-            <div>
-                <h1>Hello World!!!</h1>
+                        <h1>Bootcruit</h1>
 
+                        <p>Single Click Staffing Solutions</p>
+
+                        <div className="login__btn-container">
+                            <Link to="/recruiter"><button className="ui primary basic button">Employer</button> </Link>
+                            <Link to="/student"><button className="ui positive basic button">Student</button> </Link>
+                        </div>
+
+                    </div>
+
+                   <div className="login__btn-container">
+                       <a href="/authenticate/auth/google">Google Sign Up</a>
+                       <a href="/authenticate/auth/twitter">Twitter Sign In</a>
+                       <a href="/authenticate/auth/linkedin">Linkedin Sign In</a>
+                       <a href="/authenticate/auth/facebook">Facebook Sign In</a>
+                   </div>
+                </div>
             </div>
-        );
+        )
     }
 }
 
-// function mapStateToProps(state) {
-//     return {
-//         data: state
-//     }
-// }
-//
-//
-// function matchDispatchToProps(dispatch) {
-//     return {
-//         actions: bindActionCreators(dispatch, courseActions)
-//
-//     }
-// }
-
-export default Home
+export default Home;
