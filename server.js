@@ -7,12 +7,35 @@ var express = require('express'),
     webpack = require("webpack"),
     open = require("open"),
     passport = require("passport"),
-    session = require('express-session');
+    mongoose = require('mongoose');
+
+
+
+mongoose.connect('mongodb://localhost/sequelize_passport');
+
+
+var db = mongoose.connection;
+
+db.on("error", function (err) {
+    console.log("Mongoose Error: ", err);
+});
+
+db.once("open", function () {
+    console.log("Mongoose connection successful!!!");
+});
+
+
 
 var config = require("./webpack.config");
 
+
+require('./back/passport')(passport);
+
 var app = express(),
     PORT = process.env.PORT || 8080;
+
+
+var router = express.Router();
 
 var compiler = webpack(config);
 
@@ -42,36 +65,27 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Models
-var db = require("./back/models");
 
 var authenticate = require("./back/routes/authenticate");
 
 app.use("/authenticate", authenticate);
 
-var html = require("./back/routes/html");
-app.use("/", html);
 
+
+
+
+var html = require("./back/routes/html");
+
+app.use('/', html);
 
 
 
 //Sync Database
-db.sequelize.sync({  }).then(function() {
-    console.log('Nice! Database looks fine');
+app.listen(PORT, function(err) {
 
+    if (!err)
 
-    app.listen(PORT, function(err) {
-
-        if (!err)
-            console.log("Site is live");
-        else console.log("Database started fine!!!");
-
-    });
-
-    //open(`http://localhost:${PORT}`);
-
-}).catch(function(err) {
-    console.log(err, "Something went wrong with the Database Update!");
+        console.log("Site is live");
+    else console.log("Database started fine!!!");
 
 });
-

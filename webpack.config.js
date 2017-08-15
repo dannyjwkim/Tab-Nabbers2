@@ -1,12 +1,9 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 const path = require("path");
 
 
 module.exports = {
-
-
-
 
     // This is the entry point or start of our react applicaton
     entry:[

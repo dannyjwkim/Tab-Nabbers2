@@ -2,7 +2,9 @@ import React from "react";
 
 import { Link } from "react-router";
 
-import "../public/css/signup.scss";
+// import "../public/css/signup.scss";
+
+import { Button, Icon } from "react-materialize";
 
 
 class Home extends React.Component{
@@ -25,10 +27,11 @@ class Home extends React.Component{
                     </div>
 
                    <div className="login__btn-container">
-                       <a href="/authenticate/auth/google">Google Sign Up</a>
-                       <a href="/authenticate/auth/twitter">Twitter Sign In</a>
-                       <a href="/authenticate/auth/linkedin">Linkedin Sign In</a>
-                       <a href="/authenticate/auth/facebook">Facebook Sign In</a>
+
+                       <a href="/authenticate/auth/google"><Button waves='light'>Google</Button></a>
+                       <a href="/authenticate/auth/twitter"><Button waves='light'>Twitter</Button></a>
+                       <a href="/authenticate/auth/linkedin"><Button waves='light'>LinkedIn</Button></a>
+                       <a href="/authenticate/auth/facebook"><Button waves='light'>Facebook</Button></a>
                    </div>
                 </div>
             </div>
