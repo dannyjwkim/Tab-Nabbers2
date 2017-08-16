@@ -4,10 +4,24 @@ import { Link } from "react-router";
 
 // import "../public/css/signup.scss";
 
-import { Button, Icon } from "react-materialize";
+import { Button, Icon, Row, Input } from "react-materialize";
+// import Signup from "../components/signup";
 
 
 class Home extends React.Component{
+
+    constructor(){
+        super();
+
+    }
+
+    signUp(){
+        console.log("Hello World!!");
+
+        console.log(this);
+
+       // const {email, password } = this;
+    }
 
     render(){
         return(
@@ -25,6 +39,13 @@ class Home extends React.Component{
                         </div>
 
                     </div>
+
+
+                    <Row>
+                        <Input type="email" placeholder="Enter your email..." s={6} label="Email"/>
+                        <Input type="password" s={6} label="Password" placeholder="Enter your password...">
+                        <button onClick={this.signUp}>Sign Up</button>
+                    </Row>
 
                    <div className="login__btn-container">
 
