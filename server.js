@@ -55,6 +55,7 @@ app.use(bodyParser({ defer: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+require("./back/passport")(passport);
 
 app.use(session({
     secret: 'ilovescotchscotchyscotchscotch', // session secret
@@ -66,18 +67,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-var authenticate = require("./back/routes/authenticate");
-
-app.use("/authenticate", authenticate);
-
-
-
-
-
-var html = require("./back/routes/html");
-
-app.use('/', html);
-
+require("./back/routes/authenticate")(app, passport);
 
 
 //Sync Database

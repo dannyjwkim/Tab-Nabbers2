@@ -1,15 +1,14 @@
+const User = require("./models1/user"),
+    key = require("./config/key");
+
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+    TwitterStrategy = require('passport-twitter').Strategy,
+    LinkedInStrategy = require('passport-linkedin').Strategy,
+    FacebookStrategy = require('passport-facebook').Strategy;
+
 
 
 module.exports = (passport) => {
-
-    const User = require("./models1/user"),
-          key = require("./config/key");
-
-    const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-          TwitterStrategy = require('passport-twitter').Strategy,
-          LinkedInStrategy = require('passport-linkedin').Strategy,
-          FacebookStrategy = require('passport-facebook').Strategy;
-
 
 // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
@@ -57,7 +56,7 @@ module.exports = (passport) => {
                         newUser.google.id    = profile.id;
                         newUser.google.token = token;
                         newUser.google.name  = profile.displayName;
-                        newUser.google.email = profile.emails[0].value; // pull the first email
+                        // newUser.google.email = profile.emails[0].value; // pull the first email
 
                         // save the user
                         newUser.save(function(err) {
@@ -84,12 +83,46 @@ module.exports = (passport) => {
     passport.use(new TwitterStrategy({
             consumerKey: key.twitter.consurmer_key,
             consumerSecret: key.twitter.consumer_secret,
-            callbackURL: "http://localhost:8080/authenticate/auth/twitter/callback"
+            callbackURL: "http://localhost:8080/auth/twitter/callback",
+            passReqToCallback : true
         },
-        function(token, tokenSecret, profile, done) {
+        function(req, token, tokenSecret, profile, done) {
 
+            // make the code asynchronous
+            // User.findOne won't fire until we have all our data back from Twitter
+            process.nextTick(function() {
 
-            console.log(token, tokenSecret, profile);
+                User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
+
+                    // if there is an error, stop everything and return that
+                    // ie an error connecting to the database
+                    if (err)
+                        return done(err);
+
+                    // if the user is found then log them in
+                    if (user) {
+                        return done(null, user); // user found, return that user
+                    } else {
+                        // if there is no user, create them
+                        var newUser                 = new User();
+
+                        // set all of the user data that we need
+                        newUser.twitter.id          = profile.id;
+                        newUser.twitter.token       = token;
+                        newUser.twitter.username    = profile.username;
+                        newUser.twitter.displayName = profile.displayName;
+
+                        // save our user into the database
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
+                            return done(null, newUser);
+                        });
+                    }
+                });
+
+            });
+
         }
     ));
 
@@ -100,7 +133,7 @@ module.exports = (passport) => {
     passport.use(new LinkedInStrategy({
             consumerKey: key.linkedin.client_id,
             consumerSecret: key.linkedin.client_secret,
-            callbackURL: "http://localhost:8080/authenticate/auth/linkedin/callback"
+            callbackURL: "http://localhost:8080/auth/linkedin/callback"
         },
         function(token, tokenSecret, profile, done) {
 
@@ -119,10 +152,12 @@ module.exports = (passport) => {
     passport.use(new FacebookStrategy({
             clientID: key.facebook.client_id,
             clientSecret: key.facebook.client_secret,
-            callbackURL: "http://localhost:8080/authenticate/auth/facebook/callback"
+            callbackURL: "http://localhost:8080/auth/facebook/callback"
         },
         // facebook will send back the token and profile
         function(token, refreshToken, profile, done) {
+
+        console.log(profile);
 
             // asynchronous
             process.nextTick(function() {
@@ -146,7 +181,7 @@ module.exports = (passport) => {
                         newUser.facebook.id    = profile.id; // set the users facebook id
                         newUser.facebook.token = token; // we will save the token that facebook provides to the user
                         newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
-                        newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+                        // newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 
                         // save our user to the database
                         newUser.save(function(err) {

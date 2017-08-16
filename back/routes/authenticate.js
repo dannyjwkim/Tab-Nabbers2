@@ -1,27 +1,37 @@
 
-const express = require("express");
-
-const router = express.Router();
-
-const path = require('path');
-
-const passport = require("passport");
+const path = require("path");
 
 
+module.exports = function (app, passport) {
 
-router.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get("/", function(req, res) {
+
+        res.sendFile(path.join(__dirname + "/../../front/public/index.html"));
+
+    });
+
+    app.get("/profile", function(req, res) {
+
+        res.sendFile(path.join(__dirname + "/../../front/public/index.html"));
+
+    });
+
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope:'email'}));
 
 
-router.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {scope:['read_stream', 'publish_actions']}, { successRedirect: '/',
-            failureRedirect: '/login' }));
+
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+        successRedirect: '/profile',
+        failureRedirect: '/'
+    }));
 
 
 
-router.get('/auth/linkedin',
+
+    app.get('/auth/linkedin',
         passport.authenticate('linkedin'));
 
-router.get('/auth/linkedin/callback',
+    app.get('/auth/linkedin/callback',
         passport.authenticate('linkedin', { failureRedirect: '/login' }),
         function(req, res) {
             // Successful authentication, redirect home.
@@ -29,23 +39,30 @@ router.get('/auth/linkedin/callback',
         });
 
 
-router.get('/auth/google',
+    app.get('/auth/google',
         passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get('/auth/google/callback', passport.authenticate('google', { successRedirect : '/profile', failureRedirect: '/' }));
+    app.get('/auth/google/callback', passport.authenticate('google', { successRedirect : '/profile', failureRedirect: '/' }));
 
 
 
-router.get('/auth/twitter', passport.authenticate('twitter'));
+    app.get('/auth/twitter', passport.authenticate('twitter'));
 
 
-router.get('/auth/twitter/callback',
+    app.get('/auth/twitter/callback',
         passport.authenticate('twitter', { successRedirect: '/profile',
             failureRedirect: '/' }));
 
 
+    function isLoggedIn(req, res, next) {
+        if(req.isAuthenticated()){
+            return next()
+        } else{
+            res.redirect("/");
+        }
+    }
 
 
-module.exports = router;
+};
 
 

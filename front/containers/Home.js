@@ -29,9 +29,9 @@ class Home extends React.Component{
                    <div className="login__btn-container">
 
                        <a href="/authenticate/auth/google"><Button waves='light'>Google</Button></a>
-                       <a href="/authenticate/auth/twitter"><Button waves='light'>Twitter</Button></a>
-                       <a href="/authenticate/auth/linkedin"><Button waves='light'>LinkedIn</Button></a>
-                       <a href="/authenticate/auth/facebook"><Button waves='light'>Facebook</Button></a>
+                       <a href="/auth/twitter"><Button waves='light'>Twitter</Button></a>
+                       <a href="/auth/linkedin"><Button waves='light'>LinkedIn</Button></a>
+                       <a href="/auth/facebook"><Button waves='light'>Facebook</Button></a>
                    </div>
                 </div>
             </div>
