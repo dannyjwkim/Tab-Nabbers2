@@ -2,8 +2,9 @@
  * Created by esterlingaccime on 8/14/17.
  */
 
-const mongoose = require("mongoose");
 
+
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
 
@@ -24,6 +25,13 @@ const schema = new mongoose.Schema({
         username     : String
     },
     google           : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
+    },
+
+    linkedin         : {
         id           : String,
         token        : String,
         email        : String,

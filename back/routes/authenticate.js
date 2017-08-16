@@ -32,7 +32,7 @@ module.exports = function (app, passport) {
         passport.authenticate('linkedin'));
 
     app.get('/auth/linkedin/callback',
-        passport.authenticate('linkedin', { failureRedirect: '/login' }),
+        passport.authenticate('linkedin', { failureRedirect: '/' }),
         function(req, res) {
             // Successful authentication, redirect home.
             res.redirect('/profile');
