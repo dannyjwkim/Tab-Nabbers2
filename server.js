@@ -1,4 +1,4 @@
-var express = require('express'),
+const express = require('express'),
     session = require('express-session'),
     bodyParser = require('body-parser'),
     env = require('dotenv').load(),
@@ -14,7 +14,7 @@ var express = require('express'),
 mongoose.connect('mongodb://localhost/sequelize_passport');
 
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on("error", function (err) {
     console.log("Mongoose Error: ", err);
@@ -26,18 +26,18 @@ db.once("open", function () {
 
 
 
-var config = require("./webpack.config");
+const config = require("./webpack.config");
 
 
 require('./back/passport')(passport);
 
-var app = express(),
+const app = express(),
     PORT = process.env.PORT || 8080;
 
 
-var router = express.Router();
+const router = express.Router();
 
-var compiler = webpack(config);
+const compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
     noInfo:true,
@@ -68,6 +68,7 @@ app.use(passport.session());
 
 
 require("./back/routes/authenticate")(app, passport);
+require("./back/routes/html")(app, path);
 
 
 //Sync Database

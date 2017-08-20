@@ -5,10 +5,10 @@ import React from "react";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 
 import {connect} from "react-redux";
-import fetch from "../../utils/api";
-import "../../public/css/login.scss";
-import Signin from "./pieces/signin";
-import Signup from "./pieces/signup";
+import fetch from "../utils/api";
+import "../public/css/login.scss";
+import Signin from "../components/signin";
+import Signup from "../components/signup";
 
 class StudentCredentials extends React.Component {
 

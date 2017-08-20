@@ -3,13 +3,16 @@
  */
 
 
-
-const mongoose = require("mongoose");
+const bcrypt = require("bcrypt"),
+    mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
 
     local            : {
-        email        : String,
+        email        : {
+            type:String,
+            unique:true
+        },
         password     : String
     },
     facebook         : {
@@ -39,8 +42,14 @@ const schema = new mongoose.Schema({
     }
 });
 
+schema.methods.generateHash = (password) => {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+};
+
+schema.method.validPassword = (password) =>{
+    return bcrypt.compareSync(password, this.local.password)
+};
 
 const User = mongoose.model('User', schema);
-
 
 module.exports = User;

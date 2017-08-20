@@ -4,21 +4,21 @@ const path = require("path");
 
 module.exports = function (app, passport) {
 
-    app.get("/", function(req, res) {
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect:'/profile',
+        failureRedirect:'/'
+    }));
 
-        res.sendFile(path.join(__dirname + "/../../front/public/index.html"));
 
-    });
+    app.post('/login', passport.authenticate('local-signin', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/' // redirect back to the signup page if there is an error
+    }));
 
-    app.get("/profile", function(req, res) {
 
-        res.sendFile(path.join(__dirname + "/../../front/public/index.html"));
 
-    });
 
     app.get('/auth/facebook', passport.authenticate('facebook', {scope:'email'}));
-
-
 
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
         successRedirect: '/profile',

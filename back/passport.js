@@ -4,7 +4,8 @@ const User = require("./models1/user"),
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,
     LinkedInStrategy = require('passport-linkedin').Strategy,
-    FacebookStrategy = require('passport-facebook').Strategy;
+    FacebookStrategy = require('passport-facebook').Strategy,
+    LocalStrategy = require("passport-local").Strategy;
 
 
 
@@ -26,6 +27,75 @@ module.exports = (passport) => {
 
         });
     });
+
+
+    passport.use('local-signup', new LocalStrategy({
+        usernameField:'email',
+        passwordField:'password',
+        passReqToCallback:true
+    }, function (req, email, password, done) {
+
+        console.log(email, password);
+        process.nextTick(function () {
+
+            User.findOne({'local.email':email}, function (err, user) {
+                if(err){
+                    return done(err);
+                }
+
+                if(user){
+                    return done(null, false, 'Email already existed');
+                } else{
+                    var newUser = new User();
+
+                    newUser.local.email = email;
+                    newUser.local.password = newUser.generateHash(password);
+                    //newUser.isNew = false;
+
+                    console.log(newUser);
+
+                    newUser.save(function(err, data) {
+                        if(err)
+                            throw err;
+
+                        return done(null, data);
+                    });
+                }
+            });
+        })
+    }));
+
+
+    passport.use('local-signin', new LocalStrategy({
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true
+    }, function (req, email, password, done) {
+
+        console.log(email, password);
+
+        var newUser = new User();
+
+        User.findOne({ 'local.email' :  email }, function (err, user) {
+
+            if(err)
+                return done(err);
+
+            if(!user)
+                return done(null, false, 'Sorry bad, today is not your day, try again');
+            //
+            // if(newUser.valid(password))
+            //     return done(null, false, 'wrong password');
+
+            return done(null, user);
+
+        });
+    }));
+
+
+
+
+
 
     passport.use(new GoogleStrategy({
             clientID: key.gooogle.client_Id,

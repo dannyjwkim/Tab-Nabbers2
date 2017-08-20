@@ -2,12 +2,12 @@
  * Created by ea375w on 7/19/2017.
  */
 import React from "react";
-import "../../public/css/profile.scss";
+import "../public/css/profile.scss";
 
 // Import pieces of components for Profile Pages
-import About from "./pieces/About";
-import Content from "./pieces/Content";
-import fetch from "../../utils/api";
+import About from "../components/About";
+import Content from "../components/Content";
+import fetch from "../utils/api";
 
 
 

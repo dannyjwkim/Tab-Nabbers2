@@ -2,10 +2,13 @@ import React from "react";
 
 import { Link } from "react-router";
 
-// import "../public/css/signup.scss";
+import Signup from "../components/signup";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import api from "../utils/newApi";
 
-import { Button, Icon, Row, Input } from "react-materialize";
-// import Signup from "../components/signup";
+import {Col, Button, Row, Icon, Input} from "react-materialize";
+
 
 
 class Home extends React.Component{
@@ -13,51 +16,98 @@ class Home extends React.Component{
     constructor(){
         super();
 
+        this.state = {
+            email:'',
+            password:'',
+            loginEmail:'',
+            loginPassword:''
+
+        };
+
+        this.signUp = this.signUp.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.signIn = this.signIn.bind(this);
+
     }
 
     signUp(){
+
+        api.signup_User(this.state)
+            .then(function (data) {
+                console.log("Hello World");
+            })
+            .catch(function (err) {
+                console.log("Not working");
+            });
+
+    }
+
+    signIn(){
+
+        //console.log(this.state);
+
+        const {loginEmail, loginPassword} = this.state;
+
+        const user = {
+            email:loginEmail,
+            password:loginPassword
+        };
+
+        console.log(user);
+
+        api.signIn_User(user)
+            .then(function (data) {
+                console.log(data);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+
+    }
+
+    handleChange(e){
+        this.setState({[e.target.name]:e.target.value});
+
         console.log("Hello World!!");
 
-        console.log(this);
-
-       // const {email, password } = this;
     }
 
     render(){
         return(
-            <div className="content ui centered grid">
-                <div className="content">
-                    <div className="center">
+            <div>
 
-                        <h1>Bootcruit</h1>
+                <Navbar/>
 
-                        <p>Single Click Staffing Solutions</p>
+                {/*<h1>Bootcruit</h1>*/}
 
-                        <div className="login__btn-container">
-                            <Link to="/recruiter"><button className="ui primary basic button">Employer</button> </Link>
-                            <Link to="/student"><button className="ui positive basic button">Student</button> </Link>
-                        </div>
+                {/*<p>Single Click Staffing Solutions</p>*/}
 
-                    </div>
+                {/*<div className="login__btn-container">*/}
+                    {/*<Link to="/recruiter"><button className="ui primary basic button">Employer</button> </Link>*/}
+                    {/*<Link to="/student"><button className="ui positive basic button">Student</button> </Link>*/}
+                {/*</div>*/}
+                <Signup handleChange= {this.handleChange} signUp ={this.signUp}>
+                    Sign up
+                </Signup>
 
 
-                    <Row>
-                        <Input type="email" placeholder="Enter your email..." s={6} label="Email"/>
-                        <Input type="password" s={6} label="Password" placeholder="Enter your password...">
-                        <button onClick={this.signUp}>Sign Up</button>
-                    </Row>
+                <Col l={7} className='login__form'>
+                    <p className="center">Sign in with</p>
+                    <Input l={12} label="Username or Email" name='loginEmail' onChange={this.handleChange}><Icon>person</Icon></Input>
+                    <Input l={12} label="Password" name='loginPassword' onChange={this.handleChange}><Icon>lock_outline</Icon></Input>
 
-                   <div className="login__btn-container">
+                    <Button onClick={this.signIn}>Sign in</Button>
+                </Col>
 
-                       <a href="/authenticate/auth/google"><Button waves='light'>Google</Button></a>
-                       <a href="/auth/twitter"><Button waves='light'>Twitter</Button></a>
-                       <a href="/auth/linkedin"><Button waves='light'>LinkedIn</Button></a>
-                       <a href="/auth/facebook"><Button waves='light'>Facebook</Button></a>
-                   </div>
-                </div>
+
+
+
+                {/*<Footer/>*/}
+
             </div>
-        )
+    )
     }
 }
+
 
 export default Home;
