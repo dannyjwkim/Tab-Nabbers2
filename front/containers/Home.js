@@ -19,8 +19,8 @@ class Home extends React.Component{
         this.state = {
             email:'',
             password:'',
-            loginEmail:'',
-            loginPassword:''
+            usernameField:'',
+            passwordField:''
 
         };
 
@@ -46,21 +46,21 @@ class Home extends React.Component{
 
         //console.log(this.state);
 
-        const {loginEmail, loginPassword} = this.state;
+        const {usernameField, passwordField} = this.state;
 
         const user = {
-            email:loginEmail,
-            password:loginPassword
+            usernameField:usernameField,
+            passwordField:passwordField
         };
 
         console.log(user);
 
         api.signIn_User(user)
             .then(function (data) {
-                console.log(data);
+                console.log("User signed in");
             })
             .catch(function (err) {
-                console.log(err);
+                console.log("Error");
             });
 
     }
@@ -93,8 +93,8 @@ class Home extends React.Component{
 
                 <Col l={7} className='login__form'>
                     <p className="center">Sign in with</p>
-                    <Input l={12} label="Username or Email" name='loginEmail' onChange={this.handleChange}><Icon>person</Icon></Input>
-                    <Input l={12} label="Password" name='loginPassword' onChange={this.handleChange}><Icon>lock_outline</Icon></Input>
+                    <Input l={12} label="Username or Email" name='usernameField' onChange={this.handleChange}><Icon>person</Icon></Input>
+                    <Input l={12} label="Password" name='passwordField' onChange={this.handleChange}><Icon>lock_outline</Icon></Input>
 
                     <Button onClick={this.signIn}>Sign in</Button>
                 </Col>

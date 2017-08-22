@@ -66,15 +66,13 @@ module.exports = (passport) => {
     }));
 
 
-    passport.use('local-signin', new LocalStrategy({
+    passport.use('local-login', new LocalStrategy({
         usernameField : 'email',
         passwordField : 'password',
         passReqToCallback : true
     }, function (req, email, password, done) {
 
         console.log(email, password);
-
-        var newUser = new User();
 
         User.findOne({ 'local.email' :  email }, function (err, user) {
 
@@ -83,10 +81,11 @@ module.exports = (passport) => {
 
             if(!user)
                 return done(null, false, 'Sorry bad, today is not your day, try again');
-            //
-            // if(newUser.valid(password))
-            //     return done(null, false, 'wrong password');
+            // if the user is found but the password is wrong
+            if (!user.validPassword(password))
+                return done(null, false, 'Password does not match'); // create the loginMessage and save it to session as flashdata
 
+            // all is well, return successful user
             return done(null, user);
 
         });

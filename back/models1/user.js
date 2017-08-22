@@ -42,13 +42,15 @@ const schema = new mongoose.Schema({
     }
 });
 
-schema.methods.generateHash = (password) => {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+schema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-schema.method.validPassword = (password) =>{
-    return bcrypt.compareSync(password, this.local.password)
+// checking if password is valid
+schema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
 };
+
 
 const User = mongoose.model('User', schema);
 
