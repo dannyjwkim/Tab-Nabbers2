@@ -1,18 +1,10 @@
-/**
- * Created by esterlingaccime on 8/10/17.
- */
-
-var express = require("express"),
-    router = express.Router(),
-    path = require("path");
 
 
+module.exports = function (app, path) {
 
-router.get("*", function(req, res) {
+    app.get("*", function(req, res) {
 
-    res.sendFile(path.join(__dirname + "/../../front/public/index.html"));
+        res.sendFile(path.join(__dirname + "/../../front/public/index.html"));
 
-});
-
-
-module.exports = router;
+    });
+};

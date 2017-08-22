@@ -3,8 +3,7 @@ import { Route, IndexRoute, Router, browserHistory } from "react-router";
 
 import {Provider} from "react-redux";
 
-import Main from "../components/Main";
-import Home from "../components/Home";
+import Home from "../containers/Home";
 
 
 import PropTypes from 'prop-types'
@@ -16,14 +15,9 @@ import Pages from "./Pages";
 const Routes = ({store}) => (
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path="/" component={Main}>
+            <Route path="/" component={Home}>
 
-                {
-                    Object.keys(Pages).map((routing, i) => (
-
-                        <Route path={routing} component={Pages[routing]} key={i} > </Route>
-                    ))
-                }
+                {Object.keys(Pages).map((routing, i) => (<Route path={routing} component={Pages[routing]} key={i} > </Route>))}
 
                 <IndexRoute component={Home} />
 
