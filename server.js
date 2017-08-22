@@ -1,19 +1,46 @@
-var express = require('express'),
+const express = require('express'),
     session = require('express-session'),
     bodyParser = require('body-parser'),
     env = require('dotenv').load(),
     secret = require("./back/config/secrets"),
     path = require("path"),
-    webpack = require("webpack");
+    webpack = require("webpack"),
+    open = require("open"),
+    passport = require("passport"),
+    mongoose = require('mongoose');
 
-var config = require("./webpack.config");
 
-var app = express(),
+
+mongoose.connect('mongodb://localhost/sequelize_passport');
+
+
+const db = mongoose.connection;
+
+db.on("error", function (err) {
+    console.log("Mongoose Error: ", err);
+});
+
+db.once("open", function () {
+    console.log("Mongoose connection successful!!!");
+});
+
+
+
+const config = require("./webpack.config");
+
+
+require('./back/passport')(passport);
+
+const app = express(),
     PORT = process.env.PORT || 8080;
 
-var compiler = webpack(config);
+
+const router = express.Router();
+
+const compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo:true,
     publicPath:config.output.publicPath
 }));
 
@@ -21,47 +48,35 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 
 // // Static directory
-// app.use(express.static(path.join(__dirname + "/app/public")));
+app.use(express.static(path.join(__dirname + "/app/public")));
 
 //For BodyParser
 app.use(bodyParser({ defer: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//Models
-var db = require("./back/models");
+require("./back/passport")(passport);
 
-// Routes for students and secure routes for students
-var authenticateStudent = require("./back/controllers/securestudent");
-app.use("/api", authenticateStudent);
+app.use(session({
+    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    resave: true,
+    saveUninitialized: true
+}));
 
-var student = require("./back/controllers/studentcredentials");
-app.use("/", student);
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Routes for Recruiters and secure routes
-var authenticateRecruiter = require("./back/controllers/securerecruiter");
-app.use("/rsecure", authenticateRecruiter);
 
-var recruiter = require("./back/controllers/recruitercredentials");
-app.use("/recruiter", recruiter);
+require("./back/routes/authenticate")(app, passport);
+require("./back/routes/html")(app, path);
 
-var server;
 
 //Sync Database
-db.sequelize.sync({ force: true }).then(function() {
-    console.log('Nice! Database looks fine');
+app.listen(PORT, function(err) {
 
-    server = app.listen(PORT, function(err) {
+    if (!err)
 
-        if (!err)
-            console.log("Site is live");
-        else console.log(err)
+        console.log("Site is live");
+    else console.log("Database started fine!!!");
 
-    });
-
-}).catch(function(err) {
-    console.log(err, "Something went wrong with the Database Update!");
 });
-
-
-module.exports =  server;
