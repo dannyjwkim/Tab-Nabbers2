@@ -102,7 +102,7 @@ class Home extends React.Component{
 
 
 
-                {/*<Footer/>*/}
+                <Footer/>
 
             </div>
     )

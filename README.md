@@ -156,7 +156,7 @@ You should see a new browser tabs open, and there you go, you are all set!!
  - Redux
  - Axios
  - JavaScript
- - Semantic UI
+ - Materialize
  - Nightmare
  - D3.js
  - Jest
