@@ -5,3 +5,4 @@ config.json
 bundle.js
 key.js
 package-lock.json
+.vscode

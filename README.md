@@ -23,29 +23,63 @@
 
 ```
 |-- front/
+   |-- actions/
+           └── actionTypes.js
+           └── profile.js
    |-- components/
-         └── common
-                └── Footer.js
-                └── Navbar.js
+         └── bcsidebar
+                └── sidebar-item
+                    └──Sidebaritem.js
+                └── BCSidebar.js
+                └── signup.js
          └── About.js
-         └── D3Map.js
-         └── Event.js
-         └── Home.js
-         └── Main.js
-         └── Profile.js
-         └── Recruiter.js
+         └── Content.js
+         └── Footer.js
+         └── Navbar.js
+         └── signin.js
+         └── signup.js
          └── Student.js
    |-- containers/
         └── Home.js
+        └── D3Map.js
+        └── Event.js
+        └── Home.js
+        └── Profile.js
+        └── Recruiter.js
+        └── StudentCredentials.js
+   |-- public/
+        └── css
+            └── about.scss
+            └── event.scss
+            └── footer.scss
+            └── header.scss
+            └── home.scss
+            └── login.scss
+            └── mapstyle.css
+            └── mdb.css
+            └── profile.scss
+            └── signup.scss
+        └── font
+        └── img
+        └── js
+        └── atlanta.json
+        └── bundle.js
+        └── california.json
+        └── index.html
+        └── test.json
+        
    |-- reducers/
-        └── index.js
-        └── small.js
+              └── credentials.js
+              └── index.js
+              └── overview.js
    |-- routes/
-        └── Page.js
-        └── routes.js
+              └── Page.js
+              └── routes.js           
    |-- test/
+        └──api.test.js
    |-- utils
         └── api.js
+        └── newApi.js
    |-- index.js
 |-- back/
    |-- config/
@@ -99,75 +133,34 @@ The above command will install all the dependencies you need!
 
 
 
+
 ##### Step 2
-> Navigate in the '/back/config/' and create a file named 'config.json'
-> Put the below code within it. 
-
-> Your password and database named need to be replaced with your database info
-```
-{
-
-  "development": {
-    "username": "root",
-    "password": "password",
-    "database": "sequelize_passport",
-    "host": "localhost",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "",
-    "password": null,
-    "database": "",
-    "host": "",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "",
-    "password": "",
-    "database": "",
-    "host": "",
-    "dialect": "mysql",
-    "use_env_variable": "JAWSDB_URL"
-  }
-
-}
-```
-
-##### Step 3
-> npm start
+> npm run dev
 
 By running the above command, the app will be starting, and you can view it by
 
-clicking on this link [localhost](http://localhost:8080) or type http://localhost:8080 in your browser
+clicking on this link [localhost](http://localhost:3000) or type http://localhost:3000 in your browser
 
 
 
-##### Step 4
-
-You should see this screen below on your browser. If not, you ran into some errors
-
-<img 
-    src='http://i.imgur.com/Vi24jtC.png' width='600' alt='App home page'>
-
-Happy Contributing!
-
+You should see a new browser tabs open, and there you go, you are all set!!
 
 
 ### Technologies
 
  - Node.JS
  - Express
- - MySQL
+ - MongoDB
+ - Mongoose
  - React.JS
  - Redux
  - Axios
  - JavaScript
- - Sequelize
  - Semantic UI
  - Nightmare
  - D3.js
- - Mocha
- - Chai
+ - Jest
+ - Nightmare
  - Cloudinary
  - Passport
 
