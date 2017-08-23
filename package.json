@@ -70,10 +70,10 @@
   },
   "scripts": {
     "test": "jest",
-    "test:front":"npm run test",
+    "test:front": "npm run test",
     "start": "npm-run-all --parallel open:front lint:watch",
     "open:front": "babel-node server.js",
-    "dev:front": "babel-node serverDev.js",
+    "dev:front": "node serverDev.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch",
     "dev": "npm-run-all --parallel dev:front lint:watch"
