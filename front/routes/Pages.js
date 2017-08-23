@@ -9,7 +9,7 @@ import About from "../containers/About";
 import D3Map from "../containers/D3Map";
 import Event from "../containers/Event";
 
-import Home from "../containers/Home";
+import Home from "../containers/_Home";
 
 const pages = {
         about:About,
