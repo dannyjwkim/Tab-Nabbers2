@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Teko');
 .homepage-hero-module {
     border-right: none;
     border-left: none;
@@ -31,11 +33,11 @@
     background: rgba(0, 0, 0, 0.4);
     width: 100%;
 }
-.video-container video {
-    position: absolute;
-    z-index: 0;
-    bottom: 0;
-}
+// .video-container video {
+//     position: absolute;
+//     z-index: 0;
+//     bottom: 0;
+// }
 .video-container video.fillWidth {
     width: 100%;
 }
@@ -72,23 +74,23 @@
     z-index: 100000;
     font-family: Nunito;
     position: relative;
-    /*left: 120px;*/
+    left: 150px;
     font-size: 72px;
     top: 330px;
 }
 
-.green{
+.greenn{
     color: green;
 }
 
-.blue{
+.bluee{
     color: blue;
 }
 
 .bootcruit{
     position: relative;
     left: 10px;
-    z-index: 10000;
+    // z-index: 10000;
     font-family: Teko;
     letter-spacing: 1px;
     font-size: 52px;

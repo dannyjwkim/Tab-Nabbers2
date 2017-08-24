@@ -1,5 +1,8 @@
 import React from "react";
 import "../public/css/home.scss";
+/*import "../public/js/video.js";*/
+
+
 
 class Home extends React.Component{
 	render(){
@@ -8,7 +11,7 @@ class Home extends React.Component{
 
 				    <div className="video-container">
 				        <div className="filter"></div>
-				        <a href="#"><h1 className="bootcruit"><span className="green">Boot</span><span className="blue">Cruit</span></h1></a>
+				        <a href="#"><h1 className="bootcruit"><span className="greenn">Boot</span><span className="bluee">Cruit</span></h1></a>
 				        <h1 className="text-center middle-text">Easiest way to get a Job</h1>
 				        <div className="container">
 						<button className="btn btn-outline-success">Student</button>
