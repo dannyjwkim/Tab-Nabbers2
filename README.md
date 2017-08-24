@@ -32,7 +32,7 @@
                     └──Sidebaritem.js
                 └── BCSidebar.js
                 └── signup.js
-         └── About.js
+         └── _About.js
          └── Content.js
          └── Footer.js
          └── Navbar.js
@@ -41,12 +41,12 @@
          └── Student.js
    |-- containers/
         └── Home.js
-        └── D3Map.js
-        └── Event.js
+        └── _D3Map.js
+        └── _Event.js
         └── Home.js
-        └── Profile.js
-        └── Recruiter.js
-        └── StudentCredentials.js
+        └── _Profile.js
+        └── _Recruiter.js
+        └── _StudentCredentials.js
    |-- public/
         └── css
             └── about.scss
