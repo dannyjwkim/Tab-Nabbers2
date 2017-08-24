@@ -12,10 +12,10 @@ class Home extends React.Component{
 				    <div className="video-container">
 				        <div className="filter"></div>
 				        <a href="#"><h1 className="bootcruit"><span className="greenn">Boot</span><span className="bluee">Cruit</span></h1></a>
-				        <h1 className="text-center middle-text">Easiest way to get a Job</h1>
+				        <h1 className="center middle-text">Single-Click Staffing Solutions.</h1>
 				        <div className="container">
-						<button className="btn btn-outline-success">Student</button>
-						<button className="btn btn-outline-primary">Employeer</button>
+						<button className="btn btn-outline-success student">Student</button>
+						<button className="btn btn-outline-primary employeer">Employeer</button>
 					</div>
 				        <video autoPlay loop className="fillWidth">
 				            <source src="videos/Clouds_Fly_By.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.

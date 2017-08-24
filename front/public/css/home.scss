@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import url('https://fonts.googleapis.com/css?family=Teko');
+@import url('https://fonts.googleapis.com/css?family=Passion+One');
 .homepage-hero-module {
     border-right: none;
     border-left: none;
@@ -62,12 +63,41 @@
     margin-right: 50px;
     margin-left: 50px;
     margin: 0,50px,0px,50px;
-    width: 150px;
+    width: 170px;
     max-width: 50%;
+    // border: 2px solid green;
+    border-radius: 5px;
+    background-color: transparent;
+    height: 50px;
+    box-shadow: 1px 0px 1px black;
+
+}
+
+.middle-text{
+	position:relative;
+	left: -20px;
+}
+
+.student{
+	border: 2px solid #5cb85c;
+}
+
+.employeer{
+	border: 2px solid #428bca;
 }
 
 .btn:hover{
     cursor: pointer;
+}
+
+.employeer:hover{
+	background-color: #428bca;
+	color: white;
+}
+
+.student:hover{
+	background-color: #5cb85c;
+	color: white;
 }
 
 .middle-text{
