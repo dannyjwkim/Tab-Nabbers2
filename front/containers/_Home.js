@@ -15,14 +15,13 @@ class Home extends React.Component{
         return(
             <div>
 
-                <Navbar/>
+                
 
 
                 <Video/>
 
 
-                <Footer/>
-
+                
             </div>
     )
     }
