@@ -76,7 +76,9 @@
     "dev:front": "node serverDev.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch",
-    "dev": "npm-run-all --parallel dev:front lint:watch"
+    "dev": "npm-run-all --parallel dev:front lint:watch",
+
+    "production":"webpack && node server.js"
   },
   "repository": {
     "type": "git",
