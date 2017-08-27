@@ -1,5 +1,6 @@
 /**
  * Created by esterlingaccime on 8/14/17.
+ * Edited by Juliafin and Reynnan on 8/26/17
  */
 
 
@@ -36,6 +37,25 @@ const addressSchema = new mongoose.Schema({
   _id: false
 });
 
+const skillSchema = new mongoose.Schema({
+  skills: {
+    skillName: {
+      type: String,
+      required: true
+    },
+    category: {
+      type: String,
+      match: [/^Library|Framework|Language$/],
+      required: true
+    },
+    active: {
+      type: Boolean,
+      required: true
+    }
+  }
+
+});
+
 
 const userSchema = new mongoose.Schema({
 
@@ -52,7 +72,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
     minlength: 1,
-    default: "Enter your first name"
+    default: "Enter your last name"
   },
 
   gender: {
@@ -117,126 +137,9 @@ const userSchema = new mongoose.Schema({
   },
 
 
-  // Any more skills to add to the list?
   skills: {
-    languages: {
-
+    type: [skillSchema],
     
-      HTML: {
-        type: Boolean
-      },
-      
-      CSS: {
-        type: Boolean
-      },
-
-      Javascript: {
-        type: Boolean
-      },
-
-      Java: {
-        type: Boolean
-      },
-
-      CPlusPlus: {
-        type: Boolean
-      },
-
-      Python: {
-        type: Boolean
-      },
-
-      PHP: {
-        type: Boolean
-      },
-
-      Perl: {
-        type: Boolean
-      },
-
-      Ruby: {
-        type: Boolean
-      },
-
-      Rust: {
-        type: Boolean
-      }
-
-    },
-
-    frameworksAndLibraries: {
-      Node: {
-        type: Boolean
-      },
-
-      Express: {
-        type: Boolean
-      },
-
-      React: {
-        type: Boolean
-      },
-
-      Angular: {
-        type: Boolean
-      },
-
-      Backbone: {
-        type: Boolean
-      },
-
-      Ember: {
-        type: Boolean
-      },
-
-      JQuery: {
-        type: Boolean
-      },
-
-      Polymer: {
-        type: Boolean
-      },
-
-      Knockout: {
-        type: Boolean
-      },
-
-      VueJS: {
-        type: Boolean
-      },
-
-      Bootstrap: {
-        type: Boolean
-      },
-
-      Flask: {
-        type: Boolean
-      },
-
-      ASPdotNET: {
-        type: Boolean
-      },
-
-      SASS: {
-        type: Boolean
-      },
-
-      LESS: {
-        type: Boolean
-      },
-
-
-    },
-
-    databases: {
-      SQL: {
-        type: Boolean
-      },
-
-      MongoDB: {
-        type: Boolean
-      }
-    }
   },
   
   jobStatus: {
