@@ -4,11 +4,11 @@ import { Route, IndexRoute, Router, browserHistory } from "react-router";
 import {Provider} from "react-redux";
 
 import Home from "../containers/_Home";
+import Video from "../components/video";
 
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import Pages from "./Pages";
-
 
 
 
@@ -19,7 +19,7 @@ const Routes = ({store}) => (
 
                 {Object.keys(Pages).map((routing, i) => (<Route path={routing} component={Pages[routing]} key={i} > </Route>))}
 
-                <IndexRoute component={Home} />
+                <IndexRoute component={Video} />
 
             </Route>
         </Router>
