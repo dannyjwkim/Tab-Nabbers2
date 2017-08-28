@@ -38,21 +38,21 @@ const addressSchema = new mongoose.Schema({
 });
 
 const skillSchema = new mongoose.Schema({
-  skills: {
-    skillName: {
-      type: String,
-      required: true
-    },
-    category: {
-      type: String,
-      match: [/^Library|Framework|Language$/],
-      required: true
-    },
-    active: {
-      type: Boolean,
-      required: true
-    }
+  
+  skillName: {
+    type: String,
+    required: true
+  },
+  category: {
+    type: String,
+    match: [/^Library|Framework|Language$/],
+    required: true
+  },
+  active: {
+    type: Boolean,
+    required: true
   }
+  
 
 });
 

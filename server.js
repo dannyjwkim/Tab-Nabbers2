@@ -8,7 +8,9 @@ const express = require('express'),
     open = require("open"),
     passport = require("passport"),
     mongoose = require('mongoose'),
-    {TEST_DATABASE_URL} = require('./back/config/mongo');
+    {TEST_DATABASE_URL} = require('./back/config/mongo'),
+    User = require('./back/models/user'),
+    {generateUsers} = require('./back/models/seedUser');
   
 
     mongoose.Promise = global.Promise;
@@ -89,6 +91,18 @@ runServer()
 
     db.once("open", function () {
       console.log("Mongoose connection successful!!!");
+      return User
+        .count()
+        .then( (count) => {
+          console.log(`The count is ${count}`);
+          if (count < 5)
+            console.log('Writing dummy data to the db');
+            return User
+              .create(generateUsers(5))
+        })
+        .catch(err => console.log(err))
+      console.log(generateUsers(5));
+
     });
 
   })
