@@ -9,16 +9,13 @@ import About from "../containers/_About";
 import D3Map from "../containers/_D3Map";
 import Event from "../containers/_Event";
 
-import Home from "../containers/_Home";
-
 const pages = {
         about:About,
         student:Signin,
         profile:Profile,
         map:D3Map,
         recruiter:Recruiter,
-        event:Event,
-        home:Home
+        event:Event
 };
 
 
