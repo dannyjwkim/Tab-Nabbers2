@@ -38,7 +38,7 @@
          └── Navbar.js
          └── signin.js
          └── signup.js
-         └── Student.js
+         └── _Student.js
    |-- containers/
         └── Home.js
         └── _D3Map.js
@@ -46,7 +46,7 @@
         └── Home.js
         └── _Profile.js
         └── _Recruiter.js
-        └── _StudentCredentials.js
+        └── _Student.js
    |-- public/
         └── css
             └── about.scss

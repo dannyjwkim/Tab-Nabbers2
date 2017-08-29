@@ -13,6 +13,7 @@ import Pages from "./Pages";
 
 
 const Routes = ({store}) => (
+
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Home}>

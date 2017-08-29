@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 
 class D3Map extends React.Component {
 
@@ -26,4 +27,13 @@ class D3Map extends React.Component {
     }
 }
 
-export default D3Map;
+
+function mapStateToProps(state) {
+    // here
+    // Getting data from Redux here
+    // and set pass it as props
+
+}
+
+
+export default connect(mapStateToProps)(D3Map);

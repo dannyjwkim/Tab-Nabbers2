@@ -10,7 +10,7 @@ function mockSkills(randomRange) {
       skillName: languages[Math.floor(Math.random() * languages.length)],
       category: skillCategory[Math.floor(Math.random() * skillCategory.length)],
       active: Boolean(Math.floor(Math.random() * 2))
-    }
+    };
     skillsArr.push(skills);
   }
   console.log('Skills Array', skillsArr);
@@ -19,7 +19,7 @@ function mockSkills(randomRange) {
 
 
 
-module.exports.generateUsers = ((numberOfUsers, singleUser=false) => {
+module.exports.generateUsers = ((numberOfUsers, singleUser = false) => {
   let userArr = [];
   const genders = ['M', 'F'];
   const jobStatus = ['employed, unemployed'];

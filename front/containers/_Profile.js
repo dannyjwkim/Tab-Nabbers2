@@ -3,15 +3,12 @@
  */
 import React from "react";
 import "../public/css/profile.scss";
-
-// Import pieces of components for Profile Pages
 import About from "../components/About";
 import Content from "../components/Content";
-import fetch from "../utils/api";
-
-
-
 import {connect} from "react-redux";
+
+
+
 
 class Profile extends React.Component {
 
@@ -43,18 +40,9 @@ class Profile extends React.Component {
 
     };
 
-    // Do NOT touch this code
-    getIn = (event) => {
-        console.log(event.target);
-        console.log(event.target);
-
-    };
-
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
     render() {
-
-        console.log(this.props.overview);
 
         const [overview] = this.props.overview;
 
@@ -64,9 +52,6 @@ class Profile extends React.Component {
         };
 
         console.log(overview);
-
-
-
 
         return (
             <section className="profile">

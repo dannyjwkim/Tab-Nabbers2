@@ -1,9 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Video from "../components/video";
-import { browserHistory } from 'react-router';
-
+import {connect} from "react-redux";
 
 class Home extends React.Component{
 
@@ -20,6 +16,7 @@ class Home extends React.Component{
     )
     }
 }
+
 
 
 export default Home;
