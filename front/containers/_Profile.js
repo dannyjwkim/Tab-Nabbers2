@@ -3,8 +3,8 @@
  */
 import React from "react";
 import "../public/css/profile.scss";
-import About from "../components/About";
-import Content from "../components/Content";
+import About from "../components/about/About";
+import Content from "../components/home/Content";
 import {connect} from "react-redux";
 
 

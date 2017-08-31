@@ -3,10 +3,6 @@ import {connect} from "react-redux";
 
 class Home extends React.Component{
 
-    constructor(){
-        super();
-
-    }
 
     render(){
         return(
@@ -17,7 +13,11 @@ class Home extends React.Component{
     }
 }
 
+function mapStateToProps(state) {
+    return{
 
+    }
+}
 
-export default Home;
+export default connect(mapStateToProps)(Home);
 

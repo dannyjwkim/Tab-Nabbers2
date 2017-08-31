@@ -4,11 +4,13 @@ import { Route, IndexRoute, Router, browserHistory } from "react-router";
 import {Provider} from "react-redux";
 
 import Home from "../containers/_Home";
-import Video from "../components/video";
+import Video from "../components/home/video";
 
 
 import PropTypes from 'prop-types';
 import Pages from "./Pages";
+
+import EnsureLoggedInContainer from "./EnsureLoggedIn";
 
 
 
@@ -18,7 +20,9 @@ const Routes = ({store}) => (
         <Router history={browserHistory}>
             <Route path="/" component={Home}>
 
-                {Object.keys(Pages).map((routing, i) => (<Route path={routing} component={Pages[routing]} key={i} > </Route>))}
+                {Object.keys(Pages).map((routing, i) => (<Route path={routing.toLowerCase()} component={Pages[routing]} key={i} />))}
+
+
 
                 <IndexRoute component={Video} />
 
