@@ -5,7 +5,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as meetup from "../actions/meetupActions";
-import Meetup from "../components/event/meetup";
+import {Meetup} from "../components/event/index";
 
 class Event extends React.Component{
 
@@ -22,7 +22,6 @@ class Event extends React.Component{
         return(
             <div className="event-container">
                 <Meetup events = {events}/>
-
             </div>
         );
     }

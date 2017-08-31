@@ -3,3 +3,9 @@
  */
 // Import every components from the parent folders
 // Export them so they can be easily accessible through the applications
+
+import Meetup from "./meetup";
+
+module.exports = {
+    Meetup
+};
