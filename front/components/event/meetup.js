@@ -2,7 +2,7 @@
  * Created by esterlingaccime on 8/30/17.
  */
 import React from "react";
-import { Grid, Image, Segment } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 import "../../public/css/event.scss";
 
 const Meetup = ({events}) => {
