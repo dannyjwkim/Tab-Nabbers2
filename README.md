@@ -76,7 +76,7 @@
               └── Page.js
               └── routes.js           
    |-- test/
-        └──api.test.js
+        └──social_button_login.test.js
    |-- utils
         └── api.js
         └── newApi.js

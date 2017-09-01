@@ -3,3 +3,8 @@
  */
 // Import every components from the parent folders
 // Export them so they can be easily accessible through the applications
+import Signup from "./signup";
+
+module.exports = {
+    Signup
+};

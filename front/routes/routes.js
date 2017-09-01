@@ -2,7 +2,7 @@ import React from "react";
 import { Route, IndexRoute, Router, browserHistory } from "react-router";
 import {Provider} from "react-redux";
 import Home from "../containers/_Home";
-import Video from "../components/home/video";
+import {Video} from "../components/home/index";
 import PropTypes from 'prop-types';
 import Pages from "./Pages";
 
