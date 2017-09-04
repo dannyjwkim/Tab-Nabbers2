@@ -2,7 +2,6 @@
  * Created by esterlingaccime on 8/30/17.
  */
 import * as types from "./actionTypes";
-import key from "../../back/config/key";
 import axios from "axios";
 
 
@@ -20,7 +19,7 @@ export const fetchEvents = () => {
         return axios.get(api)
             .then((response) => {
                 console.log(response.data);
-                dispatch(fecthEventsSuccess(response.data));
+                dispatch(fecthEventsSuccess(response.data.data));
             })
             .catch((err) => {
                 throw err;
