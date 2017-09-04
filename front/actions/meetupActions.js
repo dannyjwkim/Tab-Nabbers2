@@ -13,8 +13,6 @@ export const fecthEventsSuccess = (events)  => {
 export const fetchEvents = () => {
     const api  = '/meetup/api'; 
     
-    // 'https://api.meetup.com/find/events?text=JavaScript&key=' + key.meetup.key;
-
     return (dispatch) => {
         return axios.get(api)
             .then((response) => {
