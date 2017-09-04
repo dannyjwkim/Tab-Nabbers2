@@ -7,7 +7,7 @@ const Video = () => {
         <div className="video">
             <div className="video__buttons">
                 <h5>Single-Click Staffing <br/>Solutions</h5>
-                <button className="greenButton"><Link to="/student">Student</Link></button>
+                <button className="greenButton"><Link to="/login">Student</Link></button>
                 <button className="blueButton"><Link to="/recruiter">Employer</Link></button>
             </div>
             <video autoPlay loop className="fullscreen">
