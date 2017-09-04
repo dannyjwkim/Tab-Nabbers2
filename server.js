@@ -64,6 +64,7 @@ app.use(passport.session());
 
 
 require("./back/routes/authenticate")(app, passport);
+require("./back/routes/meetup")(app, path);
 require("./back/routes/html")(app, path);
 
 let server;
