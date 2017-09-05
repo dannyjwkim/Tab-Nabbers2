@@ -12,15 +12,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import "../public/css/signup.scss";
-import Signup from "../components/signup/signup.js"
+import {Signup} from "../components/signup/index.js"
 
 class StudentCredentials extends React.Component {
-
-    constructor(){
-        super();
-
-    };
-
 
     render(){
         return(
@@ -30,10 +24,7 @@ class StudentCredentials extends React.Component {
                 <Signup/>
             </div>
         );
-
     }
-
-
 }
 
 function mapStateToProps(state) {
