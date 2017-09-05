@@ -7,27 +7,41 @@
 // Every functions related to that page, need to be built in here
 // and pass via props as well to the presentation components in the components folders
 
+
+
 import React from "react";
 import {connect} from "react-redux";
+import "../public/css/signup.scss";
+import Signup from "../components/signup/signup.js"
 
-class Home extends React.Component{
+class StudentCredentials extends React.Component {
+
+    constructor(){
+        super();
+
+    };
 
 
     render(){
         return(
+
+            // JSX go here
             <div>
-                {this.props.children}
+                <Signup/>
             </div>
-    )
+        );
+
     }
+
+
 }
 
 function mapStateToProps(state) {
-    return{
-        // here
-        // Getting data from Redux here
-        // and set pass it as props
-    }
+    // here
+    // Getting data from Redux here
+    // and set pass it as props
+    return {};
 }
 
-export default connect(mapStateToProps)(Home);
+
+export default connect(mapStateToProps)(StudentCredentials);

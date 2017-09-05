@@ -25,4 +25,3 @@ Routes.propTypes = {
 };
 
 export default Routes;
-
