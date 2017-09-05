@@ -1,5 +1,20 @@
-.eventHeader {
-  font-variant: small-caps;
-  font-size: 45px;
-  color: #54C8FF;
+.events{
+  height:400px;
+  //overflow-y: scroll;
+  //overflow-x: hidden;
+}
+
+
+.events:hover::-webkit-scrollbar-thumb{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.events::-webkit-scrollbar{
+  width: 0.2rem;
+  transition:width 2s;
+}
+
+.events:hover::-webkit-scrollbar{
+  width: 0.3rem;
+  transition:width 5s;
 }

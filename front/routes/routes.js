@@ -1,32 +1,19 @@
 import React from "react";
 import { Route, IndexRoute, Router, browserHistory } from "react-router";
-
 import {Provider} from "react-redux";
-
-import Main from "../components/Main";
-import Home from "../components/Home";
-
-
-import PropTypes from 'prop-types'
+import Home from "../containers/_Home";
+import {Video} from "../components/home/index";
+import PropTypes from 'prop-types';
 import Pages from "./Pages";
 
 
-
-
 const Routes = ({store}) => (
+
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path="/" component={Main}>
-
-                {
-                    Object.keys(Pages).map((routing, i) => (
-
-                        <Route path={routing} component={Pages[routing]} key={i} > </Route>
-                    ))
-                }
-
-                <IndexRoute component={Home} />
-
+            <Route path="/" component={Home}>
+                {Object.keys(Pages).map((routing, i) => (<Route path={routing.toLowerCase()} component={Pages[routing]} key={i} />))}
+                <IndexRoute component={Video} />
             </Route>
         </Router>
     </Provider>
@@ -35,13 +22,6 @@ const Routes = ({store}) => (
 
 Routes.propTypes = {
     store: PropTypes.object.isRequired
-}
+};
 
 export default Routes;
-
-
-
-
-{/*<Route path="map" component={D3Map}></Route>*/}
-{/*<Route path="recruiter" component={Recruiter}></Route>*/}
-{/*<Route path="event" component={Event}></Route>*/}
