@@ -4,7 +4,6 @@ const path = require("path");
 
 
 module.exports = {
-
     // This is the entry point or start of our react applicaton
     entry:[
         "eventsource-polyfill",

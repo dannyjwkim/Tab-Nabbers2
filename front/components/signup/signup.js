@@ -1,27 +1,28 @@
 
 import React from "react";
-import { Button, Icon } from 'semantic-ui-react';
+import { Button, Icon, Image, Form, Label, Divider } from 'semantic-ui-react';
 import "../../public/css/home.scss";
 
 const Signup = () => {
 
     return (
+      <div className="shadowBox">
         <div className="container mainContainer">
 
             <div className="container sideContainer">
 
                 <h1 className="leftHeading">Sign up</h1>
-                <input type="text" className="userName input" placeholder="Username"/>
-                <hr className="horizontalLine"/>
+                <input label="User Name" type="text" className="userName input" placeholder="Username"/>
+                <Divider/>
                 <input type="email" className="email input" placeholder="E-Mail"/>
-                <hr className="horizontalLine"/>
+                <Divider/>
                 <input type="password" className="password input" placeholder="Password"/>
-                <hr className="horizontalLine"/>
+                <Divider/>
                 <input type="password" className="repeatPassword input" placeholder="Retype Password"/>
-                <hr className="horizontalLine"/>
+                <Divider/>
                 <h6 className="correct">Please Retype the Correct Password.</h6>
 
-                <button className="btn btn-info button" type="submit" name="action">Sign Up
+                <button className="btn btn-info button" type="submit" name="action">SIGN ME UP
                     <i className="material-icons right"></i>
                 </button>
 
@@ -29,17 +30,18 @@ const Signup = () => {
 
             <div className="container rightContainer">
                 <h1 className="rightHeading"><span className="up">Sign In with</span><br/>Social Network</h1>
-                <a href="/auth/facebook"><Button color="facebook"><Icon name="facebook"/>Log In with Facebook</Button></a>
-                <a href="/auth/twitter"><Button color = "twitter"><Icon name="twitter"/>Log In with Twitter</Button></a>
-                <a href="/auth/google"><Button color="google plus"><Icon name="google plus"/>Log In with Google+</Button></a>
-                <a href="/auth/linkedin"><Button color="linkedin"><Icon name="linkedin"/> Log In with LinkedIn</Button></a>
-
-            </div>
+                <a href="/auth/facebook"><Button color="facebook" class="socialBtn"><Icon name="facebook"/>Facebook</Button></a>
+                <a href="/auth/twitter"><Button color="twitter" class="socialBtn"><Icon name="twitter"/>Twitter</Button></a>
+                <a href="/auth/google"><Button color="google plus" class="socialBtn"><Icon name="google plus"/>Google+</Button></a>
+                <a href="/auth/linkedin"><Button color="linkedin" class="socialBtn"><Icon name="linkedin"/>LinkedIn</Button></a>
+                </div>
+  
 
             <button className="circle"><h3>OR</h3></button>
-        </div>
 
-       
+        </div>
+</div>
+
 
     );
 };
