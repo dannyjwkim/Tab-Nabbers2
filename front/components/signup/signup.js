@@ -30,10 +30,10 @@ const Signup = () => {
 
             <div className="container rightContainer">
                 <h1 className="rightHeading"><span className="up">Sign In with</span><br/>Social Network</h1>
-                <a href="/auth/facebook"><Button color="facebook" class="socialBtn"><Icon name="facebook"/>Facebook</Button></a>
-                <a href="/auth/twitter"><Button color="twitter" class="socialBtn"><Icon name="twitter"/>Twitter</Button></a>
-                <a href="/auth/google"><Button color="google plus" class="socialBtn"><Icon name="google plus"/>Google+</Button></a>
-                <a href="/auth/linkedin"><Button color="linkedin" class="socialBtn"><Icon name="linkedin"/>LinkedIn</Button></a>
+                <a href="/auth/facebook"><Button color="facebook" className="socialBtn"><Icon name="facebook"/>Facebook</Button></a>
+                <a href="/auth/twitter"><Button color="twitter" className="socialBtn"><Icon name="twitter"/>Twitter</Button></a>
+                <a href="/auth/google"><Button color="google plus" className="socialBtn"><Icon name="google plus"/>Google+</Button></a>
+                <a href="/auth/linkedin"><Button color="linkedin" className="socialBtn"><Icon name="linkedin"/>LinkedIn</Button></a>
                 </div>
   
 
