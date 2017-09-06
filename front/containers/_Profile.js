@@ -10,8 +10,10 @@
 
 import React from "react";
 import "../public/css/profile.scss";
+import "../public/css/footer.scss";
 import {connect} from "react-redux";
-
+import { Grid, Segment, Header, Image, Rail, Sticky } from 'semantic-ui-react';
+import Footer from "../components/common/Footer";
 class Profile extends React.Component {
 
     constructor(){
@@ -23,7 +25,7 @@ class Profile extends React.Component {
         // JSX goes below
         return (
             <section className="profile">
-
+                <Footer />
             </section>
         );
     }
