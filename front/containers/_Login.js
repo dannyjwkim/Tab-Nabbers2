@@ -11,17 +11,40 @@
 
 import React from "react";
 import {connect} from "react-redux";
+import { bindActionCreators } from 'redux'
 import "../public/css/signup.scss";
-import {Signup} from "../components/signup/index.js"
+import {Signup} from "../components/signup/index.js";
+import * as passwordMatchActions from "../actions/passwordMatchActions";
 
 class StudentCredentials extends React.Component {
 
+  handlePassword=(e)=>{
+      e.preventDefault()
+      this.props.actions.passwordChange(e.target.value);
+  }
+
+  handlePasswordReTyping=(e)=>{
+      e.preventDefault()
+      this.props.actions.passwordChangeRetyping(e.target.value);
+  }
+
     render(){
+      //console.log(this.props.passwordmatch);
+      let passwordmatch = this.props.passwordmatch;
+      let passworddonotmatch = false;
+      if(passwordmatch.password!="" && passwordmatch.passwordretype!=""){
+            if(passwordmatch.password!==passwordmatch.passwordretype){
+              passworddonotmatch=true
+            }
+       }
         return(
 
             // JSX go here
             <div>
-                <Signup/>
+                <Signup onChangePassword={this.handlePassword}
+                        onChangePasswordReTyping={this.handlePasswordReTyping}
+                        passworddonotmatch={passworddonotmatch}
+                />
             </div>
         );
     }
@@ -31,8 +54,13 @@ function mapStateToProps(state) {
     // here
     // Getting data from Redux here
     // and set pass it as props
-    return {};
+    //console.log(state)
+    return {passwordmatch: state.passwordmatch};
+
 }
 
+function mapDispatchToProps(dispatch) {
+ return {actions:bindActionCreators(passwordMatchActions, dispatch)}
+}
 
-export default connect(mapStateToProps)(StudentCredentials);
+export default connect(mapStateToProps,mapDispatchToProps)(StudentCredentials);
