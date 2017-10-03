@@ -4,15 +4,14 @@
 import * as types from "./actionTypes";
 import axios from "axios";
 
-
 export const fecthEventsSuccess = (events)  => {
     return{ type: types.GET_EVENT, events }
 };
 
 
 export const fetchEvents = () => {
-    const api  = '/meetup/api'; 
-    
+    const api  = '/meetup/api';
+
     return (dispatch) => {
         return axios.get(api)
             .then((response) => {
