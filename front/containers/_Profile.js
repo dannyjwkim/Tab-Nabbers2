@@ -1,39 +1,73 @@
-// This component is page related
-// We should not do any heavy HTML here
-// All of HTML Mocks up, needs to go to components folder
-// and be imported below into JSX
-// This component is mainly to get data from Redux Store
-// and pass it to the dumb components in the components folder
-// Every functions related to that page, need to be built in here
-// and pass via props as well to the presentation components in the components folders
 
+
+/**
+ *
+ * Menu Side bar component that shows a nice looking scrolling bar
+ *
+ */
 
 import React from "react";
 import "../public/css/profile.scss";
 import "../public/css/footer.scss";
 import {connect} from "react-redux";
-import { Grid, Segment, Header, Image, Rail, Sticky } from 'semantic-ui-react';
 import Footer from "../components/common/Footer";
+import Sidebar from '../components/common/Sidebar';
+import {Grid} from 'semantic-ui-react';
+import Picture from '../components/common/Picture';
+
+
 class Profile extends React.Component {
 
-    constructor(){
-        super();
+    state = {
+        activeItem: 'event'
+    };
 
-    }
+    handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+
 
     render() {
-        // JSX goes below
+        const { activeItem } = this.state;
+        const camelCase = activeItem[0].toUpperCase() + activeItem.slice(1);
+
         return (
-            <section className="profile">
+            <div >
+                <Grid celled className="profile">
+                    <Grid.Row>
+                        <Grid.Column mobile = {13} tablet = {4} computer = {3}  largeScreen = {2} >
+                            <Picture/>
+                            <Sidebar
+                                handleItemClick = {this.handleItemClick}
+                                activeItem = {activeItem}
+                            />
+                        </Grid.Column>
+
+                        <Grid.Column
+                            mobile = {13}
+                            tablet = {12}
+                            computer = {13}
+                            largeScreen = {13}
+                            className = 'content'>
+
+                           <h1>{activeItem}</h1>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+
                 <Footer />
-            </section>
+            </div>
         );
     }
 }
 
+
+/**
+ * Getting data from Redux here
+ * @param state
+ */
 function mapStateToProps(state) {
-    // here
-    // Getting data from Redux here
-    // and set pass it as props
+    return {
+
+    }
 }
 export default connect(mapStateToProps)(Profile);

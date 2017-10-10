@@ -22,7 +22,11 @@ const pages = {
     D3Map,
     Event,
     Signup
-};
+}
 
+export const profile = {
+  Event,
+  Student
+};
 
 export default pages;
