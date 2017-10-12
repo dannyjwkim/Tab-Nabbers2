@@ -11,9 +11,11 @@ const Video = () => {
                 <Link to="/recruiter"><button className="blueButton">Employer</button></Link>
             </div>
             <video autoPlay loop className="fullscreen">
-                <source src="videos/Clouds_Fly_By.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                
+                <source src="videos/Clouds_Fly_By.mp4" type="video/mp4" />
 
-                <source src="videos/Clouds_Fly_By.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                <source src="videos/Clouds_Fly_By.webm" type="video/webm" />
+                Your browser does not support the video tag. I suggest you upgrade your browser.
             </video>
         </div>
     );

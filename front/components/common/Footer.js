@@ -12,16 +12,16 @@ const FooterPage = () => {
 
                           <p className="p">About BootCruit</p>
                           <ul>
-                          <li><strong>BootCruit</strong> is a single-click staffing solution
-                          to connect recruiters and employers to current and
-                          recently graduated coding bootcamp students.</li>
+                            <li><strong>BootCruit</strong> is a single-click staffing solution
+                            to connect recruiters and employers to current and
+                            recently graduated coding bootcamp students.</li>
                           </ul>
 
                         </Grid.Column>
                         <Grid.Column>
 
-                          <p className="p">Get Involve</p>
-                          <ul>
+                          <p className="p">Get Involved</p>
+                          <ul className="involved">
                             <li>Join a Group</li>
                             <li>Contribute to BootCruit</li>
                             <li>Submit a Bug</li>
@@ -32,7 +32,7 @@ const FooterPage = () => {
                         <Grid.Column>
 
                           <p className="p">Follow Us</p>
-                          <ul>
+                          <ul className="follow_us">
                             <li><a href="/"><Icon name='github alternate' size='large' /></a></li>
                             <li><a href="/"><Icon name='linkedin' size='large' /></a></li>
                             <li><a href="/"><Icon name='reddit' size='large' /></a></li>

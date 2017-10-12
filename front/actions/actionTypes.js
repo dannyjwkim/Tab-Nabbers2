@@ -12,4 +12,4 @@ export const SET_CURRENT_URL = "SET_CURRENT_URL";
 
 export const IS_USER_LOGGED_IN = "IS_USER_LOGGED_IN";
 
-export const GET_EVENT = "GET_EVENT";
+export const ADD_EVENT = "ADD_EVENT";

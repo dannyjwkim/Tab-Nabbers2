@@ -34,10 +34,14 @@ const {  onChangePassword,onChangePasswordReTyping, password, passwordretype,pas
 
             <div className="container rightContainer">
                 <h1 className="rightHeading"><span className="up">Sign In with</span><br/>Social Network</h1>
-                <a href="/auth/facebook"><Button color="facebook"><Icon name="facebook"/>Facebook</Button></a>
-                <a href="/auth/twitter"><Button color="twitter"><Icon name="twitter"/>Twitter</Button></a>
-                <a href="/auth/google"><Button color="google plus"><Icon name="google plus"/>Google+</Button></a>
-                <a href="/auth/linkedin"><Button color="linkedin"><Icon name="linkedin"/>LinkedIn</Button></a>
+                <a href="/auth/facebook"><Button color="facebook">
+                    <Icon name="facebook"/>Facebook</Button></a>
+                <a href="/auth/twitter"><Button color="twitter">
+                    <Icon name="twitter"/>Twitter</Button></a>
+                <a href="/auth/google"><Button color="google plus">
+                    <Icon name="google plus"/>Google+</Button></a>
+                <a href="/auth/linkedin"><Button color="linkedin">
+                    <Icon name="linkedin"/>LinkedIn</Button></a>
                 </div>
 
             <button className="circle"><h3>OR</h3></button>

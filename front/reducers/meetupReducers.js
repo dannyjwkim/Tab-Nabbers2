@@ -31,13 +31,16 @@ import * as types from "../actions/actionTypes";
 // }
 
 
-export default function meetupReducer (state = [], action) {
+export default function meetupReducer (state = {events:[]}, action) {
     switch(action.type){
-        case types.GET_EVENT:
-            return [
-                ...state, Object.assign({}, action.events)
-            ];
+        case types.ADD_EVENT:
+            return( 
+                Object.assign( 
+                    {}, state, 
+                    {events: [...state.events, action.events]})
+                )
+                    
         default:
-            return state;
+        return state;
+            }
     }
-}
