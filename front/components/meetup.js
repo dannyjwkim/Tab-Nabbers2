@@ -7,7 +7,7 @@ const WelcomeModal = () => (
     <Modal.Content image>
       <Image wrapped size='medium' src='/assets/images/avatar/large/rachel.png' />
       <Modal.Description>
-        <Header></Header>
+        <Header> </Header>
         <p>Welcome [new student name here]!</p>
         <p>We're excited to have you on board this exciting journey for programmers.</p>
         <p>Don't forget to update your profile!</p>

@@ -1,6 +1,3 @@
-/**
- * Created by ea375w on 7/19/2017.
- */
 
 import Signin from "../containers/_Student";
 import Recruiter from "../containers/_Recruiter";
@@ -22,7 +19,7 @@ const pages = {
     D3Map,
     Event,
     Signup
-}
+};
 
 export const profile = {
   Event,

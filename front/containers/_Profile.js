@@ -12,8 +12,8 @@ import "../public/css/footer.scss";
 import {connect} from "react-redux";
 import Footer from "../components/common/Footer";
 import Sidebar from '../components/common/Sidebar';
-import {Grid} from 'semantic-ui-react';
-import Picture from '../components/common/Picture';
+import {Grid, Button} from 'semantic-ui-react';
+import Content from '../components/profile/Content';
 
 
 class Profile extends React.Component {
@@ -30,12 +30,14 @@ class Profile extends React.Component {
         const { activeItem } = this.state;
         const camelCase = activeItem[0].toUpperCase() + activeItem.slice(1);
 
+        console.log(camelCase);
         return (
             <div >
-                <Grid celled className="profile">
-                    <Grid.Row>
-                        <Grid.Column mobile = {13} tablet = {4} computer = {3}  largeScreen = {2} >
-                            <Picture/>
+                <Grid celled  divided='vertically'>
+                    <Grid.Row columns = {2}>
+                        <Grid.Column width = {3} >
+                            <img src="https://yt3.ggpht.com/-r_tiN0JoSiE/AAAAAAAAAAI/AAAAAAAAAAA/AbgSGAVS35M/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" />
+
                             <Sidebar
                                 handleItemClick = {this.handleItemClick}
                                 activeItem = {activeItem}
@@ -43,13 +45,12 @@ class Profile extends React.Component {
                         </Grid.Column>
 
                         <Grid.Column
-                            mobile = {13}
-                            tablet = {12}
-                            computer = {13}
-                            largeScreen = {13}
+                            width = {13}
                             className = 'content'>
 
-                           <h1>{activeItem}</h1>
+                           <div>
+                                <Content activeItem = {camelCase}/>
+                           </div>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -62,7 +63,7 @@ class Profile extends React.Component {
 
 
 /**
- * Getting data from Redux here
+ * Getting state from Redux Store
  * @param state
  */
 function mapStateToProps(state) {
@@ -70,4 +71,6 @@ function mapStateToProps(state) {
 
     }
 }
+
+
 export default connect(mapStateToProps)(Profile);

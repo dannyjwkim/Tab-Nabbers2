@@ -1,6 +1,3 @@
-/**
- * Created by esterlingaccime on 6/24/17.
- */
 
 import "./public/css/_global.scss";
 
