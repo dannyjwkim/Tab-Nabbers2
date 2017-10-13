@@ -21,9 +21,5 @@ const pages = {
     Signup
 };
 
-export const profile = {
-  Event,
-  Student
-};
 
 export default pages;

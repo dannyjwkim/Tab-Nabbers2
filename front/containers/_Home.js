@@ -3,7 +3,13 @@ import React from "react";
 import {connect} from "react-redux";
 import Modal from '../components/common/Modal';
 import SignUp from '../components/signup/signup';
+import '../public/css/home.scss';
 
+
+/**
+ * Home component that renders the home page
+ * Every modal has a button attached that helps firing the Modal on click
+ */
 class Home extends React.Component{
     constructor(){
         super();
@@ -43,32 +49,39 @@ class Home extends React.Component{
         let student = 'Student';
 
         const {isSignIn, isSignUp} = this.state;
-        console.log("Sign In: ", isSignIn);
-        console.log("Sign Up: ", isSignUp);
         return(
-            <div>
-                <Modal name = {employer} title = {'Employer Login '}>
-                    <SignUp />
-                </Modal>
-
-                
-                <Modal
-                    name = {"Sign"}
-                    title = {'Sign In '}
-                    toggleSignUp = {this.toggleSignUp}
-                    isSignIn = {isSignIn}>
-                    I am the Sign In Page
-                </Modal>
+            <div className="home--component">
 
 
 
-                <Modal
-                    name = {student}
-                    title = {'Student Login'}
-                    isSignUp = {isSignUp}
-                    toggleSignUp = {this.toggleSignUp} >
-                    <SignUp />
-                </Modal>
+                <h3>Bootcruit</h3>
+                <p>Single-Click Staffing Solutions</p>
+                <div className="buttons--container">
+                    <Modal name = {employer} title = {'Employer Login '}>
+                        <SignUp />
+                    </Modal>
+
+
+                    <div className="hide">
+                        <Modal
+                            name = {"Sign"}
+                            title = {'Sign In '}
+                            toggleSignUp = {this.toggleSignUp}
+                            isSignIn = {isSignIn}>
+                            I am the Sign In Page
+                        </Modal>
+                    </div>
+
+
+
+                    <Modal
+                        name = {student}
+                        title = {'Student Login'}
+                        isSignUp = {isSignUp}
+                        toggleSignUp = {this.toggleSignUp} >
+                        <SignUp />
+                    </Modal>
+                </div>
             </div>
         )
     }

@@ -1,0 +1,19 @@
+
+.home--component{
+  display: flex;
+  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  height:100vh;
+
+
+  .buttons--container{
+    .hide{
+      display: none;
+    }
+
+    button{
+      margin:15px;
+    }
+  }
+}
