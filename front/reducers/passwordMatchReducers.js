@@ -16,14 +16,14 @@ export default (state=initialState,action)=> {
             return {
               ...state,
                password:action.payload
-            }
+            };
 
           case PASSWORD_CHANGE_RETYPE:
 
             return {
               ...state,
               passwordretype:action.payload
-            }
+            };
 
           default:
               return state;

@@ -19,20 +19,20 @@ import * as passwordMatchActions from "../actions/passwordMatchActions";
 class StudentCredentials extends React.Component {
 
   handlePassword=(e)=>{
-      e.preventDefault()
+      e.preventDefault();
       this.props.actions.passwordChange(e.target.value);
-  }
+  };
 
   handlePasswordReTyping=(e)=>{
-      e.preventDefault()
+      e.preventDefault();
       this.props.actions.passwordChangeRetyping(e.target.value);
-  }
+  };
 
     render(){
       //console.log(this.props.passwordmatch);
       let passwordmatch = this.props.passwordmatch;
       let passworddonotmatch = false;
-      if(passwordmatch.password!="" && passwordmatch.passwordretype!=""){
+      if(passwordmatch.password !== "" && passwordmatch.passwordretype !== ""){
             if(passwordmatch.password!==passwordmatch.passwordretype){
               passworddonotmatch=true
             }
