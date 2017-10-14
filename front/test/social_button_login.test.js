@@ -2,7 +2,7 @@ import React from "react";
 
 import {mount} from "enzyme";
 
-import Signup from "../components/signup/signup";
+import Signup from "../components/StudentLogin/signup";
 
 describe('Social media href attribute should not changed', () => {
     // ******************* Facebook Button Login ******************

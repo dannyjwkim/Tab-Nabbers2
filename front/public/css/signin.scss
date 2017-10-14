@@ -1,0 +1,109 @@
+
+
+.signin{
+
+
+  .signin--form-container{
+    height:200px;
+  }
+
+  .input{
+    display: block;
+    margin: 5%;
+    position: relative;
+    border: none;
+    background: transparent;
+  }
+
+  .correct{
+    display: none;
+  }
+
+  .incorrect{
+    color:red;
+    font-size:100%;
+  }
+
+  .mistake{
+    position: relative;
+    left: 4%;
+    color: red;
+    font-weight: 200;
+  }
+
+  .sideContainer{
+    height: 99%;
+  }
+
+
+  input:focus{
+    outline: none;
+  }
+
+  .rightContainer .button{
+    margin-top: 5%;
+    left: 23%;
+  }
+
+  .button:hover{
+    background-color: #1e8e79;
+    cursor: pointer;
+    transition: all 0.7s;
+    box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
+  }
+
+  .rightContainer{
+    width:80%;
+    background-image: url('/../img/login_image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  }
+
+  .rightHeading{
+    position: relative;
+    color: white;
+    text-align: center;
+  }
+
+  h1{
+    top: 4%;
+  }
+
+  .facebook,.twitter,.google, .linkedin{
+    color: white;
+    cursor: pointer;
+    width:120px;
+    padding:2px;
+  }
+
+  i{
+    background: none;
+  }
+
+  .facebook{
+    background: #3b5998;
+  }
+
+  .twitter{
+    background: #00aced;
+  }
+
+  .google{
+    background: #d34836;
+  }
+
+
+  //.google:hover{
+  //  background-color: #af1f0f;
+  //}
+  //
+  //.facebook:hover{
+  //  background-color: #0c3892;
+  //}
+  //
+  //.twitter:hover{
+  //  background-color: #0d8aea;
+  //}
+}

@@ -1,6 +1,9 @@
 
 import React from "react";
-import { Button, Icon, Divider, Grid } from 'semantic-ui-react';
+import { Button, Divider, Grid } from 'semantic-ui-react';
+import SocialSidebar from '../common/SocialSidebar';
+import '../../public/css/signup.scss';
+
 
 const Signup = (props) => {
 const {  onChangePassword,onChangePasswordReTyping, password, passwordretype,passworddonotmatch } = props;
@@ -11,7 +14,6 @@ const {  onChangePassword,onChangePasswordReTyping, password, passwordretype,pas
                 <Grid.Row>
                     <Grid.Column width={8}>
                         <div className="container sideContainer">
-
                             <h1 className="leftHeading">Sign up</h1>
                             <input label="User Name" type="text" className="userName input" placeholder="Username" />
                             <Divider/>
@@ -31,23 +33,10 @@ const {  onChangePassword,onChangePasswordReTyping, password, passwordretype,pas
                         </div>
 
                     </Grid.Column>
-
-                    <Grid.Column width={8}>
-                        <div className="container rightContainer">
-                            <h1 className="rightHeading"><span className="up">Sign In with</span><br/>Social Network</h1>
-                            <a href="/auth/facebook"><Button color="facebook"><Icon name="facebook"/>Facebook</Button></a>
-                            <a href="/auth/twitter"><Button color="twitter"><Icon name="twitter"/>Twitter</Button></a>
-                            <a href="/auth/google"><Button color="google plus"><Icon name="google plus"/>Google+</Button></a>
-                            <a href="/auth/linkedin"><Button color="linkedin"><Icon name="linkedin"/>LinkedIn</Button></a>
-                        </div>
-
-                    </Grid.Column>
+                    <SocialSidebar/>
                 </Grid.Row>
-
             </Grid>
-
         </div>
-
     );
 };
 

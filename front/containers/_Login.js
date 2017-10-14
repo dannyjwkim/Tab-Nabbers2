@@ -5,7 +5,6 @@ import React from "react";
 import {connect} from "react-redux";
 import { bindActionCreators } from 'redux'
 import "../public/css/signup.scss";
-import {Signup} from "../components/signup/index.js";
 import * as passwordMatchActions from "../actions/passwordMatchActions";
 
 class StudentCredentials extends React.Component {

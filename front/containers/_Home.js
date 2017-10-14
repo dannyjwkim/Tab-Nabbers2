@@ -1,8 +1,11 @@
-
+/**
+ * Import modules and components to render on the home page
+ * also import the home scss as well
+ */
 import React from "react";
 import {connect} from "react-redux";
 import Modal from '../components/common/Modal';
-import SignUp from '../components/signup/signup';
+import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
 
 
@@ -50,25 +53,33 @@ class Home extends React.Component{
 
         const {isSignIn, isSignUp} = this.state;
         return(
-            <div className="home--component">
+            <div className="home--component layout">
+
+                <div className="banner--list layout">
+                    <h1>Bootcruit</h1>
+                    <ul className="layout">
+                        <li>About</li>
+                        <li>Feature</li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
 
 
-
-                <h3>Bootcruit</h3>
+                <h3> Bootcruit </h3>
                 <p>Single-Click Staffing Solutions</p>
                 <div className="buttons--container">
                     <Modal name = {employer} title = {'Employer Login '}>
-                        <SignUp />
+                        <Signup />
                     </Modal>
 
 
                     <div className="hide">
                         <Modal
                             name = {"Sign"}
-                            title = {'Sign In '}
+                            title = {'Student Sign up'}
                             toggleSignUp = {this.toggleSignUp}
                             isSignIn = {isSignIn}>
-                            I am the Sign In Page
+                           <Signup />
                         </Modal>
                     </div>
 
@@ -76,10 +87,10 @@ class Home extends React.Component{
 
                     <Modal
                         name = {student}
-                        title = {'Student Login'}
+                        title = {'Student Sign in '}
                         isSignUp = {isSignUp}
                         toggleSignUp = {this.toggleSignUp} >
-                        <SignUp />
+                        <Signin/>
                     </Modal>
                 </div>
             </div>
@@ -87,12 +98,12 @@ class Home extends React.Component{
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return{
         // here
         // Getting data from Redux here
         // and set pass it as props
     }
-}
+};
 
 export default connect(mapStateToProps)(Home);
