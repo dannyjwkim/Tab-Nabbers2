@@ -20,10 +20,6 @@ module.exports = function (app, path) {
       })
       .catch((err) => console.log('Axios to meetup failed: ', err));
 
-
-
-
-
   })
 
-}
+};

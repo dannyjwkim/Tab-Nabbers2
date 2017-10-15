@@ -1,6 +1,3 @@
-/**
- * Created by esterlingaccime on 8/30/17.
- */
 import React from "react";
 import { Grid, Segment } from 'semantic-ui-react';
 import "../../public/css/event.scss";
@@ -10,6 +7,7 @@ const Meetup = ({events}) => {
     return(
 
         <Grid divided='vertically'>
+            <p>I am the Event Page</p>
             <Grid.Row columns={3} >
                 { events ? Object.keys(events).map((el, i) => (
                     <Grid.Column key={i}>
