@@ -52,6 +52,6 @@ function mapDispatchToProps(dispatch) {
      return {
          actions:bindActionCreators(passwordMatchActions, dispatch)
      }
-}
+}np
 
 export default connect(mapStateToProps,mapDispatchToProps)(StudentCredentials);

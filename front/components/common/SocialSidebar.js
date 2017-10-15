@@ -8,10 +8,10 @@ const SocialSidebar = () => {
         <Grid.Column width={8}>
             <div className="container rightContainer layout-col">
                 <h5 className="rightHeading"><span className="up">Sign In with</span><br/>Social Network</h5>
-                <a href="/auth/facebook"><Button color="facebook"><Icon name="facebook"/>Facebook</Button></a>
-                <a href="/auth/twitter"><Button color="twitter"><Icon name="twitter"/>Twitter</Button></a>
-                <a href="/auth/google"><Button color="google plus"><Icon name="google plus"/>Google+</Button></a>
-                <a href="/auth/linkedin"><Button color="linkedin"><Icon name="linkedin"/>LinkedIn</Button></a>
+                <a href="/auth/facebook"><Button color="button-facebook"><Icon name="facebook"/>Facebook</Button></a>
+                <a href="/auth/twitter"><Button color="button-twitter"><Icon name="twitter"/>Twitter</Button></a>
+                <a href="/auth/google"><Button color="button-google plus"><Icon name="google plus"/>Google+</Button></a>
+                <a href="/auth/linkedin"><Button color="button-linkedin"><Icon name="linkedin"/>LinkedIn</Button></a>
             </div>
 
         </Grid.Column>

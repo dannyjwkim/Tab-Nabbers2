@@ -7,7 +7,11 @@
 
 .home--component{
   flex-direction:column;
-  height:85vh;
+  height:100vh;
+  background-image: url('https://images.unsplash.com/photo-1487446929682-f62f73984006?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=&bg=');
+  -webkit-background-size: cover;
+  background-size: cover;
+  color:#fff;
 
   .banner--list{
     position: absolute;
@@ -19,7 +23,8 @@
     }
     ul li{
       margin-left:15px;
-      color:#000;
+      color:#fff;
+      cursor: pointer;
     }
   }
 

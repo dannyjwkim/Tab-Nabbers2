@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-
 const path = require("path");
 
 module.exports = {
@@ -25,8 +24,6 @@ module.exports = {
 
     // This section desribes the transformations we will perform
     module: {
-
-
         loaders: [
             {
                 // Only working with files that in in a .js or .jsx extension
