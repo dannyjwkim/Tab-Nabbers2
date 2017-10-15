@@ -18,7 +18,7 @@ class Home extends React.Component{
         super();
 
         this.state = {
-            isSignIn:false,
+            isSignIn:true,
             isSignUp:false
         };
 
@@ -33,16 +33,8 @@ class Home extends React.Component{
      * @method toggleSignUp
      */
     toggleSignUp() {
-        const {isSignIn, isSignUp} = this.state;
-        if(isSignIn){
-            this.setState({isSignUp: true, isSignIn: false})
-        }
-
-        else if(isSignUp) {
-            this.setState({isSignIn: true, isSignUp: false})
-        } else{
-            this.setState({isSignUp: true})
-        }
+        this.setState({isSignIn: !this.state.isSignIn});
+        console.log("Double Checking this and making sure it works!!!", this.state.isSignIn);
     }
 
 
@@ -51,7 +43,7 @@ class Home extends React.Component{
         let employer = 'Employer';
         let student = 'Student';
 
-        const {isSignIn, isSignUp} = this.state;
+        const {isSignIn} = this.state;
         return(
             <div className="home--component layout">
 
@@ -68,29 +60,22 @@ class Home extends React.Component{
                 <h3> Bootcruit </h3>
                 <p>Single-Click Staffing Solutions</p>
                 <div className="buttons--container">
-                    <Modal name = {employer} title = {'Employer Login '}>
-                        <Signup />
+                    <Modal
+                        name = {employer} title = {isSignIn ? 'Employer Sign up ' : 'Employer Login '}
+                        toggleSignUp = {this.toggleSignUp}
+                        footer = {isSignIn ? 'Already have an account?'  : 'Or Create an account?'}
+                        >
+                        {isSignIn ?  <Signup />:  <Signin/>}
                     </Modal>
-
-
-                    <div className="hide">
-                        <Modal
-                            name = {"Sign"}
-                            title = {'Student Sign up'}
-                            toggleSignUp = {this.toggleSignUp}
-                            isSignIn = {isSignIn}>
-                           <Signup />
-                        </Modal>
-                    </div>
 
 
 
                     <Modal
                         name = {student}
-                        title = {'Student Sign in '}
-                        isSignUp = {isSignUp}
+                        title = {isSignIn ? 'Student Sign Up ' : 'Student Sign In'}
+                        footer = {isSignIn ? 'Already have an account?'  : 'Or Create an account?'}
                         toggleSignUp = {this.toggleSignUp} >
-                        <Signin/>
+                        {isSignIn ?  <Signup />:  <Signin/>}
                     </Modal>
                 </div>
             </div>

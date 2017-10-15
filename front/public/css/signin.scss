@@ -72,10 +72,10 @@
     top: 4%;
   }
 
-  .button-facebook,.button-twitter,.button-google, .button-linkedin{
+.button-twitter,.button-google, .button-linkedin{
     color: white;
     cursor: pointer;
-    width:120px;
+    width:150px;
     padding:10px;
   }
 
@@ -83,7 +83,7 @@
     background: none;
   }
 
-  .button-facebook{
+  .button-linkedin{
     background: #3b5998;
   }
 
@@ -100,7 +100,7 @@
     background-color: #af1f0f;
   }
 
-  .button-facebook:hover{
+  .button-linkedin:hover{
     background-color: #0c3892;
   }
 

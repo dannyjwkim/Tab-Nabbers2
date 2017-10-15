@@ -7,18 +7,16 @@ import { Button,  Modal } from 'semantic-ui-react'
  * @param name
  * @param title
  * @param children
- * @param isSignUp
- * @param isSignIn
+ * @param footer
  * @param toggleSignUp
  * @constructor ModalComponent
  */
 
-const ModalComponent = ({name, title, children, isSignUp, isSignIn, toggleSignUp}) => (
+const ModalComponent = ({name, title, children, footer, toggleSignUp}) => (
     <Modal
         size = 'small'
-        open = {isSignUp ? isSignUp : isSignIn}
         onOpen={toggleSignUp}
-        trigger={<Button onClick={toggleSignUp}>{name}</Button>}>
+        trigger={<Button >{name}</Button>}>
         {title ? <Modal.Header>{title }</Modal.Header> : ''}
 
         <Modal.Content>
@@ -30,8 +28,7 @@ const ModalComponent = ({name, title, children, isSignUp, isSignIn, toggleSignUp
 
 
         <Modal.Actions content = 'Done'>
-            <p>Already have an account? <button  onClick={toggleSignUp}>Login</button></p>
-            <Button> Close</Button>
+            <a href="#" onClick={toggleSignUp}> {footer ? footer : '' }</a>
         </Modal.Actions>
 
 
