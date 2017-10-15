@@ -6,3 +6,21 @@ img{
   width:100px;
   height:100px;
 }
+
+.content{
+    height:390px;
+}
+
+.layout-col{
+  display: flex;
+  justify-content:center;
+  flex-direction:column;
+  align-items: center;
+}
+
+
+.layout{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}

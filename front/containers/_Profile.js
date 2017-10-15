@@ -1,39 +1,76 @@
-// This component is page related
-// We should not do any heavy HTML here
-// All of HTML Mocks up, needs to go to components folder
-// and be imported below into JSX
-// This component is mainly to get data from Redux Store
-// and pass it to the dumb components in the components folder
-// Every functions related to that page, need to be built in here
-// and pass via props as well to the presentation components in the components folders
 
+
+/**
+ *
+ * Menu Side bar component that shows a nice looking scrolling bar
+ *
+ */
 
 import React from "react";
 import "../public/css/profile.scss";
 import "../public/css/footer.scss";
 import {connect} from "react-redux";
-import { Grid, Segment, Header, Image, Rail, Sticky } from 'semantic-ui-react';
 import Footer from "../components/common/Footer";
+import Sidebar from '../components/common/Sidebar';
+import {Grid, Button} from 'semantic-ui-react';
+import Content from '../components/profile/Content';
+
+
 class Profile extends React.Component {
 
-    constructor(){
-        super();
+    state = {
+        activeItem: 'event'
+    };
 
-    }
+    handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+
 
     render() {
-        // JSX goes below
+        const { activeItem } = this.state;
+        const camelCase = activeItem[0].toUpperCase() + activeItem.slice(1);
+
+        console.log(camelCase);
         return (
-            <section className="profile">
+            <div >
+                <Grid celled  divided='vertically'>
+                    <Grid.Row columns = {2}>
+                        <Grid.Column width = {3} >
+                            <img src="https://yt3.ggpht.com/-r_tiN0JoSiE/AAAAAAAAAAI/AAAAAAAAAAA/AbgSGAVS35M/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" />
+
+                            <Sidebar
+                                handleItemClick = {this.handleItemClick}
+                                activeItem = {activeItem}
+                            />
+                        </Grid.Column>
+
+                        <Grid.Column
+                            width = {13}
+                            className = 'content'>
+
+                           <div>
+                                <Content activeItem = {camelCase}/>
+                           </div>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+
                 <Footer />
-            </section>
+            </div>
         );
     }
 }
 
+
+/**
+ * Getting state from Redux Store
+ * @param state
+ */
 function mapStateToProps(state) {
-    // here
-    // Getting data from Redux here
-    // and set pass it as props
+    return {
+
+    }
 }
+
+
 export default connect(mapStateToProps)(Profile);

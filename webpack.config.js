@@ -1,7 +1,5 @@
 const webpack = require('webpack');
-
 const path = require("path");
-
 
 module.exports = {
     // This is the entry point or start of our react applicaton
@@ -13,7 +11,7 @@ module.exports = {
 
     target:'web',
     devServer: {
-      contentBase: path.resolve(__dirname, 'front')
+        contentBase: path.resolve(__dirname, 'front')
     },
 
     // The plain compiled JavaScript will be output into this file
@@ -26,8 +24,6 @@ module.exports = {
 
     // This section desribes the transformations we will perform
     module: {
-
-
         loaders: [
             {
                 // Only working with files that in in a .js or .jsx extension
@@ -41,7 +37,7 @@ module.exports = {
 
             {
                 test: /\.scss$/,
-               loaders:'style-loader!css-loader!sass-loader'
+                loaders:'style-loader!css-loader!sass-loader'
                 // loader:['style-loader', 'css-loader', 'sass-loader']
 
             }

@@ -33,7 +33,7 @@
                 └── BCSidebar.js
                 └── signup.js
          └── _About.js
-         └── Content.js
+         └── StudenHome.js
          └── Footer.js
          └── Navbar.js
          └── signin.js
