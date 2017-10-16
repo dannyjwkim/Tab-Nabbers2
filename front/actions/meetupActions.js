@@ -1,6 +1,3 @@
-/**
- * Created by esterlingaccime on 8/30/17.
- */
 import * as types from "./actionTypes";
 import axios from "axios";
 

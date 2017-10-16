@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount, shallow} from 'enzyme';
-import Signup from './signup';
+import Signup from '../signup/signup';
 
 describe('<Signup/>', () => {
 

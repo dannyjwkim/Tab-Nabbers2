@@ -1,6 +1,3 @@
-/**
- * Created by Joseph Myalla on 09/24/17.
- */
 
 import {PASSWORD_CHANGE, PASSWORD_CHANGE_RETYPE} from './actionTypes';
 

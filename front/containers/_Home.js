@@ -3,7 +3,6 @@
  * also import the home scss as well
  */
 import React from "react";
-import {connect} from "react-redux";
 import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
@@ -18,8 +17,7 @@ class Home extends React.Component{
         super();
 
         this.state = {
-            isSignIn:true,
-            isSignUp:false
+            isSignIn:true
         };
 
         this.toggleSignUp = this.toggleSignUp.bind(this);
@@ -27,14 +25,10 @@ class Home extends React.Component{
 
     /**
      * Switching from Sign In and Sign Up Modal
-     * Sign in = true, set Sign up to true, and set sign in to false (Show Sign Up)
-     * Sign Up = true, set Sign in to true, and set sign up to false (Show Sign In)
-     * Both of them = false, then set the Sign up = true (Show up)
      * @method toggleSignUp
      */
     toggleSignUp() {
         this.setState({isSignIn: !this.state.isSignIn});
-        console.log("Double Checking this and making sure it works!!!", this.state.isSignIn);
     }
 
 
@@ -69,7 +63,6 @@ class Home extends React.Component{
                     </Modal>
 
 
-
                     <Modal
                         name = {student}
                         title = {isSignIn ? 'Student Sign Up ' : 'Student Sign In'}
@@ -83,12 +76,6 @@ class Home extends React.Component{
     }
 }
 
-const mapStateToProps = (state) => {
-    return{
-        // here
-        // Getting data from Redux here
-        // and set pass it as props
-    }
-};
 
-export default connect(mapStateToProps)(Home);
+
+export default Home;

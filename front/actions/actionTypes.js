@@ -1,6 +1,3 @@
-/**
- * Created by esterlingaccime on 8/11/17.
- */
 
 export const ITEMS_HAS_ERRORED = "ITEMS_HAS_ERRORED";
 
