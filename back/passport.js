@@ -1,5 +1,5 @@
 const User = require("./models/user"),
-    key = require("./config/key");
+      key = require("./config/key");
 
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,
@@ -11,20 +11,13 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
 
 module.exports = (passport) => {
 
-// used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-
         done(null, user.id);
-
     });
 
-// used to deserialize the user
     passport.deserializeUser(function(id, done) {
-
         User.findById(id, function(err, user) {
-
             done(err, user);
-
         });
     });
 
@@ -35,33 +28,30 @@ module.exports = (passport) => {
         passReqToCallback:true
     }, function (req, email, password, done) {
 
-        console.log(email, password);
         process.nextTick(function () {
+            User.findOne({'local.email':email})
+                .then((user) => {
+                    if(user){
+                        return Promise.reject({error:"User already created!, we can not sign you in!"})
+                    } else{
 
-            User.findOne({'local.email':email}, function (err, user) {
-                if(err){
-                    return done(err);
-                }
+                        let newUser = new User();
 
-                if(user){
-                    return done(null, false, 'Email already existed');
-                } else{
-                    var newUser = new User();
+                        newUser.loginData.local.email = email;
+                        newUser.loginData.local.password = newUser.generateHash(password);
 
-                    newUser.loginData.local.email = email;
-                    newUser.loginData.local.password = newUser.generateHash(password);
-                    //newUser.isNew = false;
-
-                    console.log(newUser);
-
-                    newUser.save(function(err, data) {
-                        if(err)
-                            throw err;
-
-                        return done(null, data);
-                    });
-                }
-            });
+                        newUser.save()
+                            .then(() => {
+                                return done(null, data);
+                            })
+                            .catch(() => {
+                                done(null, err);
+                            });
+                    }
+                })
+                .catch((err) => {
+                    done(err)
+                });
         })
     }));
 

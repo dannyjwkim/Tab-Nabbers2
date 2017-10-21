@@ -14,3 +14,5 @@ export const ADD_EVENT = "ADD_EVENT";
 export const PASSWORD_CHANGE = 'PASSWORD_CHANGE';
 
 export const PASSWORD_CHANGE_RETYPE = 'PASSWORD_CHANGE_RETYPE';
+
+export const SIGN_USER = 'SIGN_USER';

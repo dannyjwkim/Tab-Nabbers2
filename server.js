@@ -9,13 +9,12 @@ const express = require('express'),
     passport = require("passport"),
     mongoose = require('mongoose'),
     {TEST_DATABASE_URL} = require('./back/config/mongo'),
-    User = require('./back/models/user'),
-    {generateUsers} = require('./back/models/seedUser');
+    countAndCreateUser = require('./back/db/seedUser');
   
 
     mongoose.Promise = global.Promise;
 
-mongoose.connect(TEST_DATABASE_URL.url);
+mongoose.connect('mongodb://localhost/boocruitusers');
 
 
 
@@ -46,7 +45,11 @@ app.use(require('webpack-hot-middleware')(compiler));
 // // Static directory
 app.use(express.static(path.join(__dirname + "/front/public")));
 
-//For BodyParser
+
+/**
+ * Configure Express Middleware
+ * Such as body-parser, express-session, passport,
+ */
 app.use(bodyParser({ defer: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -63,19 +66,29 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+
+
+/**
+ * Bootcruit Routes
+ * Authenticate, API, and Browser routes
+ */
 require("./back/routes/authenticate")(app, passport);
 require("./back/routes/meetup")(app, path);
 require("./back/routes/html")(app, path);
 
+
+
+
+/**
+ * Server starting
+ */
 let server;
 
-let runServer = ( (port=PORT) => {
+let runServer = ((port = PORT) => {
   return new Promise((resolve, reject) => {
     server = app.listen(port, () => {
       console.log(`Your app is listening on port ${port}`);
-      
       resolve(server);
-      
     })
       .on('error', err => {
         console.log('Server errored, mongoose disconnecting.');
@@ -86,26 +99,13 @@ let runServer = ( (port=PORT) => {
 });
 
 const db = mongoose.connection;
-runServer()
-  .then( () => {
-    console.log('server running');
 
+
+runServer()
+  .then(() => {
     db.once("open", function () {
       console.log("Mongoose connection successful!!!");
-      return User
-        .count()
-        .then( (count) => {
-          console.log(`The count is ${count}`);
-          if (count < 5){
-              console.log('Writing dummy data to the db');
-              return User
-                  .create(generateUsers(5))
-          }
-
-        })
-        .catch(err => console.log(err));
-      console.log(generateUsers(5));
-
+      countAndCreateUser();
     });
 
   })

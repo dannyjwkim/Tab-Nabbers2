@@ -6,6 +6,7 @@ import React from "react";
 import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
+import axios from 'axios';
 
 
 /**
@@ -17,10 +18,15 @@ class Home extends React.Component{
         super();
 
         this.state = {
-            isSignIn:true
+            isSignIn:true,
+            email:'',
+            password:'',
+            username:''
         };
 
         this.toggleSignUp = this.toggleSignUp.bind(this);
+        this.authenticateUser = this.authenticateUser.bind(this);
+        this.newUser = this.newUser.bind(this);
     }
 
     /**
@@ -29,6 +35,30 @@ class Home extends React.Component{
      */
     toggleSignUp() {
         this.setState({isSignIn: !this.state.isSignIn});
+    }
+
+
+    authenticateUser(event){
+        event.preventDefault();
+        let {name, value} = event.target;
+        this.setState({[name]: value});
+    }
+
+    newUser(){
+
+        const {username, email, password} = this.state;
+
+        axios({
+            url:'/createusers',
+            method:'',
+            data:{username, email, password}
+        })
+            .then((user) => {
+                console.log(user);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
 
@@ -68,7 +98,9 @@ class Home extends React.Component{
                         title = {isSignIn ? 'Student Sign Up ' : 'Student Sign In'}
                         footer = {isSignIn ? 'Already have an account?'  : 'Or Create an account?'}
                         toggleSignUp = {this.toggleSignUp} >
-                        {isSignIn ?  <Signup />:  <Signin/>}
+                        {isSignIn ?  <Signup
+                            authenticate = {this.authenticateUser}
+                            newUser = {this.newUser}/>:  <Signin/>}
                     </Modal>
                 </div>
             </div>

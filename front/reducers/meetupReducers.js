@@ -1,4 +1,7 @@
-import {ADD_EVENT} from "../actions/actionTypes";
+import {
+    ADD_EVENT,
+    SIGN_USER
+} from "../actions/actionTypes";
 
 
 export default function meetupReducer (state = {events:[]}, action) {
@@ -9,6 +12,10 @@ export default function meetupReducer (state = {events:[]}, action) {
                     {}, state, 
                     {events: [...state.events, action.events]})
             );
+        case SIGN_USER:
+            return [
+                ...state, action.user
+            ];
                     
         default:
             return state;
