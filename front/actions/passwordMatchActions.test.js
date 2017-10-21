@@ -1,6 +1,7 @@
 import * as actions from './passwordMatchActions';
+import {PASSWORD_CHANGE, PASSWORD_CHANGE_RETYPE} from './actionTypes';
 
-const {PASSWORD_CHANGE, PASSWORD_CHANGE_RETYPE, passwordChange, passwordChangeRetyping} = actions;
+const {passwordChange, passwordChangeRetyping} = actions;
 
 describe('Password Match Actions', () => {
 
