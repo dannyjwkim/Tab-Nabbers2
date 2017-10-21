@@ -18,6 +18,7 @@ const Sidebar = ({handleItemClick, activeItem}) => {
         'settings',
         'close account',
         'student'
+
     ];
 
     return (

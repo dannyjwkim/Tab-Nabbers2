@@ -30,7 +30,6 @@ class Profile extends React.Component {
         const { activeItem } = this.state;
         const camelCase = activeItem[0].toUpperCase() + activeItem.slice(1);
 
-        console.log(camelCase);
         return (
             <div >
                 <Grid celled  divided='vertically'>

@@ -1,8 +1,5 @@
 
 import React from 'react';
-
-
-
 import Event from '../../containers/_Event';
 import EditProfile from '../../components/profile/Edit_Profile';
 import Setting from '../../containers/Settings';
