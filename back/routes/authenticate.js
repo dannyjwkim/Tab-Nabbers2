@@ -1,20 +1,16 @@
 
 module.exports = function (app, passport) {
-
+    const jwt = require('jsonwebtoken');
     app.post('/signup',  passport.authenticate('local-signup', {}), (req, res) => {
-        res.json("Authenticated!!");
+        const token = jwt.sign({user: req.user}, 'ilovebootcruit');
+        res.header('x-auth', token).send();
     });
 
 
     app.post('/login', passport.authenticate('local-login', {}), (req, res) => {
-        // console.log(req);
-        console.log(req.user);
-       res.json("User Signed in!!");
-
+        const token = jwt.sign({user: req.user}, 'ilovebootcruit');
+        res.header('x-auth', token).send();
     });
-
-
-
 
     app.get('/auth/facebook', passport.authenticate('facebook', {scope:'email'}));
 
@@ -23,24 +19,26 @@ module.exports = function (app, passport) {
         failureRedirect: '/'
     }));
 
-
-
-
     app.get('/auth/linkedin',
         passport.authenticate('linkedin'));
 
-    app.get('/auth/linkedin/callback',
-        passport.authenticate('linkedin', { failureRedirect: '/' }),
-        function(req, res) {
-            // Successful authentication, redirect home.
-            res.redirect('/profile');
-        });
+    app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+        failureRedirect: '/'
+    }), (req, res) => {
+        res.redirect('/profile');
+    });
 
 
-    app.get('/auth/google',
-        passport.authenticate('google', { scope: ['profile', 'email'] }));
+    app.get('/auth/google',  passport.authenticate('google', {
+        scope: ['profile', 'email']
+    }));
 
-    app.get('/auth/google/callback', passport.authenticate('google', { successRedirect : '/profile', failureRedirect: '/' }));
+    app.get('/auth/google/callback', passport.authenticate('google', {
+        successRedirect : '/profile',
+        failureRedirect: '/'
+    }));
+
+
 
 
 
@@ -52,7 +50,7 @@ module.exports = function (app, passport) {
             failureRedirect: '/' }));
 
 
-    function isLoggedIn(req, res, next) {
+    const isLoggedIn = (req, res, next) => {
         if(req.isAuthenticated()){
             return next()
         } else{

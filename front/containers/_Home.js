@@ -5,6 +5,7 @@
 import React from "react";
 import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
+import {browserHistory} from 'react-router';
 import '../public/css/home.scss';
 import axios from 'axios';
 
@@ -27,6 +28,7 @@ class Home extends React.Component{
         this.toggleSignUp = this.toggleSignUp.bind(this);
         this.authenticateUser = this.authenticateUser.bind(this);
         this.newUser = this.newUser.bind(this);
+        this.existedUser = this.existedUser.bind(this);
     }
 
     /**
@@ -46,18 +48,57 @@ class Home extends React.Component{
 
     newUser(){
 
-        const {username, email, password} = this.state;
+        const {email, password} = this.state;
 
         axios({
-            url:'/createusers',
-            method:'',
-            data:{username, email, password}
+            method:'POST',
+            url:'/signup',
+            data:{
+                email:email,
+                password:password
+            }
         })
-            .then((user) => {
-                console.log(user);
+            .then((response) => {
+                if(response.headers['x-auth']){
+                    const token = response.headers['x-auth'];
+                    localStorage.setItem('token', token);
+                    browserHistory.replace('/profile')
+                }
+
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((err ) => {
+                console.log('Error: :', err);
+                alert("User already exist. Please try a different user");
+
+            });
+    }
+
+
+    existedUser(event){
+        event.preventDefault();
+        console.log(this.state);
+        const {email, password} = this.state;
+
+        axios({
+            method:'POST',
+            url:'/login',
+            data:{
+                email:email,
+                password:password
+            }
+        })
+            .then((response) => {
+                if(response.headers['x-auth']){
+                    const token = response.headers['x-auth'];
+                    localStorage.setItem('token', token);
+                    browserHistory.replace('/profile')
+                }
+
+            })
+            .catch((err ) => {
+                console.log('Error: :', err);
+                alert("User already exist. Please try a different user");
+
             });
     }
 
@@ -100,7 +141,7 @@ class Home extends React.Component{
                         toggleSignUp = {this.toggleSignUp} >
                         {isSignIn ?  <Signup
                             authenticate = {this.authenticateUser}
-                            newUser = {this.newUser}/>:  <Signin/>}
+                            newUser = {this.newUser}/>:  <Signin authenticate = {this.authenticateUser} existedUser = {this.existedUser}/>}
                     </Modal>
                 </div>
             </div>

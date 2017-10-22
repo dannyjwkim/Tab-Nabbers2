@@ -70,9 +70,10 @@ app.use(passport.session());
  * Bootcruit Routes
  * Authenticate, API, and Browser routes
  */
-require("./back/routes/meetup")(app, path);
-require("./back/routes/html")(app, path);
 require("./back/routes/authenticate")(app, passport);
+require("./back/routes/api")(app, path);
+require("./back/routes/html")(app, path);
+
 
 
 /**
@@ -87,7 +88,7 @@ let runServer = ((port = PORT) => {
             resolve(server);
         })
             .on('error', err => {
-                console.log('Server errored, mongoose disconnecting.');
+                console.log('Server error, mongoose disconnecting.');
                 reject(err);
             });
     });
@@ -99,7 +100,7 @@ let runServer = ((port = PORT) => {
 
 runServer()
     .then(() => {
-        db.once("openUri", function () {
+        db.once("open", function () {
             console.log("Mongoose connection successful!!!");
             countAndCreateUser();
         });

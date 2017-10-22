@@ -8,7 +8,7 @@ import {
     localSignup,
     localSignin,
     linkedin
-} from './passportAuthentication/index';
+} from './middlewares/index';
 
 
 

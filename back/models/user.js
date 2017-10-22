@@ -4,6 +4,7 @@
  */
 
 const bcrypt = require("bcryptjs");
+const _ = require('lodash');
 const mongoose = require("mongoose");
 
 const emailValid = [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email.'];
@@ -57,6 +58,10 @@ const skillSchema = new mongoose.Schema({
 
 
 const userSchema = new mongoose.Schema({
+
+    username:{
+        type:String
+    },
 
     firstName: {
         type: String,
@@ -182,6 +187,13 @@ const userSchema = new mongoose.Schema({
     }
 
 });
+
+
+userSchema.methods.toJSON = function () {
+    let user = this;
+    let userObject = user.toObject();
+    return _.pick(userObject, ['_id', 'firstName', 'lastName', 'email'])
+};
 
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
