@@ -3,7 +3,6 @@ import { Route, IndexRoute, Router, browserHistory } from "react-router";
 import {Provider} from "react-redux";
 import Home from "../containers/_Home";
 import PropTypes from 'prop-types';
-import Pages from "./Pages";
 import Profile from "../containers/_Profile";
 
 

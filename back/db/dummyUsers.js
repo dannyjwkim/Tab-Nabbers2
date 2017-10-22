@@ -27,34 +27,30 @@ exports.user = {
     },
     jobStatus: jobStatus[Math.floor(Math.random() * jobStatus.length)],
     jobTitle: faker.name.jobTitle(),
-    loginData: {
-        local: {
-            email: faker.internet.email(),
-            password: faker.internet.password()
-        },
-        facebook: {
-            id: faker.random.uuid(),
-            token: faker.random.uuid(),
-            email: faker.internet.email(),
-            name: faker.internet.userName()
-        },
-        twitter: {
-            id: faker.random.uuid(),
-            token: faker.random.uuid(),
-            displayName: `${faker.name.firstName()}${faker.name.lastName()}`,
-            username: faker.internet.userName()
-        },
-        google: {
-            id: faker.random.uuid(),
-            token: faker.random.uuid(),
-            email: faker.internet.email()
-        },
-        linkedin: {
-            id: faker.random.uuid(),
-            token: faker.random.uuid(),
-            email: faker.internet.email(),
-            name: faker.internet.userName()
-        }
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+    facebook: {
+        id: faker.random.uuid(),
+        token: faker.random.uuid(),
+        email: faker.internet.email(),
+        name: faker.internet.userName()
+    },
+    twitter: {
+        id: faker.random.uuid(),
+        token: faker.random.uuid(),
+        displayName: `${faker.name.firstName()}${faker.name.lastName()}`,
+        username: faker.internet.userName()
+    },
+    google: {
+        id: faker.random.uuid(),
+        token: faker.random.uuid(),
+        email: faker.internet.email()
+    },
+    linkedin: {
+        id: faker.random.uuid(),
+        token: faker.random.uuid(),
+        email: faker.internet.email(),
+        name: faker.internet.userName()
     },
 
     address: {
@@ -90,35 +86,32 @@ exports.users = () => {
         },
         jobStatus: jobStatus[Math.floor(Math.random() * jobStatus.length)],
         jobTitle: faker.name.jobTitle(),
-        loginData: {
-            local: {
-                email: faker.internet.email(),
-                password: faker.internet.password()
-            },
-            facebook: {
-                id: faker.random.uuid(),
-                token: faker.random.uuid(),
-                email: faker.internet.email(),
-                name: faker.internet.userName()
-            },
-            twitter: {
-                id: faker.random.uuid(),
-                token: faker.random.uuid(),
-                displayName: `${faker.name.firstName()}${faker.name.lastName()}`,
-                username: faker.internet.userName()
-            },
-            google: {
-                id: faker.random.uuid(),
-                token: faker.random.uuid(),
-                email: faker.internet.email()
-            },
-            linkedin: {
-                id: faker.random.uuid(),
-                token: faker.random.uuid(),
-                email: faker.internet.email(),
-                name: faker.internet.userName()
-            }
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        facebook: {
+            id: faker.random.uuid(),
+            token: faker.random.uuid(),
+            email: faker.internet.email(),
+            name: faker.internet.userName()
         },
+        twitter: {
+            id: faker.random.uuid(),
+            token: faker.random.uuid(),
+            displayName: `${faker.name.firstName()}${faker.name.lastName()}`,
+            username: faker.internet.userName()
+        },
+        google: {
+            id: faker.random.uuid(),
+            token: faker.random.uuid(),
+            email: faker.internet.email()
+        },
+        linkedin: {
+            id: faker.random.uuid(),
+            token: faker.random.uuid(),
+            email: faker.internet.email(),
+            name: faker.internet.userName()
+        },
+
 
         address: {
             street_address: faker.address.streetName(),

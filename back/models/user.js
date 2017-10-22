@@ -12,46 +12,45 @@ const zipcodeValid = [/^\d{5}(?:[-\s]\d{4})?$/, 'The zipcode must either be in t
 
 
 const addressSchema = new mongoose.Schema({
-  street_address: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  apartment_number: mongoose.Schema.Types.Mixed,
-  city: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  state: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 2
-  },
-  zipcode: {
-    type: String,
-    required: true,
-    match: zipcodeValid
-  },
-  _id: false
+    street_address: {
+        type: String,
+        trim: true
+    },
+    apartment_number: mongoose.Schema.Types.Mixed,
+    city: {
+        type: String,
+        trim: true,
+        default: ""
+
+    },
+    state: {
+        type: String,
+        default: ""
+
+    },
+    zipcode: {
+        type: String,
+        match: zipcodeValid,
+
+    },
+    _id: false
 });
 
 const skillSchema = new mongoose.Schema({
   
-  skillName: {
-    type: String,
-    required: true
-  },
-  category: {
-    type: String,
-    match: [/^Library|Framework|Language$/],
-    required: true
-  },
-  active: {
-    type: Boolean,
-    required: true
-  }
+    skillName: {
+        type: String
+        // required: true
+    },
+    category: {
+        type: String
+        // match: [/^Library|Framework|Language$/],
+        // required: true
+    },
+    active: {
+        type: Boolean
+        // required: true
+    }
   
 
 });
@@ -59,145 +58,138 @@ const skillSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
 
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 1,
-    default: "Enter your first name"
-  },
+    firstName: {
+        type: String,
+        trim: true,
+        default: ""
+    },
 
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 1,
-    default: "Enter your last name"
-  },
+    lastName: {
+        type: String,
+        trim: true,
+        default: ""
+    },
 
-  gender: {
-    type: String,
-    default: "Enter your gender",
-    match: [/M|F/]
-  },
+    gender: {
+        type: String
+        // default: "",
+        // match: [/M|F/]
+    },
 
-  phoneNumber: {
-    type: String,
-    required: true,
-    match: phonenumberValid,
-    trim: true,
-    default: "Enter your phone number"
-  },
+    phoneNumber: {
+        type: String,
+        // match: phonenumberValid,
+        trim: true,
+        default: ""
+    },
 
-  address: {
-    type:addressSchema,
-    required: true
-  },
+    address: {
+        type:addressSchema
 
-  birthday: {
+    },
+
+    birthday: {
     
-    month: {
-      type: String
+        month: {
+            type: String
+        },
+
+        day: {
+            type: String
+        },
+
+        year: {
+            type: String
+        }
+
     },
 
-    day: {
-      type: String
+    photo: {
+        type: String
     },
 
-    year: {
-      type: String
-    }
+    photoUrl: {
+        type: String
+    },
 
-  },
-
-  photo: {
-    type: String
-  },
-
-  photoUrl: {
-    type: String
-  },
-
-  profiles: {
+    profiles: {
     
-    github: {
-      type: String,
-      default: "Enter a link to your github profile"
+        github: {
+            type: String,
+            default: ""
+        },
+
+        linkedIn: {
+            type: String,
+            default: ""
+        },
+
+        website: {
+            type: String,
+            default: ""
+        }
     },
 
-    linkedIn: {
-      type: String,
-      default: "Enter a link to your linkedIn profile"
-    },
 
-    website: {
-      type: String,
-      default: "Enter a link to your website"
-    }
-  },
-
-
-  skills: {
-    type: [skillSchema],
+    skills: {
+        type: [skillSchema],
     
-  },
+    },
   
-  jobStatus: {
-    type: String,
-    default: "Enter your job status"
-  },
+    jobStatus: {
+        type: String,
+        default: ""
+    },
 
-  jobTitle: {
-    type: String,
-    default: "Enter your job title"
-  },
+    jobTitle: {
+        type: String,
+        default: ""
+    },
 
-  loginData: {
-    local: {
-      email: {
+    email: {
         type: String,
         unique: true,
         match: emailValid,
         minlength: 1
-      },
-      password: String
+    },
+    password: {
+        type:String
     },
     facebook: {
-      id: {type: String},
-      token: {type: String},
-      email: {type: String},
-      name: {type:String}
+        id: {type: String},
+        token: {type: String},
+        email: {type: String},
+        name: {type:String}
     },
     twitter: {
-      id: {type:String},
-      token: {type:String},
-      displayName: {type:String},
-      username: {type:String}
+        id: {type:String},
+        token: {type:String},
+        displayName: {type:String},
+        username: {type:String}
     },
     google: {
-      id: {type:String},
-      token: {type:String},
-      email: {type:String},
-      name: {type:String}
+        id: {type:String},
+        token: {type:String},
+        email: {type:String},
+        name: {type:String}
     },
 
     linkedin: {
-      id: {type:String},
-      token: {type: String},
-      email: {type: String},
-      name: {type:String}
+        id: {type:String},
+        token: {type: String},
+        email: {type: String},
+        name: {type:String}
     }
-  }
 
 });
 
 userSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 // checking if password is valid
 userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.local.password);
+    return bcrypt.compareSync(password, this.password);
 };
 
 

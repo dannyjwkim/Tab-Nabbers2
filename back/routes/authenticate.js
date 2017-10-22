@@ -1,19 +1,17 @@
 
-const path = require("path");
-
-
 module.exports = function (app, passport) {
 
-    app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect:'/profile',
-        failureRedirect:'/'
-    }));
+    app.post('/signup',  passport.authenticate('local-signup', {}), (req, res) => {
+        res.json("Authenticated!!");
+    });
 
 
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/' // redirect back to the signup page if there is an error
-    }));
+    app.post('/login', passport.authenticate('local-login', {}), (req, res) => {
+        // console.log(req);
+        console.log(req.user);
+       res.json("User Signed in!!");
+
+    });
 
 
 
