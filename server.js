@@ -15,7 +15,7 @@ const express = require('express'),
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/boocruitusers');
+mongoose.connect(TEST_DATABASE_URL.url);
 
 
 const db = mongoose.connection;

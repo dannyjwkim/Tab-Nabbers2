@@ -5,10 +5,8 @@
 import React from "react";
 import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
-import {browserHistory} from 'react-router';
 import '../public/css/home.scss';
-import axios from 'axios';
-
+import {sendData} from '../utils';
 
 /**
  * Home component that renders the home page
@@ -47,30 +45,12 @@ class Home extends React.Component{
     }
 
     newUser(){
-
         const {email, password} = this.state;
-
-        axios({
-            method:'POST',
-            url:'/signup',
-            data:{
-                email:email,
-                password:password
-            }
-        })
-            .then((response) => {
-                if(response.headers['x-auth']){
-                    const token = response.headers['x-auth'];
-                    localStorage.setItem('token', token);
-                    browserHistory.replace('/profile')
-                }
-
-            })
-            .catch((err ) => {
-                console.log('Error: :', err);
-                alert("User already exist. Please try a different user");
-
-            });
+        const user = {
+            email,
+            password
+        };
+        sendData('/signup', user);
     }
 
 
@@ -78,28 +58,10 @@ class Home extends React.Component{
         event.preventDefault();
         console.log(this.state);
         const {email, password} = this.state;
+        const user = { email,  password };
 
-        axios({
-            method:'POST',
-            url:'/login',
-            data:{
-                email:email,
-                password:password
-            }
-        })
-            .then((response) => {
-                if(response.headers['x-auth']){
-                    const token = response.headers['x-auth'];
-                    localStorage.setItem('token', token);
-                    browserHistory.replace('/profile')
-                }
+        sendData('/login', user)
 
-            })
-            .catch((err ) => {
-                console.log('Error: :', err);
-                alert("User already exist. Please try a different user");
-
-            });
     }
 
 
@@ -125,23 +87,30 @@ class Home extends React.Component{
                 <h3> Bootcruit </h3>
                 <p>Single-Click Staffing Solutions</p>
                 <div className="buttons--container">
+
                     <Modal
-                        name = {employer} title = {isSignIn ? 'Employer Sign up ' : 'Employer Login '}
-                        toggleSignUp = {this.toggleSignUp}
-                        footer = {isSignIn ? 'Already have an account?'  : 'Or Create an account?'}
+                        name = { employer } title = { isSignIn ? 'Employer Sign up ' : 'Employer Login ' }
+                        toggleSignUp = { this.toggleSignUp }
+                        footer = { isSignIn ? 'Already have an account?'  : 'Or Create an account?' }
                         >
-                        {isSignIn ?  <Signup />:  <Signin/>}
+                        { isSignIn ?  <Signup />:  <Signin/> }
                     </Modal>
 
 
                     <Modal
-                        name = {student}
-                        title = {isSignIn ? 'Student Sign Up ' : 'Student Sign In'}
-                        footer = {isSignIn ? 'Already have an account?'  : 'Or Create an account?'}
-                        toggleSignUp = {this.toggleSignUp} >
-                        {isSignIn ?  <Signup
-                            authenticate = {this.authenticateUser}
-                            newUser = {this.newUser}/>:  <Signin authenticate = {this.authenticateUser} existedUser = {this.existedUser}/>}
+                        name = { student }
+                        title = { isSignIn ? 'Student Sign Up ' : 'Student Sign In' }
+                        footer = { isSignIn ? 'Already have an account?'  : 'Or Create an account?' }
+                        toggleSignUp = { this.toggleSignUp } >
+                        {
+                            isSignIn ?
+                            <Signup
+                            authenticate = { this.authenticateUser }
+                            newUser = { this.newUser }/>  :
+                            <Signin
+                            authenticate = { this.authenticateUser }
+                            existedUser = { this.existedUser }/>
+                        }
                     </Modal>
                 </div>
             </div>
