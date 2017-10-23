@@ -6,7 +6,7 @@ import '../../public/css/signup.scss';
 
 
 const Signup = (props) => {
-const {  onChangePassword,onChangePasswordReTyping, password, passwordretype,passworddonotmatch } = props;
+const {  onChangePassword,onChangePasswordReTyping, password, passwordretype,passworddonotmatch, authenticate, newUser } = props;
 
     return (
         <div className="signup shadowBox">
@@ -15,18 +15,18 @@ const {  onChangePassword,onChangePasswordReTyping, password, passwordretype,pas
                     <Grid.Column width={8}>
                         <div className="container sideContainer">
                             <h1 className="leftHeading">Sign up</h1>
-                            <input label="User Name" type="text" className="userName input" placeholder="Username" />
+                            <input label="User Name" type="text" name="username" className="userName input" placeholder="Username" onChange={authenticate} />
                             <Divider/>
-                            <input type="email" className="email input" placeholder="E-Mail"/>
+                            <input type="email" name="email" className="email input" placeholder="E-Mail" onChange={authenticate}/>
                             <Divider/>
-                            <input type="password" className="password input" placeholder="Password" value={password} onChange={onChangePassword} />
+                            <input type="password" name="password" className="password input" placeholder="Password" value={password} onChange={authenticate} />
                             <Divider/>
-                            <input type="password" className="repeatPassword input" placeholder="Retype Password" value={passwordretype} onChange={onChangePasswordReTyping}/>
+                            <input type="password" name="password" className="repeatPassword input" placeholder="Retype Password" value={passwordretype} />
                             <Divider/>
 
                             <h6 className={passworddonotmatch ? 'incorrect' : 'correct'}>Please Retype the Correct Password.</h6>
 
-                            <Button className="btn btn-info button" type="submit" name="action">SIGN ME UP
+                            <Button onClick={newUser}  className="btn btn-info button" type="submit" name="action">SIGN ME UP
                                 <i className="material-icons right"> </i>
                             </Button>
 

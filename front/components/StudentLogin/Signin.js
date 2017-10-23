@@ -3,7 +3,7 @@ import {Input, Button, Grid} from 'semantic-ui-react';
 import SocialSidebar from '../common/SocialSidebar';
 import '../../public/css/signin.scss';
 
-const SignIn = () => {
+const SignIn = ({existedUser, authenticate}) => {
 
     return(
         <div className="signin shadowBox">
@@ -11,10 +11,10 @@ const SignIn = () => {
             <Grid>
                 <Grid.Row>
                     <Grid.Column width={8} className = 'signin--form-container'>
-                        <form action="#" className="sideContainer layout-col">
-                            <Input type="text" size = 'large' placeholder="Username"/>
-                            <Input type="password" size = 'large' placeholder = "password"/>
-                            <Button> Login </Button>
+                        <form  className="sideContainer layout-col">
+                            <Input type="email" size = 'large' placeholder="Username" name="email" onChange={authenticate}/>
+                            <Input type="password" size = 'large' placeholder = "password" name="password" onChange={authenticate}/>
+                            <Button onClick={existedUser}> Login </Button>
                         </form>
                     </Grid.Column>
 

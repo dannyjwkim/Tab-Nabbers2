@@ -5,22 +5,20 @@ const express = require('express'),
     secret = require("./back/config/secrets"),
     path = require("path"),
     webpack = require("webpack"),
-    open = require("open"),
     passport = require("passport"),
     mongoose = require('mongoose'),
     {TEST_DATABASE_URL} = require('./back/config/mongo'),
-    User = require('./back/models/user'),
-    {generateUsers} = require('./back/models/seedUser');
+    countAndCreateUser = require('./back/db/seedUser'),
+    flash = require("express-flash"),
+    MongoStore = require('connect-mongo')(session);
   
 
-    mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
 mongoose.connect(TEST_DATABASE_URL.url);
 
 
-
-
-
+const db = mongoose.connection;
 
 const config = require("./webpack.config");
 
@@ -31,89 +29,88 @@ const app = express(),
     PORT = process.env.PORT || 8080;
 
 
-const router = express.Router();
-
 const compiler = webpack(config);
-
 app.use(require('webpack-dev-middleware')(compiler, {
     noInfo:true,
     publicPath:config.output.publicPath
 }));
-
 app.use(require('webpack-hot-middleware')(compiler));
 
 
-// // Static directory
-app.use(express.static(path.join(__dirname + "/front/public")));
+app.use(express.static(path.join(__dirname + "/front/public"))); // static folders
 
-//For BodyParser
+
+
+
+/**
+ * Configure Express Middleware
+ * Such as body-parser, express-session, passport,
+ */
 app.use(bodyParser({ defer: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 require("./back/passport")(passport);
 
+
+
 app.use(session({
     secret: 'ilovescotchscotchyscotchscotch', // session secret
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false,
+    store:new MongoStore({mongooseConnection: db})
 }));
-
+// app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 
+
+/**
+ * Bootcruit Routes
+ * Authenticate, API, and Browser routes
+ */
 require("./back/routes/authenticate")(app, passport);
-require("./back/routes/meetup")(app, path);
+require("./back/routes/api")(app, path);
 require("./back/routes/html")(app, path);
 
+
+
+/**
+ * Server starting
+ */
 let server;
 
-let runServer = ( (port=PORT) => {
-  return new Promise((resolve, reject) => {
-    server = app.listen(port, () => {
-      console.log(`Your app is listening on port ${port}`);
-      
-      resolve(server);
-      
-    })
-      .on('error', err => {
-        console.log('Server errored, mongoose disconnecting.');
-        reject(err);
-      });
-  });
-    
+let runServer = ((port = PORT) => {
+    return new Promise((resolve, reject) => {
+        server = app.listen(port, () => {
+            console.log(`Your app is listening on port ${port}`);
+            resolve(server);
+        })
+            .on('error', err => {
+                console.log('Server error, mongoose disconnecting.');
+                reject(err);
+            });
+    });
+
 });
 
-const db = mongoose.connection;
+
+
+
 runServer()
-  .then( () => {
-    console.log('server running');
+    .then(() => {
+        db.once("open", function () {
+            console.log("Mongoose connection successful!!!");
+            countAndCreateUser();
+        });
 
-    db.once("open", function () {
-      console.log("Mongoose connection successful!!!");
-      return User
-        .count()
-        .then( (count) => {
-          console.log(`The count is ${count}`);
-          if (count < 5){
-              console.log('Writing dummy data to the db');
-              return User
-                  .create(generateUsers(5))
-          }
-
-        })
-        .catch(err => console.log(err));
-      console.log(generateUsers(5));
-
+    })
+    .catch( (err) => {
+        console.log('server not running', err);
+        db.on("error", function (err) {
+            console.log("Mongoose Error: ", err);
+        });
     });
-
-  })
-  .catch( (err) => {
-    console.log('server not running', err);
-    db.on("error", function (err) {
-      console.log("Mongoose Error: ", err);
-    });
-  });
 
 

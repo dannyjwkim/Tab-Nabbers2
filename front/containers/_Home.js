@@ -6,7 +6,7 @@ import React from "react";
 import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
-
+import {sendData} from '../utils';
 
 /**
  * Home component that renders the home page
@@ -17,10 +17,16 @@ class Home extends React.Component{
         super();
 
         this.state = {
-            isSignIn:true
+            isSignIn:true,
+            email:'',
+            password:'',
+            username:''
         };
 
         this.toggleSignUp = this.toggleSignUp.bind(this);
+        this.authenticateUser = this.authenticateUser.bind(this);
+        this.newUser = this.newUser.bind(this);
+        this.existedUser = this.existedUser.bind(this);
     }
 
     /**
@@ -29,6 +35,33 @@ class Home extends React.Component{
      */
     toggleSignUp() {
         this.setState({isSignIn: !this.state.isSignIn});
+    }
+
+
+    authenticateUser(event){
+        event.preventDefault();
+        let {name, value} = event.target;
+        this.setState({[name]: value});
+    }
+
+    newUser(){
+        const {email, password} = this.state;
+        const user = {
+            email,
+            password
+        };
+        sendData('/signup', user);
+    }
+
+
+    existedUser(event){
+        event.preventDefault();
+        console.log(this.state);
+        const {email, password} = this.state;
+        const user = { email,  password };
+
+        sendData('/login', user)
+
     }
 
 
@@ -54,21 +87,30 @@ class Home extends React.Component{
                 <h3> Bootcruit </h3>
                 <p>Single-Click Staffing Solutions</p>
                 <div className="buttons--container">
+
                     <Modal
-                        name = {employer} title = {isSignIn ? 'Employer Sign up ' : 'Employer Login '}
-                        toggleSignUp = {this.toggleSignUp}
-                        footer = {isSignIn ? 'Already have an account?'  : 'Or Create an account?'}
+                        name = { employer } title = { isSignIn ? 'Employer Sign up ' : 'Employer Login ' }
+                        toggleSignUp = { this.toggleSignUp }
+                        footer = { isSignIn ? 'Already have an account?'  : 'Or Create an account?' }
                         >
-                        {isSignIn ?  <Signup />:  <Signin/>}
+                        { isSignIn ?  <Signup />:  <Signin/> }
                     </Modal>
 
 
                     <Modal
-                        name = {student}
-                        title = {isSignIn ? 'Student Sign Up ' : 'Student Sign In'}
-                        footer = {isSignIn ? 'Already have an account?'  : 'Or Create an account?'}
-                        toggleSignUp = {this.toggleSignUp} >
-                        {isSignIn ?  <Signup />:  <Signin/>}
+                        name = { student }
+                        title = { isSignIn ? 'Student Sign Up ' : 'Student Sign In' }
+                        footer = { isSignIn ? 'Already have an account?'  : 'Or Create an account?' }
+                        toggleSignUp = { this.toggleSignUp } >
+                        {
+                            isSignIn ?
+                            <Signup
+                            authenticate = { this.authenticateUser }
+                            newUser = { this.newUser }/>  :
+                            <Signin
+                            authenticate = { this.authenticateUser }
+                            existedUser = { this.existedUser }/>
+                        }
                     </Modal>
                 </div>
             </div>
