@@ -20,8 +20,8 @@ const FooterPage = () => {
                         </Grid.Column>
                         <Grid.Column>
 
-                            <p className="p">Get Involve</p>
-                            <ul>
+                            <p className="p">Get Involved</p>
+                            <ul className="involved">
                                 <li>Join a Group</li>
                                 <li>Contribute to BootCruit</li>
                                 <li>Submit a Bug</li>
