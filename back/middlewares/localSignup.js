@@ -46,7 +46,5 @@ const localSignUp = (req, res, next) => {
 
 
 
-module.exports = {
-    localSignUp
-};
+module.exports = localSignUp;
 

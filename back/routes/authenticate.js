@@ -1,7 +1,12 @@
-import {localSignUp} from '../middlewares/localSignup';
+
+import {
+    localSignUp,
+    localSignIn
+} from '../middlewares/index';
 
 
 module.exports = function (app, passport) {
+
 
 
     app.post('/signup',  localSignUp, (req, res) => {
@@ -11,10 +16,13 @@ module.exports = function (app, passport) {
     });
 
 
-    // app.post('/login', passport.authenticate('local-login', {}), (req, res) => {
-    //     const token = jwt.sign({user: req.user}, 'ilovebootcruit');
-    //     res.header('x-auth', token).send();
-    // });
+    app.post('/login',localSignIn,  (req, res) => {
+        const token = req.user['tokens'][0].token;
+        const _id = req.user._id;
+        res.header('x-auth', token).json({message: 'User sign in', user_id: _id});
+    });
+
+
 
     app.get('/auth/facebook', passport.authenticate('facebook', {scope:'email'}));
 

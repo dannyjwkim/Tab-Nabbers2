@@ -2,8 +2,8 @@ import facebook from './facebook';
 import google from './google';
 import linkedin from './linkedin';
 import twitter from './twitter';
-import localSignin from './localSignin';
-import localSignup from './localSignup';
+import localSignIn from './localSignin';
+import localSignUp from './localSignup';
 
 
 module.exports = {
@@ -11,6 +11,6 @@ module.exports = {
     linkedin,
     google,
     twitter,
-    localSignup,
-    localSignin
+    localSignUp,
+    localSignIn
 };

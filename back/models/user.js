@@ -199,11 +199,11 @@ const userSchema = new mongoose.Schema({
 });
 
 
-userSchema.methods.toJSON = function () {
-    let user = this;
-    let userObject = user.toObject();
-    return _.pick(userObject, ['_id', 'firstName', 'lastName', 'email'])
-};
+// userSchema.methods.toJSON = function () {
+//     let user = this;
+//     let userObject = user.toObject();
+//     return _.pick(userObject, ['_id', 'firstName', 'lastName', 'email'])
+// };
 
 userSchema.methods.generateAuthToken = function () {
     let user = this;
@@ -216,7 +216,6 @@ userSchema.methods.generateAuthToken = function () {
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
-
 
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);

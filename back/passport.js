@@ -5,8 +5,6 @@ import {
     facebook,
     google,
     twitter,
-    // localSignup,
-    localSignin,
     linkedin
 } from './middlewares/index';
 
@@ -22,8 +20,6 @@ module.exports = (passport) => {
         });
     });
 
-    // localSignup(passport, User);
-    localSignin(passport, User);
     facebook(passport, User, key);
     google(passport, User, key);
     twitter(passport, User, key);

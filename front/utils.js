@@ -22,7 +22,6 @@ module.exports = {
 
             })
             .catch((err) => {
-
               alert(err.response.data.error);
               console.log(err.response);
               console.log(err);
