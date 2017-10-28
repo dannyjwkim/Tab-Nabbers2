@@ -6,7 +6,7 @@ import React from "react";
 import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
-import {sendData} from '../utils';
+import {authentication} from '../utils';
 
 /**
  * Home component that renders the home page
@@ -50,17 +50,15 @@ class Home extends React.Component{
             email,
             password
         };
-        sendData('/signup', user);
+        authentication('/signup', user, '/profile');
     }
 
 
     existedUser(event){
         event.preventDefault();
-        console.log(this.state);
         const {email, password} = this.state;
         const user = { email,  password };
-
-        sendData('/login', user)
+        authentication('/login', user, '/profile');
 
     }
 

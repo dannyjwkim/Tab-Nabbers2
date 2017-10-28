@@ -8,18 +8,28 @@ const meetupApi = 'https://api.meetup.com/find/events?text=JavaScript&key=' + ke
 
 module.exports = function (app, path) {
 
-  // app.use()
+    // app.use()
 
-  app.get('/meetup/api', (req, res) => {
-    // console.log('Client to server meetup call succeeded. Now contacting the API...');
+    app.get('/meetup/api', (req, res) => {
+        // console.log('Client to server meetup call succeeded. Now contacting the API...');
 
-    return axios.get(meetupApi)
-      .then((meetupData) => {
-        console.log('Data:', meetupData);
-        res.json({data: meetupData.data});
-      })
-      .catch((err) => console.log('Axios to meetup failed: ', err));
+        return axios.get(meetupApi)
+            .then((meetupData) => {
+                console.log('Data:', meetupData);
+                res.json({data: meetupData.data});
+            })
+            .catch((err) => console.log('Axios to meetup failed: ', err));
 
-  })
+    });
+
+    app.get("/flash", (req, res) => {
+        res.json("OK");
+    });
+
+
+    app.get("/api", (req, res) => {
+        console.log(req.flash('signupMessage'));
+        res.json("OK");
+    });
 
 };

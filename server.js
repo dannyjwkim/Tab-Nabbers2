@@ -9,9 +9,11 @@ const express = require('express'),
     mongoose = require('mongoose'),
     {TEST_DATABASE_URL} = require('./back/config/mongo'),
     countAndCreateUser = require('./back/db/seedUser'),
-    flash = require("express-flash"),
-    MongoStore = require('connect-mongo')(session);
-  
+    flash = require("connect-flash"),
+    MongoStore = require('connect-mongo')(session),
+    cookieParser = require('cookie-parser');
+
+
 
 mongoose.Promise = global.Promise;
 
@@ -53,7 +55,7 @@ app.use(bodyParser.json());
 require("./back/passport")(passport);
 
 
-
+app.use(cookieParser('secretString'));
 app.use(session({
     secret: 'ilovescotchscotchyscotchscotch', // session secret
     resave: false,
@@ -63,7 +65,7 @@ app.use(session({
 // app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 
 
 /**

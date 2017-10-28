@@ -6,6 +6,7 @@
 const bcrypt = require("bcryptjs");
 const _ = require('lodash');
 const mongoose = require("mongoose");
+const jwt = require('jsonwebtoken');
 
 const emailValid = [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email.'];
 const phonenumberValid = [/(?=^\d{10}$)|(?=^\d{3}-\d{3}-\d{4}$)|(?=^\(\d{3}\)\d{3}-\d{4}$)/, 'Please enter a valid phone number in the format 1234567890, 123-456-7890, or (123)456-7890'];
@@ -83,9 +84,8 @@ const userSchema = new mongoose.Schema({
 
     phoneNumber: {
         type: String,
-        // match: phonenumberValid,
-        trim: true,
-        default: ""
+        match: phonenumberValid,
+        trim: true
     },
 
     address: {
@@ -184,7 +184,17 @@ const userSchema = new mongoose.Schema({
         token: {type: String},
         email: {type: String},
         name: {type:String}
-    }
+    },
+
+    tokens: [{
+        access:{
+            type:String,
+        },
+
+        token:{
+            type:String
+        }
+    }]
 
 });
 
@@ -195,11 +205,19 @@ userSchema.methods.toJSON = function () {
     return _.pick(userObject, ['_id', 'firstName', 'lastName', 'email'])
 };
 
+userSchema.methods.generateAuthToken = function () {
+    let user = this;
+    let access = 'auth';
+    let token = jwt.sign({_id: user._id.toHexString(), access:access}, 'ilovejson').toString();
+    user.tokens.push({ access, token });
+    return user.save().then(() => { return token });
+};
+
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-// checking if password is valid
+
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };

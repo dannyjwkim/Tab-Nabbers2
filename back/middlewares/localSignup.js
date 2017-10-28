@@ -2,36 +2,51 @@
 
 
 
+
 /**
- * Authenticate the user with Passport Local Strategy
- * @param passport
- * @param User
+ * Authenticate the user password with bcrypt
+ * store the user email and password into our Database
+ * Send an object with property error in case of errors
+ * @param req
+ * @pram res
+ * @param next
+ * @method localSignup
  */
-module.exports = (passport, User) => {
-    const LocalStrategy = require("passport-local").Strategy;
 
-    passport.use('local-signup', new LocalStrategy({
-        usernameField:'email',
-        passwordField:'password',
-        passReqToCallback:true
-    }, function (req, email, password, done) {
-        console.log(req.body);
-        console.log(email, password);
+const User = require('../models/user');
 
-       User.findOne({'email':email}, (err, user) => {
-           if(err)
-               return done(err);
-           if(user)
-               return done(null, false, {message:'Email already exist!'});
-           let newUser = new User({ email });
-               newUser.password = newUser.generateHash(password);
-               newUser.save((err) => {
-                   if(err)
-                       return done(err);
-                   return done(null, newUser);
-               })
-       })
+const localSignUp = (req, res, next) => {
 
-   }));
- };
+    const {email, password} = req.body;
+
+    User.findOne({email})
+        .then((user) => {
+            if(user){
+                return Promise.reject({error:'Email already registered, try to login or reset your password'});
+            } else{
+                let newUser = new User({ email });
+                newUser.password = newUser.generateHash(password);
+                newUser.save((err) => {
+                    if(err){
+                        res.status(400).json({error:'Email or password not valid'});
+                    } else{
+                        newUser.generateAuthToken();
+                        req.user = newUser;
+                        next();
+                    }
+                })
+            }
+        })
+        .catch((err) => {
+            res.status(400).json(err);
+        });
+};
+
+
+
+
+
+module.exports = {
+    localSignUp
+};
 

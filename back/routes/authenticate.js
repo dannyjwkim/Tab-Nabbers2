@@ -1,16 +1,20 @@
+import {localSignUp} from '../middlewares/localSignup';
+
 
 module.exports = function (app, passport) {
-    const jwt = require('jsonwebtoken');
-    app.post('/signup',  passport.authenticate('local-signup', {}), (req, res) => {
-        const token = jwt.sign({user: req.user}, 'ilovebootcruit');
-        res.header('x-auth', token).send();
+
+
+    app.post('/signup',  localSignUp, (req, res) => {
+        const token = req.user['tokens'][0].token;
+        const _id = req.user._id;
+        res.header('x-auth', token).json({message: 'User created!', user_id: _id});
     });
 
 
-    app.post('/login', passport.authenticate('local-login', {}), (req, res) => {
-        const token = jwt.sign({user: req.user}, 'ilovebootcruit');
-        res.header('x-auth', token).send();
-    });
+    // app.post('/login', passport.authenticate('local-login', {}), (req, res) => {
+    //     const token = jwt.sign({user: req.user}, 'ilovebootcruit');
+    //     res.header('x-auth', token).send();
+    // });
 
     app.get('/auth/facebook', passport.authenticate('facebook', {scope:'email'}));
 

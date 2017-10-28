@@ -19,7 +19,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler));
 
 
-// // Static directory
+// Static directory
 app.use(express.static(path.join(__dirname + "/front/public")));
 
 app.get("*", function (req, res) {

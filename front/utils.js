@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 module.exports = {
 
 
-    sendData: (url, data) => {
+    authentication: (url, data, path) => {
         axios({
             method:'POST',
             url:url,
@@ -14,14 +14,18 @@ module.exports = {
             .then((response) => {
                 if(response.headers['x-auth']){
                     const token = response.headers['x-auth'];
-                    localStorage.setItem('token', token);
-                    browserHistory.replace('/profile')
+                    const user_id = response.data.user_id;
+                    const user = {user_id, token};
+                    localStorage.setItem('token', JSON.stringify(user));
+                    browserHistory.replace(path)
                 }
 
             })
-            .catch((err ) => {
-                console.log('Error: :', err);
-                alert("User already exist. Please try a different user");
+            .catch((err) => {
+
+              alert(err.response.data.error);
+              console.log(err.response);
+              console.log(err);
 
             });
     }

@@ -27,7 +27,7 @@ module.exports = (passport, User, key) => {
                         return done(null, user); // user found, return that user
                     } else {
                         // if there is no user found with that facebook id, create them
-                        var newUser            = new User();
+                        let newUser            = new User();
 
                         // set all of the facebook information in our user model
                         newUser.linkedin.id    = profile.id; // set the users facebook id

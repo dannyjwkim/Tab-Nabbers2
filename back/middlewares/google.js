@@ -25,7 +25,7 @@ module.exports = (passport, User, key) => {
 
                     } else {
                         // if the user isnt in our database, create a new user
-                        var newUser          = new User();
+                        let newUser          = new User();
 
                         // set all of the relevant information
                         newUser.google.id    = profile.id;
