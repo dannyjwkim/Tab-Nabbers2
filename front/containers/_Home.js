@@ -11,6 +11,7 @@ import {authentication} from '../utils';
 /**
  * Home component that renders the home page
  * Every modal has a button attached that helps firing the Modal on click
+ * @constructor Home
  */
 class Home extends React.Component{
     constructor(){
@@ -38,12 +39,23 @@ class Home extends React.Component{
     }
 
 
+    /**
+     * Setting the values in the state
+     * @param event
+     * @function authenticateUser
+     */
     authenticateUser(event){
         event.preventDefault();
         let {name, value} = event.target;
         this.setState({[name]: value});
     }
 
+
+    /**
+     * Sign up new student to Bootcruit
+     * with email and password from the state
+     * @method newUser
+     */
     newUser(){
         const {email, password} = this.state;
         const user = {
@@ -54,6 +66,12 @@ class Home extends React.Component{
     }
 
 
+    /**
+     * Sign in existed student into Bootcruit
+     * with email and password
+     * @param event
+     * @method existedUser
+     */
     existedUser(event){
         event.preventDefault();
         const {email, password} = this.state;

@@ -5,6 +5,7 @@ import { Menu } from 'semantic-ui-react'
 /**
  *
  * Menu Side bar component that shows a nice looking scrolling bar
+ * @function Sidebar
  *
  */
 const Sidebar = ({handleItemClick, activeItem}) => {
