@@ -14,7 +14,7 @@ const localSignIn = (req, res, next) => {
     const {email, password} = req.body;
     User.findOne({ 'email' :  email })
         .then((user) => {
-            if(!user) res.status(400).json({error:"No user found, try again"});
+            if(!user) res.status(400).json({error:"Email doesn't exist, try again"});
             if(!user.validPassword(password)) res.status(400).json({error: "Password doesn't match"});
             else{
                 req.user = user;

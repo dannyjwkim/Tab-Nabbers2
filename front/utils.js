@@ -4,8 +4,7 @@ import {browserHistory} from 'react-router';
 
 module.exports = {
 
-
-    authentication: (url, data, path) => {
+    authentication: (url, data, path, container) => {
         axios({
             method:'POST',
             url:url,
@@ -13,19 +12,18 @@ module.exports = {
         })
             .then((response) => {
                 if(response.headers['x-auth']){
+                    container.success(`You have successfully been sign up`, `Congratulations`, { closeButton: true });
                     const token = response.headers['x-auth'];
                     const user_id = response.data.user_id;
                     const user = {user_id, token};
                     localStorage.setItem('token', JSON.stringify(user));
-                    browserHistory.replace(path)
+                    setTimeout(function () {
+                        browserHistory.replace(path)
+                    }, 1500)
                 }
-
             })
             .catch((err) => {
-              alert(err.response.data.error);
-              console.log(err.response);
-              console.log(err);
-
+              container.error(`${err.response.data.error}`, `Ooops`, { closeButton: true })
             });
     }
 

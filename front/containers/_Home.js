@@ -7,6 +7,10 @@ import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
 import {authentication} from '../utils';
+import { ToastContainer } from "react-toastr";
+
+
+
 
 /**
  * Home component that renders the home page
@@ -29,6 +33,8 @@ class Home extends React.Component{
         this.newUser = this.newUser.bind(this);
         this.existedUser = this.existedUser.bind(this);
     }
+
+    container;
 
     /**
      * Switching from Sign In and Sign Up Modal
@@ -62,7 +68,7 @@ class Home extends React.Component{
             email,
             password
         };
-        authentication('/signup', user, '/profile');
+        authentication('/signup', user, '/profile', this.container);
     }
 
 
@@ -76,12 +82,13 @@ class Home extends React.Component{
         event.preventDefault();
         const {email, password} = this.state;
         const user = { email,  password };
-        authentication('/login', user, '/profile');
+        authentication('/login', user, '/profile', this.container);
 
     }
 
 
     render(){
+
 
         let employer = 'Employer';
         let student = 'Student';
@@ -89,6 +96,10 @@ class Home extends React.Component{
         const {isSignIn} = this.state;
         return(
             <div className="home--component layout">
+                 <ToastContainer
+                    ref={ref => this.container = ref}
+                    className="toast-top-right"
+                />
 
                 <div className="banner--list layout">
                     <h1>Bootcruit</h1>
