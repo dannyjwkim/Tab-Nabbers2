@@ -27,13 +27,6 @@ class Recruiter extends React.Component{
 }
 
 
-
-function mapStateToProps(state) {
-    // here
-    // Getting data from Redux here
-    // and set pass it as props
-
-}
-
+c
 
 export default connect(mapStateToProps)(Recruiter);

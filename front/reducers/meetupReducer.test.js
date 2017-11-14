@@ -1,8 +1,8 @@
 import meetupReducer from './meetupReducers';
 
-import {ADD_EVENT} from './../actions/actionTypes';
+import {ADD_EVENT} from '../actions/types';
 
-import {fecthEventsSuccess} from './../actions/meetupActions';
+import {fecthEventsSuccess} from '../actions/actions';
 
 describe('Meetup reducer', () => {
 

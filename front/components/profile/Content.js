@@ -1,35 +1,27 @@
-
 import React from 'react';
 import Event from '../../containers/_Event';
-import EditProfile from '../../components/profile/Edit_Profile';
+import Edit_profile from '../../components/profile/Edit_Profile';
 import Setting from '../../containers/Settings';
-import CloseAccount from '../../containers/CloseAccount';
+import Close_account from '../../containers/CloseAccount';
 
-const Content = ({activeItem}) => {
+const Content = ({component}) => {
 
+    const components = {
+        Event,
+        Edit_profile,
+        Setting,
+        Close_account
+    };
+    console.log(component);
 
-    switch(activeItem){
-        case 'Edit profile':
-            return <EditProfile />;
-        break;
-
-        case 'Events':
-            return(<Event />);
-        break;
-
-        case 'Settings':
-            return(<Setting />);
-        break;
-
-        case 'Close account':
-            return(<CloseAccount />);
-        break;
-
-        default:
-            return(<p>Components haven't created yet</p>)
-
+    for (let key in components) {
+        if (component === key) {
+            let Result = components[component];
+            return <Result/>;
+        } else{
+            return( <p> Not found!! </p>)
+        }
     }
-
 };
 
 export default Content;

@@ -1,5 +1,5 @@
 import * as actions from './passwordMatchActions';
-import {PASSWORD_CHANGE, PASSWORD_CHANGE_RETYPE} from './actionTypes';
+import {PASSWORD_CHANGE, PASSWORD_CHANGE_RETYPE} from './types';
 
 const {passwordChange, passwordChangeRetyping} = actions;
 

@@ -1,5 +1,5 @@
-import {fecthEventsSuccess} from './meetupActions';
-import {ADD_EVENT} from './actionTypes';
+import {fecthEventsSuccess} from './actions';
+import {ADD_EVENT} from './types';
 
 describe ('ADD EVENT', () => {
   

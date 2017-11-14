@@ -3,7 +3,7 @@ import {
     PASSWORD_CHANGE,
     PASSWORD_CHANGE_RETYPE,
     SIGN_USER
-} from './actionTypes';
+} from './types';
 
 export const passwordChange = (password) =>({
   type: PASSWORD_CHANGE,

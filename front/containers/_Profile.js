@@ -1,5 +1,3 @@
-
-
 /**
  *
  * Menu Side bar component that shows a nice looking scrolling bar
@@ -28,11 +26,14 @@ class Profile extends React.Component {
 
     render() {
         const { activeItem } = this.state;
-        const camelCase = activeItem[0].toUpperCase() + activeItem.slice(1);
+        const { content } = this.props.params;
+
+        let component = content[0].toUpperCase() + content.slice(1);
+
 
         return (
-            <div >
-                <Grid celled  divided='vertically'>
+            <div>
+                <Grid celled  divided='vertically' className="profile">
                     <Grid.Row columns = {2}>
                         <Grid.Column width = {3} >
                             <img src="https://yt3.ggpht.com/-r_tiN0JoSiE/AAAAAAAAAAI/AAAAAAAAAAA/AbgSGAVS35M/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" />
@@ -48,7 +49,7 @@ class Profile extends React.Component {
                             className = 'content'>
 
                            <div>
-                                <Content activeItem = {camelCase}/>
+                                <Content component = {component}/>
                            </div>
                         </Grid.Column>
                     </Grid.Row>

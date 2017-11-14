@@ -12,7 +12,7 @@ import { Button,  Modal } from 'semantic-ui-react'
  * @constructor ModalComponent
  */
 
-const ModalComponent = ({name, title, children, footer, toggleSignUp}) => (
+const ModalComponent = ({ name, title, children, footer, toggleSignUp }) => (
     <Modal
         size = 'small'
         onOpen={toggleSignUp}
@@ -21,7 +21,7 @@ const ModalComponent = ({name, title, children, footer, toggleSignUp}) => (
 
         <Modal.Content>
             <Modal.Description>
-                {children}
+                { children }
             </Modal.Description>
         </Modal.Content>
 

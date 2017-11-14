@@ -17,9 +17,7 @@ module.exports = function (app, passport) {
 
 
     app.post('/login',localSignIn,  (req, res) => {
-        const token = req.user['tokens'][0].token;
-        const _id = req.user._id;
-        res.header('x-auth', token).json({message: 'User sign in', user_id: _id});
+        res.header('Authorization', req.token).json({token: req.token});
     });
 
 
@@ -49,10 +47,6 @@ module.exports = function (app, passport) {
         successRedirect : '/profile',
         failureRedirect: '/'
     }));
-
-
-
-
 
     app.get('/auth/twitter', passport.authenticate('twitter'));
 

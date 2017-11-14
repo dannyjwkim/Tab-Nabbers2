@@ -6,10 +6,13 @@ import React from "react";
 import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
-import {authentication} from '../utils';
-import { ToastContainer } from "react-toastr";
+import Utils from '../utils/utils';
+import {ToastContainer} from "react-toastr";
+import { login } from '../actions/actions';
+import {connect} from 'react-redux';
 
 
+const util = new Utils();
 
 
 /**
@@ -17,21 +20,25 @@ import { ToastContainer } from "react-toastr";
  * Every modal has a button attached that helps firing the Modal on click
  * @constructor Home
  */
-class Home extends React.Component{
-    constructor(){
+class Home extends React.Component {
+    constructor() {
         super();
 
         this.state = {
-            isSignIn:true,
-            email:'',
-            password:'',
-            username:''
+            isSignIn: true,
+            email: '',
+            password: '',
+            username: ''
         };
 
         this.toggleSignUp = this.toggleSignUp.bind(this);
         this.authenticateUser = this.authenticateUser.bind(this);
         this.newUser = this.newUser.bind(this);
         this.existedUser = this.existedUser.bind(this);
+    }
+
+    componentWillMount() {
+
     }
 
     container;
@@ -50,7 +57,7 @@ class Home extends React.Component{
      * @param event
      * @function authenticateUser
      */
-    authenticateUser(event){
+    authenticateUser(event) {
         event.preventDefault();
         let {name, value} = event.target;
         this.setState({[name]: value});
@@ -62,13 +69,13 @@ class Home extends React.Component{
      * with email and password from the state
      * @method newUser
      */
-    newUser(){
+    newUser() {
         const {email, password} = this.state;
         const user = {
             email,
             password
         };
-        authentication('/signup', user, '/profile', this.container);
+        this.props.dispatch(login('/signup', user, '/profile', this.container));
     }
 
 
@@ -78,25 +85,24 @@ class Home extends React.Component{
      * @param event
      * @method existedUser
      */
-    existedUser(event){
+    existedUser(event) {
         event.preventDefault();
         const {email, password} = this.state;
-        const user = { email,  password };
-        authentication('/login', user, '/profile', this.container);
-
+        const user = {email, password};
+        this.props.dispatch(login('/login', user, '/profile', this.container));
     }
 
 
-    render(){
+    render() {
 
 
         let employer = 'Employer';
         let student = 'Student';
 
         const {isSignIn} = this.state;
-        return(
+        return (
             <div className="home--component layout">
-                 <ToastContainer
+                <ToastContainer
                     ref={ref => this.container = ref}
                     className="toast-top-right"
                 />
@@ -116,35 +122,34 @@ class Home extends React.Component{
                 <div className="buttons--container">
 
                     <Modal
-                        name = { employer } title = { isSignIn ? 'Employer Sign up ' : 'Employer Login ' }
-                        toggleSignUp = { this.toggleSignUp }
-                        footer = { isSignIn ? 'Already have an account?'  : 'Or Create an account?' }
-                        >
-                        { isSignIn ?  <Signup />:  <Signin/> }
+                        name={employer} title={isSignIn ? 'Employer Sign up ' : 'Employer Login '}
+                        toggleSignUp={this.toggleSignUp}
+                        footer={isSignIn ? 'Already have an account?' : 'Or Create an account?'}
+                    >
+                        {isSignIn ? <Signup/> : <Signin/>}
                     </Modal>
 
 
                     <Modal
-                        name = { student }
-                        title = { isSignIn ? 'Student Sign Up ' : 'Student Sign In' }
-                        footer = { isSignIn ? 'Already have an account?'  : 'Or Create an account?' }
-                        toggleSignUp = { this.toggleSignUp } >
+                        name={student}
+                        title={isSignIn ? 'Student Sign Up ' : 'Student Sign In'}
+                        footer={isSignIn ? 'Already have an account?' : 'Or Create an account?'}
+                        toggleSignUp={this.toggleSignUp}>
                         {
                             isSignIn ?
-                            <Signup
-                            authenticate = { this.authenticateUser }
-                            newUser = { this.newUser }/>  :
-                            <Signin
-                            authenticate = { this.authenticateUser }
-                            existedUser = { this.existedUser }/>
+                                <Signup
+                                    authenticate={this.authenticateUser}
+                                    newUser={this.newUser}/> :
+                                <Signin
+                                    authenticate={this.authenticateUser}
+                                    existedUser={this.existedUser}/>
                         }
                     </Modal>
                 </div>
             </div>
-        )
+        );
     }
 }
 
 
-
-export default Home;
+export default connect(null, null)(Home);

@@ -19,12 +19,13 @@
 
 
 
+
 ## Folders Structured
 
 ```
 |-- front/
    |-- actions/
-           └── actionTypes.js
+           └── types.js
            └── profile.js
    |-- components/
          └── bcsidebar

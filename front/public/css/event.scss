@@ -1,52 +1,28 @@
-.events{
-  height:400px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  ::-webkit-scrollbar {
-  width: 12px;
-  padding:1%;
-  // color: red;
 
+.events-container {
+  position: relative;
+  height: 125px;
+  width: 644px;
+  border: 1px solid red;
+  padding:10px;
+
+  &__event {
+
+    &--content {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      h2 {
+        font-size: 12px;
+      }
+    }
+
+    &--members {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px;
+    }
   }
-  p{
-    word-wrap: break-word;
-  }
-
-  ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  height: 5px;
-  margin-left: 2px
-  }
-  ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  .events:hover::-webkit-scrollbar-thumb{
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  .events::-webkit-scrollbar{
-    width: 0.2rem;
-    transition:width 2s;
-  }
-
-  .events:hover::-webkit-scrollbar{
-    width: 0.3rem;
-    transition:width 5s;
-  }
-}
-}
-
-.events:hover::-webkit-scrollbar-thumb{
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.events::-webkit-scrollbar{
-  width: 0.2rem;
-  transition:width 2s;
-}
-
-.events:hover::-webkit-scrollbar{
-  width: 0.3rem;
-  transition:width 5s;
 }

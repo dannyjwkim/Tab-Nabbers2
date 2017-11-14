@@ -4,6 +4,8 @@ import {Provider} from "react-redux";
 import Home from "../containers/_Home";
 import PropTypes from 'prop-types';
 import Profile from "../containers/_Profile";
+import Event from "../containers/_Event";
+
 
 
 const Routes = ({store}) => (
@@ -11,7 +13,7 @@ const Routes = ({store}) => (
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Home} />
-            <Route path = '/profile' components={Profile}/>
+            <Route path = '/profile/:content' components={Profile}/>
         </Router>
     </Provider>
 );

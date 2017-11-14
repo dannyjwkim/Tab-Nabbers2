@@ -24,7 +24,6 @@ class StudentCredentials extends React.Component {
     render(){
         return(
 
-            // JSX go here
             <div>
                 <h1>I am the Student Page</h1>
             </div>

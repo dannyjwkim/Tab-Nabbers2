@@ -1,25 +1,35 @@
 import React from "react";
-import { Grid, Segment } from 'semantic-ui-react';
+import {Grid, Segment} from 'semantic-ui-react';
 import "../../public/css/event.scss";
 
 const Meetup = ({events}) => {
 
-    return(
+    return (
+        <section className="events-container">
+            {
+                Object.keys(events).map((el, i) => {
+                    return events[el].map(({group, time, yes_rsvp_count, id}) => (
+                        <div className="events-container__event" key={id}>
+                            <div className="events-container__event--content">
+                                <i>Icons here</i>
+                                <div>
+                                    <h2>{group.name} </h2>
+                                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab debitis
+                                        dignissimos dolor dolores doloribus eos eum
+                                     </p>
+                                </div>
+                            </div>
 
-        <Grid divided='vertically'>
-            <p>I am the Event Page</p>
-            <Grid.Row columns={3} >
-                { events ? Object.keys(events).map((el, i) => (
-                    <Grid.Column key={i}>
-                        <Segment piled className={"events"}>
-                            <h4>{events[el].name}</h4>
-                            <p>{events[el].description}</p>
-                        </Segment>
-                    </Grid.Column>
+                            <div className="events-container__event--members">
+                                <p>{yes_rsvp_count} going</p>
+                                <p>{time}</p>
+                            </div>
+                        </div>
+                    ));
+                })
+            }
 
-                )) : <p>Loading...</p>}
-            </Grid.Row>
-        </Grid>
+        </section>
 
     );
 };
