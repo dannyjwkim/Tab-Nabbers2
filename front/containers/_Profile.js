@@ -20,10 +20,6 @@ class Profile extends React.Component {
         activeItem: 'event'
     };
 
-    componentWillMount(){
-        const {isAuthenticated} = localStorage.credentials;
-    }
-
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
 
