@@ -4,29 +4,6 @@ import jwt from 'jsonwebtoken';
 
 
 export default class Utils {
-    // authentication(url, user, path, container) {
-    //     axios({
-    //         method: 'POST',
-    //         url: url,
-    //         data: user
-    //     })
-    //         .then((response) => {
-    //             if (response.data.token) {
-    //                 container.success(`You have successfully been sign up`, `Congratulations`, {closeButton: true});
-    //                 const token = response.data.token;
-    //                 localStorage.setItem('token', JSON.stringify(token));
-    //
-    //                 this.setAuthorizationToken(token);
-    //
-    //                 setTimeout(function () {
-    //                     browserHistory.replace(path);
-    //                 }, 1500);
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             container.error(`${err.response.data.error}`, `Ooops`, {closeButton: true});
-    //         });
-    // };
 
     setAuthorizationToken(token) {
         if (token) {
@@ -36,8 +13,19 @@ export default class Utils {
         }
     };
 
-    decodeToken(token){
+    decodeToken(token) {
         return jwt.decode(token);
+    };
+
+    setCredentials(token) {
+        const isAuthenticated = true;
+        const credentials = {
+            token,
+            isAuthenticated,
+            user: this.decodeToken(token)
+        };
+        localStorage.setItem('credentials', JSON.stringify(credentials));
+        this.setAuthorizationToken(token);
     }
 }
 

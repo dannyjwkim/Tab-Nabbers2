@@ -21,7 +21,7 @@ class Profile extends React.Component {
     };
 
     componentWillMount(){
-        localStorage.setItem('isAuthenticated', JSON.stringify(this.props.isAuthenticated))
+        const {isAuthenticated} = localStorage.credentials;
     }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });

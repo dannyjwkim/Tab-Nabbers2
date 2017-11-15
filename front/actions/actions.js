@@ -42,8 +42,8 @@ export const login = (url, user, path, container) => {
                 if (response.data.token) {
                     container.success(`You have successfully been sign up`, `Congratulations`, {closeButton: true});
                     const token = response.data.token;
-                    localStorage.setItem('token', JSON.stringify(token));
-                    util.setAuthorizationToken(token);
+
+                    util.setCredentials(token);
 
                     dispatch(setCurrentUser(util.decodeToken(token)));
 

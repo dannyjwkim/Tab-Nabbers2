@@ -36,7 +36,13 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        localStorage.isAuthenticated ? browserHistory.push('/profile/event') : 'No user is authenticated!!'
+        try{
+            const { isAuthenticated } = JSON.parse(localStorage.getItem('credentials'));
+            isAuthenticated ? browserHistory.push('/profile/event') : 'No user is authenticated!!'
+        } catch (err){
+            console.log("No user in session");
+        }
+
     }
 
     container;
