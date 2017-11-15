@@ -20,6 +20,10 @@ class Profile extends React.Component {
         activeItem: 'event'
     };
 
+    componentWillMount(){
+        localStorage.setItem('isAuthenticated', JSON.stringify(this.props.isAuthenticated))
+    }
+
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
 
@@ -68,7 +72,7 @@ class Profile extends React.Component {
  */
 function mapStateToProps(state) {
     return {
-
+        isAuthenticated: state.auth.isAuthenticated
     }
 }
 

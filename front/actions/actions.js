@@ -18,6 +18,13 @@ export const setCurrentUser = (user) => {
     };
 };
 
+export const setErrors = (err) => {
+    return {
+        type:"SET_ERROR",
+        err
+    }
+};
+
 
 export const login = (url, user, path, container) => {
     return (dispatch) => {
@@ -25,16 +32,18 @@ export const login = (url, user, path, container) => {
         return axios({
             method: 'POST',
             url: url,
-            data: user
+            data: user,
+            headers:{
+                'Content-Type': 'application/json',
+                "x-auth":'Esterling'
+            }
         })
             .then(response => {
                 if (response.data.token) {
                     container.success(`You have successfully been sign up`, `Congratulations`, {closeButton: true});
                     const token = response.data.token;
                     localStorage.setItem('token', JSON.stringify(token));
-
                     util.setAuthorizationToken(token);
-
 
                     dispatch(setCurrentUser(util.decodeToken(token)));
 
@@ -43,7 +52,9 @@ export const login = (url, user, path, container) => {
                     }, 1500);
                 }
             })
-            .catch(err => container.error(`${err.response.data.error}`, `Ooops`, {closeButton: true}) );
+            .catch(err => {
+                dispatch(setErrors(err));
+            } );
     };
 };
 

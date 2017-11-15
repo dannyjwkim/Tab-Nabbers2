@@ -37,7 +37,7 @@ export default class Utils {
     };
 
     decodeToken(token){
-        console.log(jwt.decode(token));
+        return jwt.decode(token);
     }
 }
 

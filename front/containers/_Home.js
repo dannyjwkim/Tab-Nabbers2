@@ -6,13 +6,11 @@ import React from "react";
 import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
-import Utils from '../utils/utils';
 import {ToastContainer} from "react-toastr";
 import { login } from '../actions/actions';
 import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
 
-
-const util = new Utils();
 
 
 /**
@@ -38,7 +36,7 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-
+        localStorage.isAuthenticated ? browserHistory.push('/profile/event') : 'No user is authenticated!!'
     }
 
     container;
@@ -75,7 +73,7 @@ class Home extends React.Component {
             email,
             password
         };
-        this.props.dispatch(login('/signup', user, '/profile', this.container));
+        this.props.dispatch(login('/signup', user, '/profile/event', this.container));
     }
 
 
@@ -89,7 +87,7 @@ class Home extends React.Component {
         event.preventDefault();
         const {email, password} = this.state;
         const user = {email, password};
-        this.props.dispatch(login('/login', user, '/profile', this.container));
+        this.props.dispatch(login('/login', user, '/profile/event', this.container));
     }
 
 
