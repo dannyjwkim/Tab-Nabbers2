@@ -13,9 +13,6 @@ img{
   height:100px;
 }
 
-.content{
-    height:390px;
-}
 
 .layout-col{
   display: flex;
@@ -29,4 +26,14 @@ img{
   display: flex;
   justify-content:center;
   align-items: center;
+}
+
+#app{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.profile{
+  flex: 1;
 }

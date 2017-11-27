@@ -14,7 +14,6 @@ class Event extends React.Component {
     render() {
         return (
             <div>
-                <p>Hello World!!!</p>
                 <Meetup events = {this.props.events}/>
             </div>
         );

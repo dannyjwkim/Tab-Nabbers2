@@ -1,8 +1,11 @@
 import React from "react";
 import {Grid, Segment} from 'semantic-ui-react';
 import "../../public/css/event.scss";
+import moment from 'moment';
 
 const Meetup = ({events}) => {
+
+    console.log();
 
     return (
         <section className="events-container">
@@ -22,7 +25,7 @@ const Meetup = ({events}) => {
 
                             <div className="events-container__event--members">
                                 <p>{yes_rsvp_count} going</p>
-                                <p>{time}</p>
+                                <p>{moment(time).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
                             </div>
                         </div>
                     ));

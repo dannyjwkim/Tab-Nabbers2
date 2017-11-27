@@ -5,15 +5,20 @@
    *
 */
 
-  /* Resetting the semantic ui box-shadow that looks like border*/
-  .ui.celled.grid>.row>.column{
-    box-shadow: none;
+/* Resetting the semantic ui box-shadow that looks like border*/
+.ui.celled.grid > .row > .column {
+  box-shadow: none;
+}
+
+.ui.pointing {
+  width: 147px;
+}
+
+.profile {
+  margin-bottom: 150px;
+
+  .menu {
+    margin-top: 200px;
   }
-
-.ui.pointing{
-  width:147px;
 }
 
-.profile{
-  margin-bottom:150px;
-}

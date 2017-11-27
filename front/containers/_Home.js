@@ -28,11 +28,6 @@ class Home extends React.Component {
             password: '',
             username: ''
         };
-
-        this.toggleSignUp = this.toggleSignUp.bind(this);
-        this.authenticateUser = this.authenticateUser.bind(this);
-        this.newUser = this.newUser.bind(this);
-        this.existedUser = this.existedUser.bind(this);
     }
 
     componentWillMount() {
@@ -51,7 +46,7 @@ class Home extends React.Component {
      * Switching from Sign In and Sign Up Modal
      * @method toggleSignUp
      */
-    toggleSignUp() {
+    toggleSignUp = () => {
         this.setState({isSignIn: !this.state.isSignIn});
     }
 
@@ -61,11 +56,11 @@ class Home extends React.Component {
      * @param event
      * @function authenticateUser
      */
-    authenticateUser(event) {
+    authenticateUser = (event) => {
         event.preventDefault();
         let {name, value} = event.target;
         this.setState({[name]: value});
-    }
+    };
 
 
     /**
@@ -73,14 +68,14 @@ class Home extends React.Component {
      * with email and password from the state
      * @method newUser
      */
-    newUser() {
+    newUser = () => {
         const {email, password} = this.state;
         const user = {
             email,
             password
         };
         this.props.dispatch(login('/signup', user, '/profile/event', this.container));
-    }
+    };
 
 
     /**
@@ -89,15 +84,15 @@ class Home extends React.Component {
      * @param event
      * @method existedUser
      */
-    existedUser(event) {
+    existedUser = (event) => {
         event.preventDefault();
         const {email, password} = this.state;
         const user = {email, password};
         this.props.dispatch(login('/login', user, '/profile/event', this.container));
-    }
+    };
 
 
-    render() {
+    render(){
 
 
         let employer = 'Employer';
