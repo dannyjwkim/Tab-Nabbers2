@@ -12,16 +12,26 @@ const Content = ({component}) => {
         Setting,
         Close_account
     };
-    console.log(component);
 
-    for (let key in components) {
-        if (component === key) {
-            let Result = components[component];
-            return <Result/>;
-        } else{
-            return( <p> Not found!! </p>)
-        }
+    try{
+        console.log("Simple Component: ", component);
+        let Result = components[component];
+        return <Result/>;
     }
+    catch (e) {
+        return( <p> Content is currently working on </p>)
+    }
+
+    // for (let key in components) {
+    //     console.log("Key: ", key);
+    //     console.log("Component: ", component);
+    //     if (component === key) {
+    //         let Result = components[key];
+    //         return <Result/>;
+    //     } else{
+    //         return( <p> Content is currently working on </p>)
+    //     }
+    // }
 };
 
 export default Content;

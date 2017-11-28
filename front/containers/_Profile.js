@@ -9,6 +9,7 @@ import "../public/css/profile.scss";
 import "../public/css/footer.scss";
 import {connect} from "react-redux";
 import Footer from "../components/common/Footer";
+import {browserHistory} from 'react-router';
 import Sidebar from '../components/common/Sidebar';
 import {Grid, Button} from 'semantic-ui-react';
 import Content from '../components/profile/Content';
@@ -22,6 +23,11 @@ class Profile extends React.Component {
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
+    logout = () => {
+        localStorage.removeItem('credentials');
+        browserHistory.replace('/');
+    };
+
 
 
     render() {
@@ -33,9 +39,10 @@ class Profile extends React.Component {
 
         return (
             <div>
+                <Button onClick={this.logout}> Log out </Button>
                 <Grid celled  divided='vertically' className="profile">
                     <Grid.Row columns = {2}>
-                        <Grid.Column width = {3} >
+                        <Grid.Column width = {3} className="left-sidebar">
                             <img src="https://yt3.ggpht.com/-r_tiN0JoSiE/AAAAAAAAAAI/AAAAAAAAAAA/AbgSGAVS35M/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" />
 
                             <Sidebar

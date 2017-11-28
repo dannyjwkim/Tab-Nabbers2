@@ -14,20 +14,20 @@ const Sidebar = ({handleItemClick, activeItem}) => {
 
     let pages = [
         'edit_profile',
-        'network',
+        // 'network',
         'event',
-        'meet_up',
+        // 'meet_up',
         'setting',
-        'close_account',
-        'student'
+        'close_account'
+        // 'student'
 
     ];
 
     return (
-        <Menu pointing secondary vertical  >
+        <Menu pointing secondary vertical >
             {pages.map((name, index) => (
                 <Link to = {"/profile/" + name} key = {index}>
-                    <Menu.Item className='sidebar'
+                    <Menu.Item
                     name={name}
                     key={index}
                     active={activeItem === name}
