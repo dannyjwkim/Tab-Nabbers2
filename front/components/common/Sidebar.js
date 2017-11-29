@@ -17,8 +17,7 @@ const Sidebar = ({handleItemClick, activeItem}) => {
         // 'network',
         'event',
         // 'meet_up',
-        'setting',
-        'close_account'
+        'setting'
         // 'student'
 
     ];

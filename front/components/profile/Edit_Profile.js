@@ -1,113 +1,103 @@
 import React from 'react';
-import {Input} from 'semantic-ui-react';
+    import {Input, Form, Radio, TextArea, Button} from 'semantic-ui-react';
 import '../../public/css/edit.scss';
 
 
-const Edit_Profile = () => {
+class Edit_Profile extends React.Component {
 
-    return (
-        <div className="edit_profile">
-            <div className="forms">
-                <div>
-                    <label htmlFor="name">Name: </label>
-                    <Input placeholder='Name...' size={'medium'}/>
+    state = {};
+    handleChange = (e, {value}) => this.setState({value});
+
+    render() {
+        return (
+            <Form>
+                <div className="edit_profile">
+
+                    <Form.Field>
+                        <label htmlFor="Name">Name</label>
+                        <Input/>
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        <label htmlFor="Email">Email</label>
+                        <Input/>
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        Selected gender: <b>{this.state.value}</b>
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        <Radio
+                            label='Male'
+                            name='sex'
+                            value='Male'
+                            checked={this.state.value === 'Male'}
+                            onChange={this.handleChange}
+                        />
+                    </Form.Field>
+
+                    <Form.Field>
+                        <Radio
+                            label='Female'
+                            name='sex'
+                            value='Female'
+                            checked={this.state.value === 'Female'}
+                            onChange={this.handleChange}
+                        />
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        <label htmlFor="Birthday">Birthday</label>
+                        <Input type="date"/>
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        <label htmlFor="Phone number">Phone number</label>
+                        <Input />
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        <label htmlFor="School">School</label>
+                        <Input />
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        <label htmlFor="Address">Address</label>
+                        <Input />
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        <label htmlFor="City">City</label>
+                        <Input />
+                    </Form.Field>
+
+
+                    <Form.Field>
+                        <label htmlFor="Zip Code">Zip Code</label>
+                        <Input />
+                    </Form.Field>
+
+                    <Form.Field>
+                        <label htmlFor="Biography">Biography</label>
+                        <TextArea />
+                    </Form.Field>
+
+                    <Button> Save Changes </Button>
+
+
                 </div>
-
-
-                <div>
-                    <label htmlFor="username">username: </label>
-                    <Input placeholder='username' size={'medium'}/>
-                </div>
-
-                <div>
-                    <label htmlFor="email">Email: </label>
-                    <Input placeholder='Email' size={'medium'}/>
-                </div>
-
-                <div>
-                    <label htmlFor="Phone Number">Phone Number: </label>
-                    <Input placeholder='Phone Number' size={'medium'}/>
-                </div>
-
-
-                <div>
-                    <label htmlFor="name">Name: </label>
-                    <Input placeholder='Name...' size={'medium'}/>
-                </div>
-
-
-                <div>
-                    <label htmlFor="username">username: </label>
-                    <Input placeholder='username' size={'medium'}/>
-                </div>
-
-                <div>
-                    <label htmlFor="email">Email: </label>
-                    <Input placeholder='Email' size={'medium'}/>
-                </div>
-
-                <div>
-                    <label htmlFor="Phone Number">Phone Number: </label>
-                    <Input placeholder='Phone Number' size={'medium'}/>
-                </div>
-
-            </div>
-
-
-            <div className="forms">
-
-                <div>
-                    <label htmlFor="Portfolio">Portfolio: </label>
-                    <Input placeholder='Portfolio' size={'medium'}/>
-                </div>
-
-
-                <div>
-                    <label htmlFor="School">School: </label>
-                    <Input placeholder='School' size={'medium'}/>
-                </div>
-
-                <div>
-                    <label htmlFor="sex">Sex: </label>
-                    <Input placeholder='Sex' size={'medium'}/>
-                </div>
-
-                 <div>
-                    <label htmlFor="Portfolio">Portfolio: </label>
-                    <Input placeholder='Portfolio' size={'medium'}/>
-                </div>
-
-
-                <div>
-                    <label htmlFor="School">School: </label>
-                    <Input placeholder='School' size={'medium'}/>
-                </div>
-
-                <div>
-                    <label htmlFor="sex">Sex: </label>
-                    <Input placeholder='Sex' size={'medium'}/>
-                </div>
-
-                 <div>
-                    <label htmlFor="Portfolio">Portfolio: </label>
-                    <Input placeholder='Portfolio' size={'medium'}/>
-                </div>
-
-
-                <div>
-                    <label htmlFor="School">School: </label>
-                    <Input placeholder='School' size={'medium'}/>
-                </div>
-
-                <div>
-                    <label htmlFor="sex">Sex: </label>
-                    <Input placeholder='Sex' size={'medium'}/>
-                </div>
-            </div>
-
-
-        </div>
-    );
+            </Form>
+        );
+    };
 };
 
 export default Edit_Profile;

@@ -7,10 +7,9 @@ import Modal from '../components/common/Modal';
 import {Signup, Signin} from '../components/StudentLogin/index';
 import '../public/css/home.scss';
 import {ToastContainer} from "react-toastr";
-import { login } from '../actions/actions';
+import {login} from '../actions/actions';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
-
 
 
 /**
@@ -31,10 +30,10 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        try{
-            const { isAuthenticated } = JSON.parse(localStorage.getItem('credentials'));
-            isAuthenticated ? browserHistory.push('/profile/event') : 'No user is authenticated!!'
-        } catch (err){
+        try {
+            const {isAuthenticated} = JSON.parse(localStorage.getItem('credentials'));
+            isAuthenticated ? browserHistory.push('/profile/event') : 'No user is authenticated!!';
+        } catch (err) {
             console.log("No user in session");
         }
 
@@ -48,7 +47,7 @@ class Home extends React.Component {
      */
     toggleSignUp = () => {
         this.setState({isSignIn: !this.state.isSignIn});
-    }
+    };
 
 
     /**
@@ -92,7 +91,7 @@ class Home extends React.Component {
     };
 
 
-    render(){
+    render() {
 
 
         let employer = 'Employer';
@@ -100,50 +99,52 @@ class Home extends React.Component {
 
         const {isSignIn} = this.state;
         return (
-            <div className="home--component layout">
-                <ToastContainer
-                    ref={ref => this.container = ref}
-                    className="toast-top-right"
-                />
+            <div>
+                <div className="home--component layout">
+                    <ToastContainer
+                        ref={ref => this.container = ref}
+                        className="toast-top-right"
+                    />
 
-                <div className="banner--list layout">
-                    <h1>Bootcruit</h1>
-                    <ul className="layout">
-                        <li>About</li>
-                        <li>Feature</li>
-                        <li>Contact</li>
-                    </ul>
-                </div>
-
-
-                <h3> Bootcruit </h3>
-                <p>Single-Click Staffing Solutions</p>
-                <div className="buttons--container">
-
-                    <Modal
-                        name={employer} title={isSignIn ? 'Employer Sign up ' : 'Employer Login '}
-                        toggleSignUp={this.toggleSignUp}
-                        footer={isSignIn ? 'Already have an account?' : 'Or Create an account?'}
-                    >
-                        {isSignIn ? <Signup/> : <Signin/>}
-                    </Modal>
+                    <div className="banner--list layout">
+                        <h1>Bootcruit</h1>
+                        <ul className="layout">
+                            <li>About</li>
+                            <li>Feature</li>
+                            <li>Contact</li>
+                        </ul>
+                    </div>
 
 
-                    <Modal
-                        name={student}
-                        title={isSignIn ? 'Student Sign Up ' : 'Student Sign In'}
-                        footer={isSignIn ? 'Already have an account?' : 'Or Create an account?'}
-                        toggleSignUp={this.toggleSignUp}>
-                        {
-                            isSignIn ?
-                                <Signup
-                                    authenticate={this.authenticateUser}
-                                    newUser={this.newUser}/> :
-                                <Signin
-                                    authenticate={this.authenticateUser}
-                                    existedUser={this.existedUser}/>
-                        }
-                    </Modal>
+                    <h3> Bootcruit </h3>
+                    <p>Single-Click Staffing Solutions</p>
+                    <div className="buttons--container">
+
+                        <Modal
+                            name={employer} title={isSignIn ? 'Employer Sign up ' : 'Employer Login '}
+                            toggleSignUp={this.toggleSignUp}
+                            footer={isSignIn ? 'Already have an account?' : 'Or Create an account?'}
+                        >
+                            {isSignIn ? <Signup/> : <Signin/>}
+                        </Modal>
+
+
+                        <Modal
+                            name={student}
+                            title={isSignIn ? 'Student Sign Up ' : 'Student Sign In'}
+                            footer={isSignIn ? 'Already have an account?' : 'Or Create an account?'}
+                            toggleSignUp={this.toggleSignUp}>
+                            {
+                                isSignIn ?
+                                    <Signup
+                                        authenticate={this.authenticateUser}
+                                        newUser={this.newUser}/> :
+                                    <Signin
+                                        authenticate={this.authenticateUser}
+                                        existedUser={this.existedUser}/>
+                            }
+                        </Modal>
+                    </div>
                 </div>
             </div>
         );

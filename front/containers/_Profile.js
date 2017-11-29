@@ -13,7 +13,7 @@ import {browserHistory} from 'react-router';
 import Sidebar from '../components/common/Sidebar';
 import {Grid, Button} from 'semantic-ui-react';
 import Content from '../components/profile/Content';
-
+import Navbar from '../components/common/Navbar';
 
 class Profile extends React.Component {
 
@@ -39,7 +39,8 @@ class Profile extends React.Component {
 
         return (
             <div>
-                <Button onClick={this.logout}> Log out </Button>
+                <Navbar/>
+                {/*<Button onClick={this.logout}> Log out </Button>*/}
                 <Grid celled  divided='vertically' className="profile">
                     <Grid.Row columns = {2}>
                         <Grid.Column width = {3} className="left-sidebar">
