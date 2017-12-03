@@ -53,13 +53,38 @@ class Profile extends React.Component {
                         </Grid.Column>
 
                         <Grid.Column
-                            width = {13}
+                            width = {10}
                             className = 'content'>
 
                            <div>
                                 <Content component = {component}/>
                            </div>
                         </Grid.Column>
+
+                        <Grid.Column
+                            width = {3}
+                            className = 'hackerthons' id="hackerthons">
+
+                           <div>
+                               <h2>Hackerthons</h2>
+
+                               <div>
+                                   <div className="hack">
+                                       <h4>Building JavaScript API</h4>
+                                       <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                       <p>9:00 AM</p>
+                                   </div>
+
+                                   <div className="hack">
+                                       <h4>Building JavaScript API</h4>
+                                       <p>I am also a simple Hack for now</p>
+                                       <p>9:00 AM</p>
+                                   </div>
+                               </div>
+                           </div>
+                        </Grid.Column>
+
+
                     </Grid.Row>
                 </Grid>
 
