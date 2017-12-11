@@ -1,4 +1,3 @@
-
 import {
     localSignUp,
     localSignIn
@@ -6,9 +5,6 @@ import {
 
 
 module.exports = function (app, passport) {
-
-
-
     app.post('/signup',  localSignUp, (req, res) => {
         const token = req.user['tokens'][0].token;
         const _id = req.user._id;

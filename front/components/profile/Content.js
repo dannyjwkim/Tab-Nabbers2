@@ -1,6 +1,6 @@
 import React from 'react';
 import Event from '../../containers/_Event';
-import Edit_profile from '../../components/profile/Edit_Profile';
+import Edit_profile from '../../containers/Edit_Profile';
 import Setting from '../../containers/Settings';
 
 const Content = ({component}) => {

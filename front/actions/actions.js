@@ -1,7 +1,7 @@
 import * as types from "./types";
 import axios from "axios";
 import {browserHistory} from 'react-router';
-import {SET_CURRENT_USER} from "./types";
+import {SET_CURRENT_USER, USER_PROFILE, UPDATE_ADDRESS} from "./types";
 import Utils from '../utils/utils';
 
 let util = new Utils();
@@ -25,16 +25,39 @@ export const setCurrentUser = (user) => {
 };
 
 
-/**
- * Set errors in case there is error
- * @param err
- * @returns {{type: string, err: *}}
- */
-export const setErrors = (err) => {
+export const setUserProfile = (profile) => {
     return {
-        type:'SET_ERROR',
-        err
+        type: USER_PROFILE,
+        profile
+    };
+};
+
+
+
+export const updateAddress = (address) => {
+    return {
+        type:UPDATE_ADDRESS,
+        address
     }
+};
+
+
+export const fetchUserProfile = () => {
+    return (dispatch) => {
+        return axios({
+            url: '/profile/info',
+            method: 'GET',
+            headers: {
+                'x-email': 'accimeesterlin@yahoo.com'
+            }
+        })
+            .then((response) => {
+                dispatch(setUserProfile(response.data));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 };
 
 
@@ -57,29 +80,26 @@ export const login = (url, user, path, container) => {
             method: 'POST',
             url: url,
             data: user,
-            headers:{
+            headers: {
                 'Content-Type': 'application/json',
-                "x-auth":'Esterling'
+                "x-auth": 'Esterling'
             }
         })
             .then(response => {
                 if (response.data.token) {
                     container.success(`You have successfully been sign up`, `Congratulations`, {closeButton: true});
                     const token = response.data.token;
-
                     util.setCredentials(token);
-
                     dispatch(setCurrentUser(util.decodeToken(token)));
-
                     setTimeout(function () {
                         browserHistory.replace(path);
                     }, 1000);
                 }
             })
             .catch(err => {
-                container.error(`${err.response.data.error}`, `Ooops`, { closeButton: true })
+                container.error(`${err.response.data.error}`, `Ooops`, {closeButton: true});
                 dispatch(setErrors(err));
-            } );
+            });
     };
 };
 
@@ -103,4 +123,7 @@ export const fetchEvents = () => {
             });
     };
 };
+
+
+
 

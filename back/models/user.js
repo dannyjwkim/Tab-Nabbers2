@@ -7,28 +7,25 @@ const bcrypt = require("bcryptjs");
 const _ = require('lodash');
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
+const Schema = mongoose.Schema;
 
 const emailValid = [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email.'];
 const phonenumberValid = [/(?=^\d{10}$)|(?=^\d{3}-\d{3}-\d{4}$)|(?=^\(\d{3}\)\d{3}-\d{4}$)/, 'Please enter a valid phone number in the format 1234567890, 123-456-7890, or (123)456-7890'];
 const zipcodeValid = [/^\d{5}(?:[-\s]\d{4})?$/, 'The zipcode must either be in the format XXXXX or XXXXX-XXXX.'];
 
 
-const addressSchema = new mongoose.Schema({
+const addressSchema = Schema({
     street_address: {
         type: String,
         trim: true
     },
-    apartment_number: mongoose.Schema.Types.Mixed,
+    apartment_number: Schema.Types.Mixed,
     city: {
         type: String,
-        trim: true,
-        default: ""
-
+        trim: true
     },
     state: {
-        type: String,
-        default: ""
-
+        type: String
     },
     zipcode: {
         type: String,
@@ -38,7 +35,7 @@ const addressSchema = new mongoose.Schema({
     _id: false
 });
 
-const skillSchema = new mongoose.Schema({
+const skillSchema = Schema({
   
     skillName: {
         type: String
@@ -58,22 +55,19 @@ const skillSchema = new mongoose.Schema({
 });
 
 
-const userSchema = new mongoose.Schema({
-
+const userSchema = Schema({
     username:{
         type:String
     },
 
     firstName: {
         type: String,
-        trim: true,
-        default: ""
+        trim: true
     },
 
     lastName: {
         type: String,
-        trim: true,
-        default: ""
+        trim: true
     },
 
     gender: {
@@ -87,22 +81,15 @@ const userSchema = new mongoose.Schema({
         match: phonenumberValid,
         trim: true
     },
-
-    address: {
-        type:addressSchema
-
-    },
+    address: addressSchema,
 
     birthday: {
-    
         month: {
             type: String
         },
-
         day: {
             type: String
         },
-
         year: {
             type: String
         }
@@ -118,17 +105,14 @@ const userSchema = new mongoose.Schema({
     },
 
     profiles: {
-    
         github: {
             type: String,
             default: ""
         },
-
         linkedIn: {
             type: String,
             default: ""
         },
-
         website: {
             type: String,
             default: ""
@@ -136,9 +120,12 @@ const userSchema = new mongoose.Schema({
     },
 
 
+    bio:String,
+
+
     skills: {
         type: [skillSchema],
-    
+
     },
   
     jobStatus: {
@@ -194,16 +181,12 @@ const userSchema = new mongoose.Schema({
         token:{
             type:String
         }
-    }]
+    }],
+
+    events:[{type:Schema.Types.ObjectId, ref:'Event'}]
 
 });
 
-
-// userSchema.methods.toJSON = function () {
-//     let user = this;
-//     let userObject = user.toObject();
-//     return _.pick(userObject, ['_id', 'firstName', 'lastName', 'email'])
-// };
 
 userSchema.methods.generateAuthToken = function () {
     let user = this;

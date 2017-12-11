@@ -17,7 +17,7 @@ const express = require('express'),
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(TEST_DATABASE_URL.url);
+mongoose.connect("mongodb://mongo/tabnabbers");
 
 
 const db = mongoose.connection;
@@ -72,9 +72,9 @@ app.use(flash());
  * Bootcruit Routes
  * Authenticate, API, and Browser routes
  */
-require("./back/routes/authenticate")(app, passport);
-require("./back/routes/api")(app, path);
-require("./back/routes/html")(app, path);
+require("./back/routes/authentication")(app, passport);
+require("./back/routes/api")(app);
+require("./back/routes/render")(app, path);
 
 
 
