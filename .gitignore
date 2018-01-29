@@ -8,3 +8,5 @@ package-lock.json
 .vscode
 .settings
 .project
+.yarn-lock
+.env

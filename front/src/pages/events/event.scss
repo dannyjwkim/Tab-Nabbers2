@@ -1,0 +1,65 @@
+
+
+.search_events > div:first-child{
+    width:15%;
+    position: fixed;    
+    display: block;
+    height: 73vh;
+    border-right:1px solid #efe8ed;
+}
+
+.search_events ul{
+    position: relative;
+    top:5em;
+}
+
+.search_events ul li{
+    margin:15px;
+}
+
+.search_events > div:last-child{
+    width:85%;
+    border-left:1px solid #efe8ed;
+    background: #f1f3f5;
+    margin-left: 15%;
+}
+
+
+.search_events form .form-group{
+    width: 50%;
+    margin-top: 20px;
+}
+/* 
+.sidebar{
+    position: fixed;
+} */
+
+
+.week{
+    border:1px solid #efe8ed;
+    border-radius: 4px;
+    position: relative;
+    padding: 20px;
+    margin:20px;
+    width:280px;
+    height: 280px;
+    background: #fff;
+    box-shadow: 3px 7px 10px 2px #efe8ed;
+}
+
+.week img{
+    width: 100%;
+}
+.info{
+    display: none;
+}
+
+
+.current{
+    width:100%;
+    padding: 11px;;
+    margin:0;
+    border-right-color:#fff;
+    background: #f1f3f5;
+
+}
