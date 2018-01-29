@@ -9,7 +9,7 @@ import {
 import logger from 'redux-logger';
 import promise from 'redux-promise-middleware';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import { Provider } from 'react-redux';
 import reducers from './reducers/index';
 import App from "./App";

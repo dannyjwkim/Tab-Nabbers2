@@ -6,7 +6,7 @@ import {
     Footer,
     Loader
 } from "../../components";
-import "./saved.css";
+import "./saved.scss";
 import data from "./events.json";
 
 // const mapStateToProps = (state) => {

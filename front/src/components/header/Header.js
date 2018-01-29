@@ -3,7 +3,7 @@ import {
     Link,
     NavLink
 } from "react-router-dom";
-import "./header.css";
+import "./header.sass";
 
 const Header = () => (
     <header className="header flex between">
