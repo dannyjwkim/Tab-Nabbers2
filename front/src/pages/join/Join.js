@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import "./join.scss";
+import "./join.css";
 import {
     Input
 } from "../../components";

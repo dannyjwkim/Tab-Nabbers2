@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
-import "./profile.scss";
+import "./profile.css";
 import {
     Header,
     Footer,

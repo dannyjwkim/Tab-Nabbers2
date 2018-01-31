@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./dashboard.scss";
+import "./dashboard.css";
 // import { connect } from 'react-redux';
 import {
     Header,

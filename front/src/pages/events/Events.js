@@ -5,7 +5,7 @@ import {
     Footer,
     Input
 } from "../../components";
-import "./event.scss";
+import "./event.css";
 import data from "./data.json";
 
 // const mapStateToProps = (state) => {

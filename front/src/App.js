@@ -9,7 +9,7 @@ import {
   Join
 
 } from "./pages";
-import "./App.scss";
+import "./App.css";
 
 // const mapStateToProps = (state) => {
 //   return {

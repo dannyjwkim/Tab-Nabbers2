@@ -193,7 +193,7 @@ userSchema.methods.generateAuthToken = function () {
     let access = 'auth';
     let token = jwt.sign({_id: user._id.toHexString(), access:access}, 'ilovejson').toString();
     user.tokens.push({ access, token });
-    return user.save().then(() => { return token });
+    user.save().then(() => { return token });
 };
 
 userSchema.methods.generateHash = function(password) {

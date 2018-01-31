@@ -27,6 +27,7 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "moment": "^2.20.1",
+    "node-sass-chokidar": "0.0.3",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -51,8 +52,10 @@
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start-js": "node scripts/start.js",
+    "build-js": "node scripts/build.js",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm-run-all build-css build-js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
@@ -96,5 +99,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }
