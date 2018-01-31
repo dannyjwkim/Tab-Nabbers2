@@ -18,7 +18,7 @@ import data from "./data.json";
 const Search = (props) => (
     <div>
         <div className="search flex center ">
-            <form className="flex main-center center column">
+            <form className="flex main-center  column">
                 <Input  placeholder="Search events..." />
                 <button className="btn">Search</button>
             </form>
@@ -126,7 +126,7 @@ const Sidebar = (props) => (
             <li onClick={(event) => props.change_view("Search", event)} className = {props.current_button["search"]}>Search</li>
             <li onClick={(event) => props.change_view("Allevents", event)} className = {props.current_button["allevents"]}>Events</li>
             <li onClick={(event) => props.change_view("Saved", event)} className = {props.current_button["saved"]}>Saved</li>
-            <li onClick={(event) => props.change_view("Week", event)} className = {props.current_button["week"]}>Next week Events</li>
+            <li onClick={(event) => props.change_view("Week", event)} className = {props.current_button["week"]}>Next week</li>
         </ul>
     </div>
 );

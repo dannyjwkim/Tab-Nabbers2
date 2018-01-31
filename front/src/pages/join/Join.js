@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import "./join.css";
+import "./join.scss";
 import {
     Input
 } from "../../components";
@@ -16,20 +16,19 @@ export class Landing extends Component {
     render() {
 
         return (
-            <div className="landing flex center ">
-
-                <div className="credentials_btn">
-                    <Link to="/"><button className="">Login</button></ Link>
-                    <button className="active">Join</button>
-                </div>
-
-
+            <div className="join landing flex center ">
                 <div className="landing_sidebar flex center column main-center signup">
                     {
                         // TODO
                         // Display contents into the sidebar
                     }
                 </div>
+
+                <div className="credentials_btn">
+                    <Link to="/"><button className="">Login</button></ Link>
+                    <button className="active">Join</button>
+                </div>
+
 
                 <Join {...this.props} submit={this.submit} />
 

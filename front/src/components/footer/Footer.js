@@ -1,5 +1,5 @@
 import React from 'react';
-import "./footer.sass";
+import "./footer.scss";
 
 
 const Footer = () => (
@@ -8,7 +8,7 @@ const Footer = () => (
             <ul className="flex center">
                 <li>Github</li>
                 <li>About</li>
-                <li>Events</li>
+                <li>Link</li>
             </ul>
         </div>
 

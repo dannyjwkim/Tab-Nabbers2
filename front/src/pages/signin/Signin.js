@@ -16,7 +16,7 @@ export class Signin extends Component {
     render() {
 
         return (
-            <div className="landing flex center ">
+            <div className="login landing flex center ">
 
                 <div className="credentials_btn">
                     <button className="active">Login</button>

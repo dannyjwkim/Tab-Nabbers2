@@ -4,7 +4,6 @@ import { Route } from "react-router-dom";
 import {
   Events,
   Profile,
-  Saved,
   Dashboard,
   Signin,
   Join
@@ -25,7 +24,6 @@ const Routes = (props) => (
     <Route exact path="/dashboard" component={Dashboard} />
     <Route exact path="/profile" component={Profile} />
     <Route exact path="/events" component={Events} />
-    <Route exact path="/saved" component={Saved} />
   </div>
 );
 export default Routes;

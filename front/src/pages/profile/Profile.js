@@ -67,8 +67,8 @@ const Settings = () => (
 const Info = () => (
     <div className="main_info flex main-center around wrap ">
         <Input name="Username" />
-        <Input name="Name" />
-        <Input name="Interest" />
+        <Input name="Name" sub_text = "(Firstname and Lastname)"/>
+        <Input name="Interest" sub_text = "(Interested events)"/>
         <Input name="Address" />
         <Input name="City" />
         <Input name="Zipcode" />
@@ -78,7 +78,7 @@ const Info = () => (
 );
 
 const Credentials = () => (
-    <div className="credentials flex main-center column ">
+    <div className="credentials flex main-center column wrap ">
         <div>
             <h3>Warning</h3>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum maxime iusto

@@ -39,7 +39,7 @@ class Dashboard extends Component {
 
 const Content = (props) => {
     return (
-        <div className="content">
+        <div className="content main-events">
             <Events {...props} />
             <Recommendations />
             <Tips />
