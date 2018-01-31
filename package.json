@@ -74,8 +74,9 @@
     "test:front": "npm test -- --watch",
     "start": "npm-run-all --parallel front back",
     "front": "cd front && npm start",
-    "build":"cd front && npm run build",
+    "build": "cd front && npm run build",
     "back": "nodemon server.js",
+    "dev": "npm i & cd front && npm i",
     "lint": "node_modules/.bin/esw webpack.config.* ",
     "lint:watch": "npm run lint -- --watch",
     "production": "npm-run-all build back"

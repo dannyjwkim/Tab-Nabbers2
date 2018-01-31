@@ -11,8 +11,7 @@
 ## Benefits contributing
 
 - Being to be a part of something great
-- Joining a network of full stack developers with different skill set
-- Newbies are assigned a mentor to help them contribute to the project.
+- Joining a network of full stack developers with different skill sets
 - Meeting other developers and extend your network
 - Giving back to the community
 
@@ -26,109 +25,33 @@ To get started on this project, follow the instructions below.
 
 ### Installations
 
-Before you contribute
-
-Make sure you install all the dependencies you need for the project
-Once you have [Node.js](https://nodejs.org/en/) installed on your computer
-Navigate to the working directory and do the following in your terminal
-
-Before you proceed, make sure you fork the repo
-
-> Note: If the below process doesn't work for you, no worries. Create an issue
+Before you proceed, make sure you have Node.js installed on your computer, if not, Install [Node.js](https://nodejs.org/en/)
 
 
-### Front End Steps:
-##### Step 1
-> npm install
-```
-The above command will install all the dependencies you need!
-```
+Step 1:
+
+> fork the repo
+
+Step 2:
+
+> git clone forked_repo
 
 
 
+Step 3:
 
-##### Step 2
-> npm run dev
-
-By running the above command, the app will be starting, and you can view it by
-
-clicking on this link [localhost](http://localhost:3000) or type http://localhost:3000 in your browser
-
-
-
-You should see a new browser tabs open, and there you go, you are all set!!
-
-
-
-Note:
-For those of you working in the Back End
-
-### Back End Steps:
-Follow these steps
-
-#### Step 1
+Open your terminal and run the below command in the root of the project, and also inside the front folder
 > npm install
 
-#### Step 2
-in back/config , create a file named key.js and add the 
-following into it
-
-```
-module.exports = {
-    gooogle:{
-        client_Id: '',
-        client_secret:""
-    },
-    twitter:{
-        consurmer_key:'',
-        consumer_secret:''
-    },
-
-    linkedin:{
-        client_id:'',
-        client_secret:''
-    },
-    facebook:{
-        client_id:'',
-        client_secret:''
-    }
-};
-```
-
-
-#### Step 3
+Step 4:
 
 > npm start
 
-You should see a new browser tabs open, and there you go, you are all set!!
-
-
-
-### Technologies
-
- - Node.JS
- - Express
- - MongoDB
- - Mongoose
- - React.JS
- - Redux
- - Axios
- - JavaScript
- - Materialize
- - Nightmare
- - D3.js
- - Jest
- - Nightmare
- - Cloudinary
- - Passport
 
 
 ## Contributing
-
-
-There are different ways to contribute
   - Front End (React.js, Redux, JavaScript, Axios, D3, Sass)
-  - Back End (Node.js, express, building API, etc )
+  - Back End (Node.js, express, Mongoose, etc )
   - Designers
   - Genius Idea's
   - Unit Testers
@@ -137,8 +60,9 @@ There are different ways to contribute
   
   
 ## API
-  - Meet up api : https://www.meetup.com/meetup_api/
-  - Github api : https://developer.github.com/v3/search/#search-users
+  - Meet up API : https://www.meetup.com/meetup_api/
+  - Github API : https://developer.github.com/v3/search/#search-users
+  - Event Brite API : https://www.eventbrite.com/developer/v3/
   
   
 
