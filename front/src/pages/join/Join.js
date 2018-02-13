@@ -4,6 +4,9 @@ import "./join.css";
 import {
     Input
 } from "../../components";
+import {
+    NotificationContainer, NotificationManager
+} from "react-notifications";
 import axios from "axios";
 
 export class Landing extends Component {
@@ -18,28 +21,30 @@ export class Landing extends Component {
         event.preventDefault();
 
         axios({
-            url:"/secure/signup",
+            url: "/secure/signup",
             method: "POST",
             data: this.state
         })
-        .then((response) => {
-            this.props.history.push('/dashboard');
-        })
-        .catch((err) => {
-            console.log("Error");
-        });
+            .then((response) => {
+                NotificationManager.success( response.data.msg);
+                this.props.history.push('/dashboard');
+            })
+            .catch((error) => {
+                console.log("Error: ", error.response.data.error);
+                NotificationManager.error( error.response.data.error);
+            });
 
 
-        
+
     };
 
 
 
     getValues = ({
         target: {
-        name, 
+        name,
         value
-    }}) => this.setState({ [name]: value });
+    } }) => this.setState({ [name]: value });
 
 
     render() {
@@ -49,6 +54,7 @@ export class Landing extends Component {
 
         return (
             <div className="join landing flex center ">
+                <NotificationContainer />
                 <div className="landing_sidebar flex center column main-center signup">
                     {
                         // TODO

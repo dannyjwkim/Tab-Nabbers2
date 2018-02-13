@@ -14,6 +14,7 @@ const {
 
 
 let setCookiesAndSendMail = (mail, res, user) => {
+    console.log("User: ", user);
     let {
         email,
         _id,
@@ -71,7 +72,7 @@ module.exports = {
                     newUser.save((err) => {
                         if (err)
                             res.json({ error: "Not able to create a user at this time" });
-                        setCookiesAndSendMail(sendgrid_email, res, user);
+                        setCookiesAndSendMail(sendgrid_email, res, newUser);
                     });
                 }
             })
