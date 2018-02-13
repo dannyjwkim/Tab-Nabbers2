@@ -6,7 +6,9 @@ import {
   Profile,
   Dashboard,
   Signin,
-  Join
+  Join,
+  ResetPassword,
+  NewPassword
 
 } from "./pages";
 import "./App.css";
@@ -24,6 +26,8 @@ const Routes = (props) => (
     <Route exact path="/dashboard" component={Dashboard} />
     <Route exact path="/profile" component={Profile} />
     <Route exact path="/events" component={Events} />
+    <Route exact path="/resetpassword" component={ResetPassword} />
+    <Route exact path="/secure/reset/:token" component={NewPassword} />
   </div>
 );
 export default Routes;

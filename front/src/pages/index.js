@@ -3,6 +3,8 @@ import Profile from "./profile/Profile";
 import Events from "./events/Events";
 import Signin from "./signin/Signin";
 import Join from "./join/Join";
+import ResetPassword from "./resetpassword/ResetPassword";
+import NewPassword from "./newpassword/NewPassword";
 
 
 
@@ -11,5 +13,7 @@ export {
     Profile,
     Dashboard,
     Signin,
-    Join
+    Join,
+    ResetPassword,
+    NewPassword
 }

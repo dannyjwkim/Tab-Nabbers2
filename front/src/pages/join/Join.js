@@ -4,16 +4,48 @@ import "./join.css";
 import {
     Input
 } from "../../components";
-
+import axios from "axios";
 
 export class Landing extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {}; // {name: "", email: "", password: ""}
+    }
 
 
     submit = (event) => {
         event.preventDefault();
-        this.props.history.push('/dashboard')
+
+        axios({
+            url:"/secure/signup",
+            method: "POST",
+            data: this.state
+        })
+        .then((response) => {
+            this.props.history.push('/dashboard');
+        })
+        .catch((err) => {
+            console.log("Error");
+        });
+
+
+        
     };
+
+
+
+    getValues = ({
+        target: {
+        name, 
+        value
+    }}) => this.setState({ [name]: value });
+
+
     render() {
+
+        console.log("State: ", this.state);
+
 
         return (
             <div className="join landing flex center ">
@@ -30,7 +62,7 @@ export class Landing extends Component {
                 </div>
 
 
-                <Join {...this.props} submit={this.submit} />
+                <Join {...this.props} submit={this.submit} getValues={this.getValues} />
 
             </div>
         );
@@ -41,11 +73,11 @@ const Join = (props) => {
     return (
         <div className="flex center main-center column landing_content">
             <form >
-                <Input sub_text="(Firstname and Lastname)" name="name" />
+                <Input sub_text="(Firstname and Lastname)" name="name" onChange={props.getValues} />
 
-                <Input name="email" />
+                <Input name="email" onChange={props.getValues} />
 
-                <Input name="password" sub_text="(min. 6 char)" />
+                <Input name="password" sub_text="(min. 6 char)" onChange={props.getValues} />
 
                 <button className="btn" onClick={props.submit}> Join </button>
 
