@@ -25,7 +25,7 @@ const app = express(),
  */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser('secretString'));
+app.use(cookieParser(process.env.SECRET));
 
 
 
