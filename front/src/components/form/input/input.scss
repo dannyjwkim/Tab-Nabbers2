@@ -16,5 +16,7 @@
         outline: none;
         color: #555;
     }
+    input:invalid {
+        box-shadow: none; }
 }
 
