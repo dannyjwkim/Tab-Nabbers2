@@ -7,8 +7,16 @@ import {
 } from "../../components";
 
 import {
+    connect
+} from "react-redux";
+
+import {
     filter_num
 } from "../../utils/event_feature";
+
+import {
+    logout
+} from "../../actions";
 
 import data from "./data.json";
 
@@ -24,12 +32,15 @@ class Dashboard extends Component {
         this.state = {};
     }
 
+    
+    signout = () => this.props.dispatch(logout());
+
     componentWillMount = () => this.setState({ data });
     render() {
         console.log(filter_num(this.state.data.events, 2));
         return (
             <div>
-                <Header />
+                <Header logout = {this.signout} />
                 <Content {...this.state} filter_num={filter_num} />
                 <Footer />
             </div>
@@ -134,4 +145,4 @@ const Recommendations = () => (
 );
 
 
-export default Dashboard;
+export default connect(null)(Dashboard);

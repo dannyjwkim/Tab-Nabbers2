@@ -6,18 +6,18 @@ const express = require('express'),
     cookieParser = require('cookie-parser');
 
 
-require('dotenv').load()
+require('dotenv').load();
 
 mongoose.Promise = global.Promise;
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://http://localhost:8800/tabnabbers" || process.env.DB_URL;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/tabnabbers" || process.env.DB_URL;
 mongoose.connect(MONGODB_URI);
 const db = mongoose.connection;
 
 
 
 const app = express(),
-    PORT = process.env.PORT || 8080;
+    PORT = process.env.PORT || 9000;
 
 /**
  * Configure Express Middleware
@@ -25,7 +25,21 @@ const app = express(),
  */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser('secretString'));
+app.use(cookieParser(process.env.SECRET));
+
+
+
+
+
+
+/**
+ * Bootcruit Routes
+ * Authenticate, API, and Browser routes
+ */
+
+const authenticate = require("./back/routes/api");
+app.use("/secure", authenticate);
+
 
 
 
@@ -42,15 +56,6 @@ if (process.env.NODE_ENVIROMENT === "PRODUCTION") {
         ====================================================
     `);
 }
-
-
-
-
-/**
- * Bootcruit Routes
- * Authenticate, API, and Browser routes
- */
-require("./back/routes/api")(app);
 
 
 /**
