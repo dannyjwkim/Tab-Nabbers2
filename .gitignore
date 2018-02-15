@@ -9,5 +9,9 @@ package-lock.json
 .settings
 .project
 .yarn-lock
+<<<<<<< HEAD
 .env
 # build
+=======
+.env
+>>>>>>> Rachel-master
