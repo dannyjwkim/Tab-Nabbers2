@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import {
+    Link
+} from "react-router-dom";
 import "./join.css";
 import {
     Input
 } from "../../components";
 import {
-    NotificationContainer, NotificationManager
-} from "react-notifications";
-import axios from "axios";
+    connect
+} from "react-redux";
+import {
+    signup,
+    getValues
+} from "../../actions";
 
 export class Landing extends Component {
 
@@ -19,42 +24,41 @@ export class Landing extends Component {
 
     submit = (event) => {
         event.preventDefault();
+        const url = "/secure/signup";
+        const {
+            email,
+            password,
+            name
+        } = this.props.user;
 
-        axios({
-            url: "/secure/signup",
-            method: "POST",
-            data: this.state
-        })
-            .then((response) => {
-                NotificationManager.success( response.data.msg);
-                this.props.history.push('/dashboard');
-            })
-            .catch((error) => {
-                console.log("Error: ", error.response.data.error);
-                NotificationManager.error( error.response.data.error);
-            });
-
-
-
+        this.props.dispatch(signup(url, {
+            email,
+            password,
+            name
+        }));
     };
 
+    componentWillReceiveProps(props) {
+        if (props.user.authenticated)
+            this.props.history.push('/dashboard');
+
+    }
 
 
     getValues = ({
         target: {
         name,
         value
-    } }) => this.setState({ [name]: value });
+    } }) => {
+        const data = { [name]: value };
+        this.props.dispatch(getValues(data));
+    };
 
 
     render() {
 
-        console.log("State: ", this.state);
-
-
         return (
             <div className="join landing flex center ">
-                <NotificationContainer />
                 <div className="landing_sidebar flex center column main-center signup">
                     {
                         // TODO
@@ -76,8 +80,17 @@ export class Landing extends Component {
 }
 
 const Join = (props) => {
+
+    const error = props.user.error.login;
+
+    const errorMessage = error ? <div className="ui message error">
+        <p>{error}</p>
+    </div> : null
+
+
     return (
         <div className="flex center main-center column landing_content">
+            {errorMessage}
             <form >
                 <Input sub_text="(Firstname and Lastname)" name="name" onChange={props.getValues} />
 
@@ -93,4 +106,10 @@ const Join = (props) => {
     )
 }
 
-export default Landing;
+
+const mapPropsToState = (state) => {
+    return {
+        user: state.user
+    }
+};
+export default connect(mapPropsToState)(Landing);

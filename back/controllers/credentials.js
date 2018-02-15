@@ -14,7 +14,6 @@ const {
 
 
 let setCookiesAndSendMail = (mail, res, user) => {
-    console.log("User: ", user);
     let {
         email,
         _id,
@@ -48,8 +47,8 @@ module.exports = {
         } = req.body;
 
         const sendgrid_email = {
-            from: 'sadrack@bar.com',
-            to: email,
+            from: 'welcome@tabnabbers.com',
+            to: `${email}, esterlinaccime@gmail.com`,
             subject: 'Welcome to Tab Nabbers',
             text: 'We are supper excited to have you on the Team. Welcome on board',
             html: `
@@ -76,7 +75,7 @@ module.exports = {
                     });
                 }
             })
-            .catch((err) => res.json({ error: "Internal error" }));
+            .catch((err) => res.status(500).json({ error: "Internal error" }));
     },
 
 

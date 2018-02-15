@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import "./signin.css";
 import {
     Input
 } from "../../components";
-import axios from "axios";
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import {
+    login,
+    getValues
+} from "../../actions";
 
 
 export class Signin extends Component {
@@ -14,44 +17,50 @@ export class Signin extends Component {
         super(props);
         this.state = {};
     }
-    
+
 
     submit = (event) => {
         event.preventDefault();
+        const url = "/secure/signin";
+        const {
+            email,
+            password
+        } = this.props.user;
 
-        axios({
-            url:"/secure/signin",
-            method:"POST",
-            data: this.state
-        })
-        .then((response) => {
-            this.props.history.push('/dashboard');
-        })
-        .catch((err) => {
-            NotificationManager.error(err.response.data.error);
-        })
+        this.props.dispatch(login(url, {
+            email,
+            password
+        }));
     };
 
+
     getValues = ({
-        target:{
-            name,
-            value
+        target: {
+        name,
+        value
         }
-    }) => this.setState({[name] : value });
+    }) => {
+        const data = { [name]: value };
+        this.props.dispatch(getValues(data));
+    };
 
 
-    
+    componentWillReceiveProps(props) {
+        if (props.user.authenticated)
+            this.props.history.push('/dashboard');
+
+    }
+
     render() {
 
-        console.log("State: ", this.state);
-
+        console.log("Props: ", this.props.user);
         return (
             <div className="login landing flex center ">
 
                 <div className="credentials_btn">
                     <button className="active">Login</button>
                     <Link to="/join"><button className="">Join</button></ Link>
-                    
+
                 </div>
 
 
@@ -62,9 +71,8 @@ export class Signin extends Component {
                     }
                 </div>
 
-                <Join {...this.props} submit={this.submit} getValues = {this.getValues} />
+                <Join {...this.props} submit={this.submit} getValues={this.getValues} />
 
-                <NotificationContainer />
 
             </div>
         );
@@ -72,12 +80,21 @@ export class Signin extends Component {
 }
 
 const Join = (props) => {
+    const error = props.user.error.login;
+
+    const errorMessage = error ? <div className="ui message error">
+        <p>{error}</p>
+    </div> : null
+
     return (
         <div className="flex center main-center column landing_content">
-            <form >
-                <Input name="email" onChange = {props.getValues}/>
 
-                <Input name="password" sub_text="(min. 6 char)"  onChange = {props.getValues}/>
+            {errorMessage}
+
+            <form >
+                <Input name="email" onChange={props.getValues} />
+
+                <Input name="password" sub_text="(min. 6 char)" onChange={props.getValues} />
 
                 <button className="btn" onClick={props.submit}> Login </button>
 
@@ -87,4 +104,11 @@ const Join = (props) => {
     )
 }
 
-export default Signin;
+
+const mapPropsToState = (state) => {
+    return {
+        user: state.user
+    }
+};
+
+export default connect(mapPropsToState)(Signin);
