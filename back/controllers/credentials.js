@@ -20,6 +20,25 @@ const options = {
 const client = nodemailer.createTransport(sgTransport(options));
 
 
+/**
+ * Generate a token
+ * Might need to refactor and move elsewhere
+ * @param {*} data 
+ */
+const generateToken = ({_id, email}) => {
+
+    const token = jwt.sign({
+        exp: Math.floor(Date.now() / 1000) + (60 * 60),
+        data:{
+            email,
+            _id
+        }
+    }, process.env.SECRET);
+
+    return token;
+};
+
+
 module.exports = {
     signup: (req, res, next) => {
         const {
@@ -54,9 +73,10 @@ module.exports = {
                         if (err) {
                             res.json({ error: "Not able to create a user at this time" });
                         } else {
+                            const token = generateToken(newUser);
                             client.sendMail(sendgrid_email, (err, info) => {
                                 if (err)
-                                    res.json({ error: "Not able to send the email" });
+                                    res.cookie("token", token).json({ error: "Not able to send the email" });
                                 else {
                                     res.json({ msg: "Email sent!" });
                                 }
@@ -81,12 +101,13 @@ module.exports = {
         User.findOne({ email })
             .then((user) => {
                 if (bcrypt.compareSync(password, user.password)) {
-                    res.cookie("token", "ffs").json({ msg: "User is now logged in" });
+                    const token = generateToken(user);
+                    res.cookie("token", token).json({ msg: "User is now logged in" });
                 } else {
                     res.status(409).json({ error: "Credentials don't match" });
                 }
             })
-            .catch((err) => res.status(500).json({ error: "Internal error" }));
+            .catch((err) => res.status(500).json({ error: "User not found" }));
     }
 
 };
