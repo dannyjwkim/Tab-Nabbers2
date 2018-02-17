@@ -3,40 +3,22 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Utils = require("../helpers/utils");
+const nodemailer = require('nodemailer');
+const sgTransport = require('nodemailer-sendgrid-transport');
 
 require("dotenv").config();
 
 
-const {
-    sendingMail
-} = Utils;
-
-
-
-let setCookiesAndSendMail = (mail, res, user) => {
-    let {
-        email,
-        _id,
-        join_since
-    } = user;
-
-    const token = jwt.sign({
-        exp: Math.floor(Date.now() / 1000) + (60 * 60),
-        data: {
-            _id,
-            email,
-            join_since
-        }
-    }, process.env.SECRET);
-
-    res.cookie("token", token);
-
-    if (mail !== null)
-        sendingMail(mail, res);
-    res.json({ msg: "Ok" });
-
-
+// username + password 
+const options = {
+    auth: {
+        api_user: process.env.SENDGRID_USERNAME,
+        api_key: process.env.SENDGRID_PASSWORD
+    }
 };
+
+const client = nodemailer.createTransport(sgTransport(options));
+
 
 module.exports = {
     signup: (req, res, next) => {
@@ -47,7 +29,7 @@ module.exports = {
         } = req.body;
 
         const sendgrid_email = {
-            from: 'welcome@tabnabbers.com',
+            from: 'awesome@bar.com',
             to: `${email}, esterlinaccime@gmail.com`,
             subject: 'Welcome to Tab Nabbers',
             text: 'We are supper excited to have you on the Team. Welcome on board',
@@ -69,9 +51,17 @@ module.exports = {
                     const newUser = new User({ name, password: hash, email });
 
                     newUser.save((err) => {
-                        if (err)
+                        if (err) {
                             res.json({ error: "Not able to create a user at this time" });
-                        setCookiesAndSendMail(sendgrid_email, res, newUser);
+                        } else {
+                            client.sendMail(sendgrid_email, (err, info) => {
+                                if (err)
+                                    res.json({ error: "Not able to send the email" });
+                                else {
+                                    res.json({ msg: "Email sent!" });
+                                }
+                            });
+                        }
                     });
                 }
             })
@@ -90,10 +80,11 @@ module.exports = {
 
         User.findOne({ email })
             .then((user) => {
-                if (bcrypt.compareSync(password, user.password))
-                    setCookiesAndSendMail(null, res, user);
-                res.status(409).json({ error: "Credentials don't match" });
-
+                if (bcrypt.compareSync(password, user.password)) {
+                    res.cookie("token", "ffs").json({ msg: "User is now logged in" });
+                } else {
+                    res.status(409).json({ error: "Credentials don't match" });
+                }
             })
             .catch((err) => res.status(500).json({ error: "Internal error" }));
     }
