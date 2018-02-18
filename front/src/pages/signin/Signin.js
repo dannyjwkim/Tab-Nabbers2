@@ -77,19 +77,21 @@ export class Signin extends Component {
 
 const Join = (props) => {
     const error = props.user.error.login;
+    const pending = props.user.pending;
 
     const errorMessage = error ? <div className="ui message error">
         <p>{error}</p>
     </div> : null;
 
     const errorClass = error ? "error" : null;
+    const pendingClass = pending ? "loading" : null;
 
     return (
         <div className="flex center main-center column landing_content">
 
             {errorMessage}
 
-            <form className="ui form" onSubmit={props.submit}>
+            <form className={"ui form " + pendingClass} onSubmit={props.submit}>
 
                 <div className={"field " + errorClass}>
                     <label>Email </label>
