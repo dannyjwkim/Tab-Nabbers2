@@ -22,7 +22,7 @@
         .search {
             form {
                 width: 100%;
-                .form-group {
+                div {
                     width: 50%;
                     margin-top: 20px;
                 }
@@ -34,6 +34,7 @@
         border-radius: 4px;
         position: relative;
         padding: 20px;
+        overflow:hidden;
         margin: 20px;
         width: 280px;
         height: 280px;

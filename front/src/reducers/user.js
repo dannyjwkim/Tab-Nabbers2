@@ -4,8 +4,8 @@ const initial_state = {
         signup: "",
     },
     authenticated: false,
-    pending: false
-
+    pending: false,
+    search:""
 };
 
 const user = (state = initial_state, action) => {

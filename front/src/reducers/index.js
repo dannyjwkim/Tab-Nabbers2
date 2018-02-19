@@ -3,9 +3,12 @@ import {
 } from "redux";
 
 import user from "./user";
+import eventbrites from "./eventbrites";
+
 
 const bootcruit = combineReducers({
-    user
+    user,
+    eventbrites
 });
 
 

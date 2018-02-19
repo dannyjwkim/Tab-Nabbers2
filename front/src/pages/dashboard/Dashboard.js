@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./dashboard.css";
-// import { connect } from 'react-redux';
 import {
     Header,
     Footer
@@ -15,16 +14,10 @@ import {
 } from "../../utils/event_feature";
 
 import {
-    logout
+    logout,
+    eventBriteSearch
 } from "../../actions";
 
-import data from "./data.json";
-
-// const mapStateToProps = (state) => {
-//     return {
-
-//     };
-// }
 
 class Dashboard extends Component {
     constructor(props) {
@@ -32,16 +25,19 @@ class Dashboard extends Component {
         this.state = {};
     }
 
-    
+
     signout = () => this.props.dispatch(logout());
 
-    componentWillMount = () => this.setState({ data });
+    componentWillMount = () => {
+        if (this.props.eventbrites.events.length === 0)
+            this.props.eventBriteSearch("javascript");
+    };
     render() {
-        console.log(filter_num(this.state.data.events, 2));
+        console.log(filter_num(this.props.eventbrites.events, 2));
         return (
             <div>
-                <Header logout = {this.signout} />
-                <Content {...this.state} filter_num={filter_num} />
+                <Header logout={this.signout} />
+                <Content {...this.state} filter_num={filter_num}  {...this.props}/>
                 <Footer />
             </div>
         );
@@ -68,13 +64,19 @@ const Events = (props) => {
 
     const {
         filter_num,
-        data: {
-            events
+        eventbrites:{
+            events,
+            pending
         }
+
     } = props;
 
+
+    const pendingClass = pending ? " ui loading form" : "";
+
+
     return (
-        <div className="events flex column wrap">
+        <div className="events flex column wrap ">
             <div>
                 <h3>Events: </h3>
                 <p>
@@ -84,7 +86,7 @@ const Events = (props) => {
                 </p>
             </div>
 
-            <div className="top_event center flex  wrap">
+            <div className={"top_event center flex  wrap " + pendingClass}>
                 {filter_num(events, 5).map((el, index) => (
                     <div key={index} >
                         <img src={el.logo ? el.logo.url : ''} alt="" />
@@ -143,6 +145,17 @@ const Recommendations = () => (
         </div>
     </div>
 );
+const mapStateToProps = (state) => {
+    return {
+        eventbrites: state.eventbrites
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        eventBriteSearch: (name) => dispatch(eventBriteSearch(name)),
+    }
+};
 
 
-export default connect(null)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -77,9 +77,7 @@ module.exports = {
                             client.sendMail(sendgrid_email, (err, info) => {
                                 if (err)
                                     res.cookie("token", token).json({ error: "Not able to send the email" });
-                                else {
-                                    res.json({ msg: "Email sent!" });
-                                }
+                                res.json({ msg: "Email sent!" });
                             });
                         }
                     });
