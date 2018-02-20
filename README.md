@@ -45,7 +45,7 @@ Open your terminal and run the below command in the root of the project, and als
 
 Step 4:
 
-> npm start
+> npm run dev
 
 
 
