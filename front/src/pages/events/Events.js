@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from "moment";
 import {
     connect
 } from 'react-redux';
@@ -11,7 +12,8 @@ import "./event.css";
 
 import {
     eventBriteSearch,
-    getValues
+    getValues,
+    getLocation
 } from "../../actions";
 
 
@@ -65,8 +67,8 @@ const DisplayEvents = (props) => {
             {(props.eventbrites.events || []).map((event, index) => (
                 <div className={"week search " + pendingClass} key={index}>
                     <img src={event.logo ? event.logo.url : ''} alt="" />
-                    <h4>Name: {event.name.text}</h4>
-                    <p>Time: {event.start.local}</p>
+                    <h4>{event.name.text}</h4>
+                    <p>{moment(event.start.local).format("llll")}</p>
                     {
                         // Feature
                         // Add to calendar
@@ -96,13 +98,27 @@ class Events extends Component {
     }
 
     componentWillMount = () => {
-        if (this.props.eventbrites.events.length === 0)
-            this.props.eventBriteSearch("javascript");
+        this.props.getLocation()
+            .then((response) => {
+                if (this.props.eventbrites.events.length === 0)
+                    this.fetchEventLocation(response.value.data, "tech");
+            })
+            .catch((err) => console.log("Error: ", err))
     };
 
     change_view = (view, event) => {
         const lower_view = view.toLowerCase();
         this.setState({ view, current_button: { [lower_view]: "current" } })
+    };
+
+    fetchEventLocation = (data, value) => {
+        const {
+            longitude,
+            latitude
+            } = data;
+
+        const coordinations = { longitude, latitude };
+        this.props.eventBriteSearch(value, coordinations);
     };
 
 
@@ -114,9 +130,12 @@ class Events extends Component {
     }) => this.props.getValues({ [name]: value });
 
     onSubmit = (event) => {
+        const {
+            search,
+            location
+        } = this.props.user;
         event.preventDefault();
-        const value = this.props.user.search;
-        this.props.eventBriteSearch(value);
+        this.fetchEventLocation(location, search);
         this.props.getValues({ search: "" }); // resetting the value
     };
 
@@ -184,8 +203,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        eventBriteSearch: (name) => dispatch(eventBriteSearch(name)),
-        getValues: (data) => dispatch(getValues(data))
+        eventBriteSearch: (name, obj) => dispatch(eventBriteSearch(name, obj)),
+        getValues: (data) => dispatch(getValues(data)),
+        getLocation: () => dispatch(getLocation()),
     }
 };
 

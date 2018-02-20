@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from "moment";
 import "./dashboard.css";
 import {
     Header,
@@ -15,7 +16,8 @@ import {
 
 import {
     logout,
-    eventBriteSearch
+    eventBriteSearch,
+    getLocation
 } from "../../actions";
 
 
@@ -29,15 +31,28 @@ class Dashboard extends Component {
     signout = () => this.props.dispatch(logout());
 
     componentWillMount = () => {
+        this.props.getLocation()
+            .then((response) => this.fetchEventLocation(response))
+            .catch((err) => console.log("Error: ", err))
+    };
+
+
+    fetchEventLocation = (response) => {
+        const {
+            longitude,
+            latitude
+            } = response.value.data;
+
+        const coordinations = { longitude, latitude };
+
         if (this.props.eventbrites.events.length === 0)
-            this.props.eventBriteSearch("javascript");
+            this.props.eventBriteSearch("tech", coordinations);
     };
     render() {
-        console.log(filter_num(this.props.eventbrites.events, 2));
         return (
             <div>
                 <Header logout={this.signout} />
-                <Content {...this.state} filter_num={filter_num}  {...this.props}/>
+                <Content {...this.state} filter_num={filter_num}  {...this.props} />
                 <Footer />
             </div>
         );
@@ -64,7 +79,7 @@ const Events = (props) => {
 
     const {
         filter_num,
-        eventbrites:{
+        eventbrites: {
             events,
             pending
         }
@@ -87,11 +102,11 @@ const Events = (props) => {
             </div>
 
             <div className={"top_event center flex  wrap " + pendingClass}>
-                {filter_num(events, 5).map((el, index) => (
+                {filter_num(events, 5).map((event, index) => (
                     <div key={index} >
-                        <img src={el.logo ? el.logo.url : ''} alt="" />
-                        <h4>{el.name.text}</h4>
-                        <p>Time: {el.start.local}</p>
+                        <img src={event.logo ? event.logo.url : ''} alt="" />
+                        <h4>{event.name.text}</h4>
+                        <p>{moment(event.start.local).format("llll")}</p>
                     </div>
                 ))}
             </div>
@@ -153,7 +168,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        eventBriteSearch: (name) => dispatch(eventBriteSearch(name)),
+        eventBriteSearch: (name, address) => dispatch(eventBriteSearch(name, address)),
+        getLocation: () => dispatch(getLocation()),
     }
 };
 

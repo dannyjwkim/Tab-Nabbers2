@@ -56,6 +56,15 @@ const user = (state = initial_state, action) => {
                     signup: ""
                 }
             };
+
+
+        case "GET_LOCATION_FULFILLED": 
+            return {
+                ...state,
+                location: {...action.payload.data}
+            };
+
+
         default:
             return state;
     }
