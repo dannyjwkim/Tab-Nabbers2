@@ -28,7 +28,7 @@ class Dashboard extends Component {
     }
 
 
-    signout = () => this.props.dispatch(logout());
+    signout = () => this.props.logout();
 
     componentWillMount = () => {
         this.props.getLocation()
@@ -170,6 +170,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         eventBriteSearch: (name, address) => dispatch(eventBriteSearch(name, address)),
         getLocation: () => dispatch(getLocation()),
+        logout: () => dispatch(logout()),
     }
 };
 
