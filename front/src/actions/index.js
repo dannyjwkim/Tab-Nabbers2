@@ -5,6 +5,11 @@ import {
     logout
 } from "./auth";
 
+import {
+    eventBriteSearch,
+    getLocation
+} from "./api";
+
 
 
 
@@ -12,5 +17,7 @@ export {
     login, 
     signup,
     getValues,
-    logout
+    getLocation,
+    logout,
+    eventBriteSearch
 }

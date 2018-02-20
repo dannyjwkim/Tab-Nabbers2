@@ -4,9 +4,6 @@ import {
 } from "react-router-dom";
 import "./join.css";
 import {
-    Input
-} from "../../components";
-import {
     connect
 } from "react-redux";
 import {
@@ -80,25 +77,44 @@ export class Landing extends Component {
 }
 
 const Join = (props) => {
-
+    const pending = props.user.pending;
     const error = props.user.error.login;
 
     const errorMessage = error ? <div className="ui message error">
         <p>{error}</p>
-    </div> : null
+    </div> : null;
+
+    const errorClass = error ? "error" : null;
+    const pendingClass = pending ? "loading" : null;
+
+    console.log("Loading: ", props.user);
+    
 
 
     return (
         <div className="flex center main-center column landing_content">
             {errorMessage}
-            <form >
-                <Input sub_text="(Firstname and Lastname)" name="name" onChange={props.getValues} />
+            <form className={"ui form " + pendingClass} onSubmit = {props.submit}>
 
-                <Input name="email" onChange={props.getValues} />
+                <div className="field">
+                    <label>Name <span>(Firstname and Lastname)</span></label>
+                    <input required type="text" name="name" placeholder="Name"  onChange={props.getValues}  />
+                </div>
 
-                <Input name="password" sub_text="(min. 6 char)" onChange={props.getValues} />
+ 
+                <div className={"field " + errorClass}>
+                    <label>Email </label>
+                    <input required type="text" name="email" placeholder="Email"  onChange={props.getValues}  />
+                </div>
 
-                <button className="btn" onClick={props.submit}> Join </button>
+
+
+                <div className="field">
+                    <label>Password <span>(min. 6 char)</span></label>
+                    <input required type="password" name="password" placeholder="Password"  onChange={props.getValues}  />
+                </div>
+
+                <button className="btn " > Join </button>
 
             </form>
             <p>By joining, you agree to the Terms and Privacy Policy.</p>

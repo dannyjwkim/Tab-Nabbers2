@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import moment from "moment";
 import "./dashboard.css";
-// import { connect } from 'react-redux';
 import {
     Header,
     Footer
@@ -15,16 +15,11 @@ import {
 } from "../../utils/event_feature";
 
 import {
-    logout
+    logout,
+    eventBriteSearch,
+    getLocation
 } from "../../actions";
 
-import data from "./data.json";
-
-// const mapStateToProps = (state) => {
-//     return {
-
-//     };
-// }
 
 class Dashboard extends Component {
     constructor(props) {
@@ -32,16 +27,32 @@ class Dashboard extends Component {
         this.state = {};
     }
 
-    
-    signout = () => this.props.dispatch(logout());
 
-    componentWillMount = () => this.setState({ data });
+    signout = () => this.props.logout();
+
+    componentWillMount = () => {
+        this.props.getLocation()
+            .then((response) => this.fetchEventLocation(response))
+            .catch((err) => console.log("Error: ", err))
+    };
+
+
+    fetchEventLocation = (response) => {
+        const {
+            longitude,
+            latitude
+            } = response.value.data;
+
+        const coordinations = { longitude, latitude };
+
+        if (this.props.eventbrites.events.length === 0)
+            this.props.eventBriteSearch("tech", coordinations);
+    };
     render() {
-        console.log(filter_num(this.state.data.events, 2));
         return (
             <div>
-                <Header logout = {this.signout} />
-                <Content {...this.state} filter_num={filter_num} />
+                <Header logout={this.signout} />
+                <Content {...this.state} filter_num={filter_num}  {...this.props} />
                 <Footer />
             </div>
         );
@@ -68,13 +79,19 @@ const Events = (props) => {
 
     const {
         filter_num,
-        data: {
-            events
+        eventbrites: {
+            events,
+            pending
         }
+
     } = props;
 
+
+    const pendingClass = pending ? " ui loading form" : "";
+
+
     return (
-        <div className="events flex column wrap">
+        <div className="events flex column wrap ">
             <div>
                 <h3>Events: </h3>
                 <p>
@@ -84,12 +101,12 @@ const Events = (props) => {
                 </p>
             </div>
 
-            <div className="top_event center flex  wrap">
-                {filter_num(events, 5).map((el, index) => (
+            <div className={"top_event center flex  wrap " + pendingClass}>
+                {filter_num(events, 5).map((event, index) => (
                     <div key={index} >
-                        <img src={el.logo ? el.logo.url : ''} alt="" />
-                        <h4>{el.name.text}</h4>
-                        <p>Time: {el.start.local}</p>
+                        <img src={event.logo ? event.logo.url : ''} alt="" />
+                        <h4>{event.name.text}</h4>
+                        <p>{moment(event.start.local).format("llll")}</p>
                     </div>
                 ))}
             </div>
@@ -143,6 +160,19 @@ const Recommendations = () => (
         </div>
     </div>
 );
+const mapStateToProps = (state) => {
+    return {
+        eventbrites: state.eventbrites
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        eventBriteSearch: (name, address) => dispatch(eventBriteSearch(name, address)),
+        getLocation: () => dispatch(getLocation()),
+        logout: () => dispatch(logout()),
+    }
+};
 
 
-export default connect(null)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

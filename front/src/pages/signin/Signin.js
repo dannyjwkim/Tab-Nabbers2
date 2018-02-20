@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./signin.css";
 import {
-    Input
-} from "../../components";
-import {
     login,
     getValues
 } from "../../actions";
@@ -53,7 +50,6 @@ export class Signin extends Component {
 
     render() {
 
-        console.log("Props: ", this.props.user);
         return (
             <div className="login landing flex center ">
 
@@ -81,22 +77,33 @@ export class Signin extends Component {
 
 const Join = (props) => {
     const error = props.user.error.login;
+    const pending = props.user.pending;
 
     const errorMessage = error ? <div className="ui message error">
         <p>{error}</p>
-    </div> : null
+    </div> : null;
+
+    const errorClass = error ? "error" : null;
+    const pendingClass = pending ? "loading" : null;
 
     return (
         <div className="flex center main-center column landing_content">
 
             {errorMessage}
 
-            <form >
-                <Input name="email" onChange={props.getValues} />
+            <form className={"ui form " + pendingClass} onSubmit={props.submit}>
 
-                <Input name="password" sub_text="(min. 6 char)" onChange={props.getValues} />
+                <div className={"field " + errorClass}>
+                    <label>Email </label>
+                    <input type="text" name="email" placeholder="Email" onChange={props.getValues} required />
+                </div>
 
-                <button className="btn" onClick={props.submit}> Login </button>
+                <div className={"field " + errorClass}>
+                    <label>Password <span>(min. 6 char)</span></label>
+                    <input type="password" name="password" placeholder="Password" onChange={props.getValues} required />
+                </div>
+
+                <button className="btn disabled" > Login </button>
 
             </form>
             <p>By joining, you agree to the Terms and Privacy Policy.</p>
