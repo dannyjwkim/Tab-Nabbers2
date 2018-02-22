@@ -74,6 +74,8 @@ const DisplayEvents = (props) => {
                         // Add to calendar
                         // Share on Social Media
                     }
+                    <i class="heart outline icon"></i>
+                    <i class="share square outline icon"></i>
                     <div className="info">
                         <p>Description: {event.description.text}</p>
                     </div>
