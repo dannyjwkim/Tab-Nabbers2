@@ -9,7 +9,7 @@ import {
 import {
     signup,
     getValues
-} from "../../actions";
+} from "./actions";
 
 export class Landing extends Component {
 
@@ -26,7 +26,7 @@ export class Landing extends Component {
             email,
             password,
             name
-        } = this.props.user;
+        } = this.props.signup;
 
         this.props.dispatch(signup(url, {
             email,
@@ -36,7 +36,7 @@ export class Landing extends Component {
     };
 
     componentWillReceiveProps(props) {
-        if (props.user.authenticated)
+        if (props.signup.authenticated)
             this.props.history.push('/dashboard');
 
     }
@@ -77,8 +77,8 @@ export class Landing extends Component {
 }
 
 const Join = (props) => {
-    const pending = props.user.pending;
-    const error = props.user.error.login;
+    const pending = props.signup.pending;
+    const error = props.signup.error;
 
     const errorMessage = error ? <div className="ui message error">
         <p>{error}</p>
@@ -86,9 +86,6 @@ const Join = (props) => {
 
     const errorClass = error ? "error" : null;
     const pendingClass = pending ? "loading" : null;
-
-    console.log("Loading: ", props.user);
-    
 
 
     return (
@@ -125,7 +122,7 @@ const Join = (props) => {
 
 const mapPropsToState = (state) => {
     return {
-        user: state.user
+        signup: state.signup
     }
 };
 export default connect(mapPropsToState)(Landing);
