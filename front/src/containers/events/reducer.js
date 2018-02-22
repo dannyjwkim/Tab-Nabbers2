@@ -1,13 +1,11 @@
-
 const initialState = {
     events: [],
     saved: [],
     pending: false
-};
+}; 
 
 
-const eventbrites = (state = initialState, action) => {
-
+const eventBrites = (state = initialState, action) => {
     switch (action.type) {
         case "EVENTBRITE_SEARCH_FULFILLED":
             return {
@@ -25,10 +23,10 @@ const eventbrites = (state = initialState, action) => {
         case "EVENTBRITE_SEARCH_REJECTED":
             return {
                 ...state,
-                events: [...action.payload.data.events],
+                events: [...action.payload],
                 pending: false
             };
-
+    
         default:
             return state;
     }
@@ -36,4 +34,4 @@ const eventbrites = (state = initialState, action) => {
 
 
 
-export default eventbrites;
+export default eventBrites;

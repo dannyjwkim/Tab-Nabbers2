@@ -25,11 +25,11 @@ const client = nodemailer.createTransport(sgTransport(options));
  * Might need to refactor and move elsewhere
  * @param {*} data 
  */
-const generateToken = ({_id, email}) => {
+const generateToken = ({ _id, email }) => {
 
     const token = jwt.sign({
         exp: Math.floor(Date.now() / 1000) + (60 * 60),
-        data:{
+        data: {
             email,
             _id
         }
@@ -37,6 +37,9 @@ const generateToken = ({_id, email}) => {
 
     return token;
 };
+
+
+const salt = bcrypt.genSaltSync(10);
 
 
 module.exports = {
@@ -60,7 +63,6 @@ module.exports = {
             `
         };
 
-        const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
 
         User.findOne({ email })
@@ -73,11 +75,11 @@ module.exports = {
                         if (err) {
                             res.json({ error: "Not able to create a user at this time" });
                         } else {
-                            const token = generateToken(newUser);
+                            const token = generateToken(newUser); // token
                             client.sendMail(sendgrid_email, (err, info) => {
                                 if (err)
-                                    res.cookie("token", token).json({ error: "Not able to send the email" });
-                                res.json({ msg: "Email sent!" });
+                                    res.status(409).json({ error: "Not able to send the email" });
+                                res.cookie("token", token).json({ msg: "Email sent!" });
                             });
                         }
                     });
@@ -106,6 +108,66 @@ module.exports = {
                 }
             })
             .catch((err) => res.status(500).json({ error: "User not found" }));
-    }
+    },
 
+
+
+    resetPassword: (req, res, next) => {
+        const {
+            email
+        } = req.body;
+
+        const token = jwt.sign({
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            email
+        }, process.env.SECRET);
+
+        const sendgrid_email = {
+            from: 'awesome@bar.com',
+            to: email,
+            subject: 'Password Reset || Bootcruit',
+            text: 'We are supper excited to have you on the Team. Welcome on board',
+            html: `
+            <h2>You requested to reset your password</h2>
+            <p>Please click on the following link in order to reset your password<p>
+            <a href="http://localhost:3000/secure/reset/${token}">Reset password</a>
+            `
+        };
+
+        User.findOne({ email })
+            .then((user) => {
+                if(user){
+                    client.sendMail(sendgrid_email, (err, info) => {
+                        if (err)
+                            res.status(409).json({ error: "Not able to send the email" });
+                        res.json({ msg: "Email sent!" });
+                    });
+                } else{
+                    res.status(409).json({error: "No record found!"});
+                }
+
+            })
+            .catch((err) => res.status(409).json({ error: "No user found!" }));
+    },
+
+    newPassword: (req, res, next) => {
+        const {
+            password,
+            token
+        } = req.body;
+
+        jwt.verify(token, process.env.SECRET, (err, decoded) => {
+            if (err) {
+                res.status(409).json({ error: "No valid token" });
+            } else {
+                const hash = bcrypt.hashSync(password, salt);
+
+                User.update({ email: decoded.email }, { $set: { password: hash } })
+                    .then((user) => {
+                        res.json({ msg: "Password has successfully reset" });
+                    })
+                    .catch((err) => res.status(409).json({ error: "Not able to reset the password" }));
+            }
+        });
+    }
 };

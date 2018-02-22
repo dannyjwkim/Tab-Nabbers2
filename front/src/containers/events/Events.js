@@ -14,7 +14,7 @@ import {
     eventBriteSearch,
     getValues,
     getLocation
-} from "../../actions";
+} from "./actions";
 
 
 

@@ -15,10 +15,13 @@ import {
 } from "../../utils/event_feature";
 
 import {
-    logout,
+    logout
+} from "../../actions";
+
+import {
     eventBriteSearch,
     getLocation
-} from "../../actions";
+} from "../events/actions";
 
 
 class Dashboard extends Component {

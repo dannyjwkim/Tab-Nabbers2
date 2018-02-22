@@ -6,7 +6,9 @@ const API = require("../controllers/thirdpartyapi");
 
 const {
     signin,
-    signup
+    signup,
+    resetPassword,
+    newPassword
 } = Credentials;
 
 const {
@@ -18,12 +20,13 @@ const {
 
 router.post("/signup", signup);
 
-
 router.post("/signin", signin);
-
 
 router.get("/eventbrite/search", search);
 
+router.post("/resetpassword", resetPassword);
+
+router.post("/newpassword", newPassword);
 
 
 

@@ -5,7 +5,7 @@ import "./signin.css";
 import {
     login,
     getValues
-} from "../../actions";
+} from "./actions";
 
 
 export class Signin extends Component {
@@ -22,7 +22,7 @@ export class Signin extends Component {
         const {
             email,
             password
-        } = this.props.user;
+        } = this.props.signin;
 
         this.props.dispatch(login(url, {
             email,
@@ -43,7 +43,7 @@ export class Signin extends Component {
 
 
     componentWillReceiveProps(props) {
-        if (props.user.authenticated)
+        if (props.signin.authenticated)
             this.props.history.push('/dashboard');
 
     }
@@ -76,8 +76,8 @@ export class Signin extends Component {
 }
 
 const Join = (props) => {
-    const error = props.user.error.login;
-    const pending = props.user.pending;
+    const error = props.signin.error;
+    const pending = props.signin.pending;
 
     const errorMessage = error ? <div className="ui message error">
         <p>{error}</p>
@@ -106,6 +106,7 @@ const Join = (props) => {
                 <button className="btn disabled" > Login </button>
 
             </form>
+            <Link to = "/resetpassword"> Forgot password</Link>
             <p>By joining, you agree to the Terms and Privacy Policy.</p>
         </div>
     )
@@ -114,7 +115,7 @@ const Join = (props) => {
 
 const mapPropsToState = (state) => {
     return {
-        user: state.user
+        signin: state.signin
     }
 };
 
