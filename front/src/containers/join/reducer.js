@@ -31,8 +31,14 @@ const signup = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data
-            };    
-    
+            };
+            
+        case "LOGOUT":
+            return {
+                ...state,
+                authenticated: false
+            };
+
         default:
             return state;
     }

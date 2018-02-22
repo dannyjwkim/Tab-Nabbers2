@@ -27,6 +27,11 @@ const signin = (state = initialState, action) => {
                 pending: true
             };
 
+        case "LOGOUT":
+            return {
+                ...state,
+                authenticated: false
+            };    
 
         case "GET_VALUES_SIGNIN":
             return {
