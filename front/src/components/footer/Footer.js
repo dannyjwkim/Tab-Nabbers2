@@ -8,16 +8,14 @@ const Footer = () => (
             <ul className="flex center">
                 <li>Github</li>
                 <li>About</li>
-                <li>Link</li>
+                <li>Integrations</li>
             </ul>
         </div>
 
 
         <div>
             <ul className = "flex center">
-                <li className = "fa fa-twitter"></li>
                 <li className = "fa fa-github"></li>
-                <li className = "fa fa-facebook-official"></li>
             </ul>
         </div>
     </footer>
