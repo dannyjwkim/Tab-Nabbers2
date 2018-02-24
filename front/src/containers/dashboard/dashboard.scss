@@ -1,0 +1,91 @@
+.main-events {
+    // Set events, resources, and tips layout the same
+    .events,
+    .resources,
+    .tips {
+        width: inherit;
+        width: 100%;
+        margin-bottom: 90px;
+    }
+
+
+    .events>div:first-child,
+    .resources>div:first-child,
+    .tips:first-child {
+        width: 500px;
+        padding: 15px;
+    } // Top 5 events secion
+    .top_event {
+        &>div {
+            width: 320px;
+            background: #fff;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #efe8ed;
+            border-radius: 4px;
+            cursor: pointer;
+            animation: fadein 500ms ease-in-out;
+            img {
+                width: 100%;
+            }
+        }
+    } // Resources layout of the page
+    .resources {
+        .interview_tip {
+            & div:first-child {
+                width: 50%;
+                height: 250px;
+                background: #fff;
+                margin: 20px;
+                border: 1px solid #efe8ed;
+            }
+            & div:last-child {
+                width: 40%;
+                border: 1px solid #efe8ed;
+                height: 250px;
+                background: #fff;
+                margin: 20px;
+            }
+        }
+    } // Tips about interview section
+    .tips {
+        .top_tip {
+            div {
+                width: 25%;
+                height: 250px;
+                border: 1px solid #efe8ed;
+                background: #fff;
+                margin: 20px;
+            }
+        }
+    }
+}
+
+@media (max-width:414px) {
+    .main-events {
+        .events>div:first-child,
+        .resources>div:first-child,
+        .tips:first-child {
+            width: 90%;
+            margin:0;
+        }
+
+
+        .resources{
+            .interview_tip{
+                & div:first-child, div:last-child{
+                    width:95%;
+                }
+            }
+        }
+
+        .tips {
+            .top_tip {
+                div {
+                    width: 95%;
+                }
+            }
+        }
+        
+    }
+}

@@ -56,9 +56,44 @@ const skillSchema = Schema({
 
 
 const userSchema = Schema({
+
+    name:{
+        type:String,
+        // required: true
+    },
+
+    join_since: {
+        type: Date,
+        default: new Date
+    },
+
+
+    password: {
+        type:String
+    },
+
+    email: {
+        type: String,
+        // unique: true,
+        // match: [emailValid],
+        // minlength: 1
+    },
+
+    locked: {
+        type:String,
+        default: false
+    },
+
+    login_fail:{
+        type: Number,
+        default: 0
+    },
+
     username:{
         type:String
     },
+
+    
 
     firstName: {
         type: String,
@@ -69,6 +104,7 @@ const userSchema = Schema({
         type: String,
         trim: true
     },
+    
 
     gender: {
         type: String
@@ -138,15 +174,8 @@ const userSchema = Schema({
         default: ""
     },
 
-    email: {
-        type: String,
-        unique: true,
-        match: emailValid,
-        minlength: 1
-    },
-    password: {
-        type:String
-    },
+    
+    
     facebook: {
         id: {type: String},
         token: {type: String},
