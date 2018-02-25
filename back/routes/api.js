@@ -1,3 +1,4 @@
+var jwt = require('jsonwebtoken');
 const express = require("express");
 const router = express.Router();
 
@@ -8,7 +9,8 @@ const {
     signin,
     signup,
     resetPassword,
-    newPassword
+    newPassword,
+    verifyCookie
 } = Credentials;
 
 const {
@@ -22,7 +24,7 @@ router.post("/signup", signup);
 
 router.post("/signin", signin);
 
-router.get("/eventbrite/search", search);
+router.get("/eventbrite/search", verifyCookie, search);
 
 router.post("/resetpassword", resetPassword);
 
