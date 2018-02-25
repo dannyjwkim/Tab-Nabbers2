@@ -41,7 +41,7 @@ const authenticate = require("./back/routes/api");
 app.use("/secure", authenticate);
 
 
-
+  
 
 if (process.env.NODE_ENVIROMENT === "PRODUCTION") {
     app.use(express.static(path.join(__dirname + "/front/build"))) // static folders
@@ -95,5 +95,4 @@ runServer()
             console.log("Mongoose Error: ", err);
         });
     });
-
 

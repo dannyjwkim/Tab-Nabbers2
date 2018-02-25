@@ -1,8 +1,8 @@
-var jwt = require('jsonwebtoken');
 const express = require("express");
 const router = express.Router();
 
 const Credentials = require("../controllers/credentials");
+const Middleware = require("../middlewares");
 const API = require("../controllers/thirdpartyapi");
 
 const {
@@ -10,8 +10,11 @@ const {
     signup,
     resetPassword,
     newPassword,
-    verifyCookie
 } = Credentials;
+
+const {
+    verifyCookie
+} = Middleware;
 
 const {
     eventbrite:{

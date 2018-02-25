@@ -108,23 +108,6 @@ module.exports = {
     },
 
 
-    verifyCookie: (req, res, next) => {
-        const {
-            token
-        } = req.cookies;
-        
-        jwt.verify(token, process.env.SECRET, (err, decoded) => {
-          
-          if(err){
-              res.status(401).json({error: "Access denied. "});
-          } else{
-            next();
-          }
-        });
-      
-      },
-
-
     resetPassword: (req, res, next) => {
         const {
             email
