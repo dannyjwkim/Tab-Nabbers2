@@ -5,6 +5,8 @@ import Signin from "./signin/Signin";
 import Join from "./join/Join";
 import ResetPassword, {Confirmation} from "./resetpassword/ResetPassword";
 import NewPassword from "./newpassword/NewPassword";
+import Github from "./integrations/Github";
+import GoogleCalendar from "./integrations/Google";
 
 
 
@@ -16,5 +18,7 @@ export {
     Join,
     ResetPassword,
     NewPassword,
-    Confirmation
+    Confirmation,
+    Github,
+    GoogleCalendar
 }

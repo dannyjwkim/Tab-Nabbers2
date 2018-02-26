@@ -19,6 +19,7 @@
         border-left: 1px solid #efe8ed;
         background: #f1f3f5;
         margin-left: 15%;
+        height: 100vh;
         .search {
             form {
                 width: 100%;
@@ -44,6 +45,29 @@
         animation: fadein 500ms ease-in-out forwards;
         img {
             width: 100%;
+        }
+
+        .icons{
+            position: absolute;
+            bottom: 20px;
+            right:15px;
+            font-size: 18px;
+            opacity: 0;
+
+            .saved{
+                color: #0938f5;
+                opacity: 1;
+            }
+            
+            i{
+                margin-left: 10px;
+                cursor: pointer;
+                color:#555;
+            }
+        }
+
+        &:hover .icons {
+            opacity: 1;
         }
     }
     .info {

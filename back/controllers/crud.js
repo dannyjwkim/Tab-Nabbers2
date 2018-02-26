@@ -15,11 +15,9 @@ module.exports = {
     createUser: (req, res, next) => {
         const newData = new User(req.body);
         newData.save((err) => {
-            if (err) {
-                res.status(409).json({ err: "Not able to save" });
-            } else {
-                res.json({ msg: "Successfully been saved!" });
-            }
+            if (err)
+                res.status(409).json({ err: "Not able to save" })
+            res.json({ msg: "Successfully been saved!" });
         });
     },
 
@@ -28,27 +26,19 @@ module.exports = {
     readUser: (req, res, next) => {
         User.find({})
             .select("-password")
-            .then((users) => {
-                res.json({ msg: "Successfully been saved!" });
-            })
-            .catch((err) => {
-                res.status(409).json({ err: "Not able to save" });
-            });
+            .then((users) => res.json({ msg: "Successfully been saved!" }))
+            .catch((err) => res.status(409).json({ err: "Not able to save" }));
     },
 
 
     // Update the the user info
     updateUser: (req, res, next) => {
-        
+
         const obj = req.body;
 
         User.update({ _id: req.body.id }, { $set: obj })
-            .then((data) => {
-                res.json({ msg: "Data has been updated!" });
-            })
-            .catch((err) => {
-                res.status(409).json({ error: "Issue updating info" });
-            });
+            .then((data) => res.json({ msg: "Data has been updated!" }))
+            .catch((err) => res.status(409).json({ error: "Issue updating info" }));
     },
 
     // Pending

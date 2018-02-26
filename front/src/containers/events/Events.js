@@ -13,7 +13,9 @@ import "./event.css";
 import {
     eventBriteSearch,
     getValues,
-    getLocation
+    getLocation,
+    savedEvent,
+    getSavedEvents
 } from "./actions";
 
 
@@ -53,29 +55,41 @@ const Search = (props) => {
 
 const Week = (props) => (true ? (<div className="flex wrap center"> No next Week Events</div>) : "");
 
-const Allevents = (props) => (true ? <DisplayEvents {...props} /> : "");
+const Allevents = (props) => (true ? <DisplayEvents {...props} status="allevents" /> : "");
 
-const Saved = (props) => (true ? (<div className="flex wrap center"> No Saved Events</div>) : '');
+const Saved = (props) => (true ? <DisplayEvents {...props} status="saved" /> : "");
 
 
 
 const DisplayEvents = (props) => {
     const pendingClass = props.eventbrites.pending ? " ui loading form" : "";
 
+    let events = props.status === "saved" ? props.eventbrites.saved : props.eventbrites.events;
+
+    events = events.map((el, index) => {
+        if (props.eventbrites.ids.includes(el.id)) {
+            el["saved"] = "saved";
+            return el;
+        } else {
+            el["saved"] = "";
+            return el;
+        }
+    });
+
     return (
-        <div className={"flex wrap center "}>
-            {(props.eventbrites.events || []).map((event, index) => (
+        <div className={"flex wrap center " + pendingClass}>
+            {(events || []).map((event, index) => (
                 <div className={"week search " + pendingClass} key={index}>
                     <img src={event.logo ? event.logo.url : ''} alt="" />
                     <h4>{event.name.text}</h4>
                     <p>{moment(event.start.local).format("llll")}</p>
-                    {
-                        // Feature
-                        // Add to calendar
-                        // Share on Social Media
-                    }
-                    <i class="heart outline icon"></i>
-                    <i class="share square outline icon"></i>
+
+                    <div className="icons">
+                        <i className="share alternate icon"></i>
+                        <i className="calendar alternate icon"></i>
+                        <i className={"heart outline icon " + event.saved} onClick={() => props.saved(event)}></i>
+                    </div>
+
                     <div className="info">
                         <p>Description: {event.description.text}</p>
                     </div>
@@ -100,12 +114,18 @@ class Events extends Component {
     }
 
     componentWillMount = () => {
-        this.props.getLocation()
-            .then((response) => {
-                if (this.props.eventbrites.events.length === 0)
-                    this.fetchEventLocation(response.value.data, "tech");
-            })
-            .catch((err) => console.log("Error: ", err))
+        this.props.getSavedEvents()
+            .then(() => {
+                this.props.getLocation()
+                    .then((response) => {
+                        if (this.props.eventbrites.events.length === 0)
+                            this.fetchEventLocation(response.value.data, "tech");
+                    })
+                    .catch((err) => console.log("Error: ", err));
+            });
+
+
+
     };
 
     change_view = (view, event) => {
@@ -113,6 +133,11 @@ class Events extends Component {
         this.setState({ view, current_button: { [lower_view]: "current" } })
     };
 
+    /**
+     * Get current user locations
+     * @param data
+     * @param value
+     */
     fetchEventLocation = (data, value) => {
         const {
             longitude,
@@ -141,6 +166,15 @@ class Events extends Component {
         this.props.getValues({ search: "" }); // resetting the value
     };
 
+    saved = (obj) => {
+        console.log("Checking");
+        this.props.savedEvent(obj.id)
+            .then((data) => {
+                this.props.getSavedEvents();  // # Bad for Perfomance   
+            });
+
+    };
+
 
     render() {
         return (
@@ -150,6 +184,7 @@ class Events extends Component {
                     change_view={this.change_view}
                     getSearchInput={this.getSearchInput}
                     onSubmit={this.onSubmit}
+                    saved={this.saved}
                     {...this.state} {...this.props} />
                 <Footer />
             </div>
@@ -208,6 +243,8 @@ const mapDispatchToProps = (dispatch) => {
         eventBriteSearch: (name, obj) => dispatch(eventBriteSearch(name, obj)),
         getValues: (data) => dispatch(getValues(data)),
         getLocation: () => dispatch(getLocation()),
+        savedEvent: (id) => dispatch(savedEvent(id)),
+        getSavedEvents: () => dispatch(getSavedEvents())
     }
 };
 

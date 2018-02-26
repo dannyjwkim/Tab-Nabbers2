@@ -26,7 +26,12 @@ const eventBrites = (state = initialState, action) => {
                 events: [...action.payload],
                 pending: false
             };
-    
+         case "GET_SAVED_EVENTS_FULFILLED":
+            return {
+                ...state,
+                saved: [...action.payload.data.favorite],
+                ids:[...action.payload.data.id]
+            };
         default:
             return state;
     }

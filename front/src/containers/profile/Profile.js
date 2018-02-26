@@ -7,6 +7,8 @@ import {
     Input
 } from "../../components";
 
+import axios from "axios";
+
 // const mapStateToProps = (state) => {
 //     return {
 
@@ -15,7 +17,7 @@ import {
 
 
 
-const Integrations = () => (
+const Integrations = (props) => (
     <section className="integrations flex around wrap">
         <div >
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
@@ -23,7 +25,7 @@ const Integrations = () => (
                  dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
                  laboriosam dolores autem!
             </p>
-            <p>Github</p>
+            <p onClick = {() => props.authorizeGithub("/secure/authorize/github")}>Github</p>
         </div>
         <div>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
@@ -49,7 +51,7 @@ const Integrations = () => (
                  dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
                  laboriosam dolores autem!
             </p>
-            <p>Google Calendar</p>
+            <p onClick = {() => props.authorizeGithub("/secure/authorize/google")}>Google Calendar</p>
         </div>
     </section>
 );
@@ -107,13 +109,33 @@ class Profile extends Component {
         };
     }
 
+    authorizeGithub = (url) => {
+        // TODO
+        // Send it over post
+
+        axios({
+            url,
+            method:"POST"
+        })
+        .then((response) => {
+            // TODO
+            window.location.href = response.data.url;
+        })
+        .catch((err) => {
+            // TODO
+            // Error
+        });
+        
+    };
+
+    
 
     change_view = (view) => this.setState({ view, current: { [view]: "current" } });
     render() {
         return (
             <div>
                 <Header />
-                <Content {...this.state} change_view={this.change_view} />
+                <Content {...this.state} change_view={this.change_view} authorizeGithub = {this.authorizeGithub} />
                 <Footer />
             </div>
         );

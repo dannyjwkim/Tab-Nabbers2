@@ -21,15 +21,10 @@ module.exports = {
             })
             
             .then((response) => {
-                const events = response.data.events.filter((el) => {
-                    return el.name.text.length <= 68;
-                });
-
+                const events = response.data.events.filter((el) => el.name.text.length <= 68);
                 res.json({events, pagination: response.data.pagination});
             })
-            .catch((err) => {
-                res.status(409).json({error: err.response});
-            });
+            .catch((err) => res.status(409).json({error: err.response}));
         }
     }
 };

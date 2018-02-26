@@ -46,4 +46,27 @@ export const getLocation = () => {
 
 
 
+export const savedEvent = (id) => {
+    console.log("ID: ", id);
+    return {
+        type:"SAVED_EVENT",
+        payload: axios({
+            url:"/secure/saved",
+            data:{
+                id
+            },
+            method:"POST"
+        })
+    };
+};
+
+export const getSavedEvents = () => {
+    return {
+        type:"GET_SAVED_EVENTS",
+        payload: axios({
+            url:"/secure/favorites",
+            method:"GET"
+        })
+    };
+};
 

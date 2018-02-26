@@ -25,7 +25,7 @@ const app = express(),
  */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser(process.env.SECRET));
+app.use(cookieParser());
 
 
 
@@ -36,6 +36,8 @@ app.use(cookieParser(process.env.SECRET));
  * Bootcruit Routes
  * Authenticate, API, and Browser routes
  */
+
+
 
 const authenticate = require("./back/routes/api");
 app.use("/secure", authenticate);

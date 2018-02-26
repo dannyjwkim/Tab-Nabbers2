@@ -9,8 +9,9 @@ import {
   Join,
   ResetPassword,
   NewPassword,
-  Confirmation
-
+  Confirmation,
+  Github,
+  GoogleCalendar
 } from "./containers";
 import "./App.css";
 
@@ -29,7 +30,9 @@ const Routes = (props) => (
     <Route exact path="/events" component={Events} />
     <Route exact path="/resetpassword" component={ResetPassword} />
     <Route exact path="/confirmation" component={Confirmation} />
-    <Route exact path="/secure/reset/:token" component={NewPassword} />
+    <Route exact path="/github/authorize" component={Github} />
+    <Route exact path="/googlecalendar/authorize" component={GoogleCalendar} />
+    <Route exact path="/secure/reset?code" component={NewPassword} />
   </div>
 );
 export default Routes;

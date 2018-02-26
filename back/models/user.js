@@ -36,7 +36,7 @@ const addressSchema = Schema({
 });
 
 const skillSchema = Schema({
-  
+
     skillName: {
         type: String
         // required: true
@@ -50,15 +50,15 @@ const skillSchema = Schema({
         type: Boolean
         // required: true
     }
-  
+
 
 });
 
 
 const userSchema = Schema({
 
-    name:{
-        type:String,
+    name: {
+        type: String,
         // required: true
     },
 
@@ -69,7 +69,7 @@ const userSchema = Schema({
 
 
     password: {
-        type:String
+        type: String
     },
 
     email: {
@@ -80,20 +80,21 @@ const userSchema = Schema({
     },
 
     locked: {
-        type:String,
+        type: String,
         default: false
     },
 
-    login_fail:{
+    login_fail: {
         type: Number,
         default: 0
     },
 
-    username:{
-        type:String
+    username: {
+        type: String
     },
 
-    
+
+    favorite: [{ type: String }],
 
     firstName: {
         type: String,
@@ -104,7 +105,7 @@ const userSchema = Schema({
         type: String,
         trim: true
     },
-    
+
 
     gender: {
         type: String
@@ -156,14 +157,14 @@ const userSchema = Schema({
     },
 
 
-    bio:String,
+    bio: String,
 
 
     skills: {
         type: [skillSchema],
 
     },
-  
+
     jobStatus: {
         type: String,
         default: ""
@@ -174,45 +175,55 @@ const userSchema = Schema({
         default: ""
     },
 
-    
-    
+    githubToken:{
+        type:String,
+        default:""
+    },
+
+    googleToken:{
+        type:String,
+        default:""
+    },
+
+
+
     facebook: {
-        id: {type: String},
-        token: {type: String},
-        email: {type: String},
-        name: {type:String}
+        id: { type: String },
+        token: { type: String },
+        email: { type: String },
+        name: { type: String }
     },
     twitter: {
-        id: {type:String},
-        token: {type:String},
-        displayName: {type:String},
-        username: {type:String}
+        id: { type: String },
+        token: { type: String },
+        displayName: { type: String },
+        username: { type: String }
     },
     google: {
-        id: {type:String},
-        token: {type:String},
-        email: {type:String},
-        name: {type:String}
+        id: { type: String },
+        token: { type: String },
+        email: { type: String },
+        name: { type: String }
     },
 
     linkedin: {
-        id: {type:String},
-        token: {type: String},
-        email: {type: String},
-        name: {type:String}
+        id: { type: String },
+        token: { type: String },
+        email: { type: String },
+        name: { type: String }
     },
 
     tokens: [{
-        access:{
-            type:String,
+        access: {
+            type: String,
         },
 
-        token:{
-            type:String
+        token: {
+            type: String
         }
     }],
 
-    events:[{type:Schema.Types.ObjectId, ref:'Event'}]
+    events: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
 
 });
 
@@ -220,16 +231,16 @@ const userSchema = Schema({
 userSchema.methods.generateAuthToken = function () {
     let user = this;
     let access = 'auth';
-    let token = jwt.sign({_id: user._id.toHexString(), access:access}, 'ilovejson').toString();
+    let token = jwt.sign({ _id: user._id.toHexString(), access: access }, 'ilovejson').toString();
     user.tokens.push({ access, token });
     user.save().then(() => { return token });
 };
 
-userSchema.methods.generateHash = function(password) {
+userSchema.methods.generateHash = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-userSchema.methods.validPassword = function(password) {
+userSchema.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 
