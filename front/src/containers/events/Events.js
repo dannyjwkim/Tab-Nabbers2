@@ -66,15 +66,19 @@ const DisplayEvents = (props) => {
 
     let events = props.status === "saved" ? props.eventbrites.saved : props.eventbrites.events;
 
-    events = events.map((el, index) => {
-        if (props.eventbrites.ids.includes(el.id)) {
-            el["saved"] = "saved";
-            return el;
-        } else {
-            el["saved"] = "";
-            return el;
-        }
-    });
+    try {
+        events = events.map((el, index) => {
+            if (props.eventbrites.ids.includes(el.id)) {
+                el["saved"] = "saved";
+                return el;
+            } else {
+                el["saved"] = "";
+                return el;
+            }
+        });
+    } catch (error) {
+
+    }
 
     return (
         <div className={"flex wrap center " + pendingClass}>
