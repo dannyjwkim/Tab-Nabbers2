@@ -8,17 +8,18 @@ const API = require("../controllers/api");
 const integrations = require("../controllers/integrations");
 
 
-
-const {
-    verifyCookie
-} = middlewares;
+const Middleware = require("../middlewares");
 
 const {
     signin,
     signup,
     resetPassword,
-    newPassword
+    newPassword,
 } = Credentials;
+
+const {
+    verifyCookie
+} = Middleware;
 
 const {
     eventbrite:{
@@ -54,7 +55,7 @@ router.post("/signup", signup);
 
 router.post("/signin", signin);
 
-router.get("/eventbrite/search", search);
+router.get("/eventbrite/search", verifyCookie, search);
 
 router.post("/resetpassword", resetPassword);
 

@@ -89,9 +89,6 @@ module.exports = {
     },
 
 
-
-
-
     signin: (req, res, next) => {
         const {
             email,
@@ -109,7 +106,6 @@ module.exports = {
             })
             .catch((err) => res.status(500).json({ error: "User not found" }));
     },
-
 
 
     resetPassword: (req, res, next) => {
@@ -149,6 +145,7 @@ module.exports = {
             })
             .catch((err) => res.status(409).json({ error: "No user found!" }));
     },
+
 
     newPassword: (req, res, next) => {
         const {

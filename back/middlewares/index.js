@@ -1,18 +1,25 @@
-
 const jwt = require("jsonwebtoken");
 
-module.exports = {
-    verifyCookie: (req, res, next) => {
-        const token = req.cookies["token"];
+require("dotenv").config();
 
-        jwt.verify(token, process.env.SECRET, (err, decoded) => {
-            if(err){
-                res.redirect("http://localhost:3000");
-            } else{
-                req.email = decoded.data.email;
-                req.id = decoded.data.id;
-                next();
-            }
-        });
-    },
+module.exports = {
+
+  verifyCookie: (req, res, next) => {
+    const {
+        token
+    } = req.cookies;
+    
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      
+      if(err){
+          res.status(401).json({error: "Access denied. "});
+      } else{
+        req.email = decoded.data.email;
+        req.id = decoded.data._id;
+        next();
+      }
+    });
+  
+  }
+
 };
