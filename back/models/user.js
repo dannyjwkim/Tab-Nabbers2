@@ -175,42 +175,27 @@ const userSchema = Schema({
         default: ""
     },
 
-    githubToken:{
-        type:String,
-        default:""
-    },
-
-    googleToken:{
-        type:String,
-        default:""
-    },
-
-
-
-    facebook: {
-        id: { type: String },
-        token: { type: String },
-        email: { type: String },
-        name: { type: String }
+    github: {
+        access_token: { type: String },
+        expires_in: { type: String },
+        refresh_token: { type: String },
+        scope:{type: String}
     },
     twitter: {
-        id: { type: String },
-        token: { type: String },
-        displayName: { type: String },
-        username: { type: String }
+        access_token: { type: String },
+        expires_in: { type: String },
+        refresh_token: { type: String }
     },
     google: {
-        id: { type: String },
-        token: { type: String },
-        email: { type: String },
-        name: { type: String }
+        access_token: { type: String },
+        refresh_token: { type: String },
+        expires_in: { type: String }
     },
 
-    linkedin: {
-        id: { type: String },
-        token: { type: String },
-        email: { type: String },
-        name: { type: String }
+    eventbrite: {
+        access_token: { type: String },
+        expires_in: { type: String },
+        refresh_token: { type: String }
     },
 
     tokens: [{

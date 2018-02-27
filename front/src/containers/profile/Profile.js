@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import "./profile.css";
 import {
     Header,
@@ -7,55 +7,57 @@ import {
     Input
 } from "../../components";
 
-import axios from "axios";
-
-// const mapStateToProps = (state) => {
-//     return {
-
-//     };
-// }
+import {
+    authorize, // @params url, service,
+    getListIntegrations
+} from "./actions";
 
 
 
-const Integrations = (props) => (
-    <section className="integrations flex around wrap">
-        <div >
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
-                sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
-                 dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
-                 laboriosam dolores autem!
-            </p>
-            <p onClick = {() => props.authorizeGithub("/secure/authorize/github")}>Github</p>
-        </div>
-        <div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
-                sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
-                 dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
-                 laboriosam dolores autem!
-            </p>
-            <p>Twitter</p>
-        </div>
-        <div>
 
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
-                sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
-                 dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
-                 laboriosam dolores autem!
-            </p>
-            <p>EventBrite</p>
-        </div>
-        <div>
+const Integrations = (props) => {
 
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
-                sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
-                 dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
-                 laboriosam dolores autem!
-            </p>
-            <p onClick = {() => props.authorizeGithub("/secure/authorize/google")}>Google Calendar</p>
-        </div>
-    </section>
-);
 
+    return(
+        <section className="integrations flex around wrap">
+            <div >
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
+                    sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
+                     dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
+                     laboriosam dolores autem!
+                </p>
+                <p className = {props.profile.github ? "integrated" : ""} onClick={() => props.authorizeGithub("github")}>Github</p>
+            </div>
+            <div>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
+                    sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
+                     dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
+                     laboriosam dolores autem!
+                </p>
+                <p  className = {props.profile.twitter ? "integrated" : ""}>Twitter</p>
+            </div>
+            <div>
+    
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
+                    sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
+                     dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
+                     laboriosam dolores autem!
+                </p>
+                <p className = {props.profile.eventbrite ? "integrated" : ""}>EventBrite</p>
+            </div>
+            <div>
+    
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
+                    sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
+                     dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
+                     laboriosam dolores autem!
+                </p>
+                <p className = {props.profile.google ? "integrated" : ""} onClick={() => props.authorizeGithub("google")}>Google Calendar</p>
+            </div>
+        </section>
+    );
+    
+};
 const Settings = () => (
     <div className="settings flex around wrap">
         <Input name="Username" />
@@ -69,8 +71,8 @@ const Settings = () => (
 const Info = () => (
     <div className="main_info flex main-center around wrap ">
         <Input name="Username" />
-        <Input name="Name" sub_text = "(Firstname and Lastname)"/>
-        <Input name="Interest" sub_text = "(Interested events)"/>
+        <Input name="Name" sub_text="(Firstname and Lastname)" />
+        <Input name="Interest" sub_text="(Interested events)" />
         <Input name="Address" />
         <Input name="City" />
         <Input name="Zipcode" />
@@ -109,33 +111,28 @@ class Profile extends Component {
         };
     }
 
-    authorizeGithub = (url) => {
-        // TODO
-        // Send it over post
-
-        axios({
-            url,
-            method:"POST"
-        })
-        .then((response) => {
-            // TODO
-            window.location.href = response.data.url;
-        })
-        .catch((err) => {
-            // TODO
-            // Error
-        });
-        
+    componentWillMount = () => {
+        this.props.dispatch(getListIntegrations());
     };
 
-    
+    authorizeGithub = (url, service) => {
+        this.props.dispatch(authorize(url, service));
+    };
+
+    componentWillReceiveProps = (nextProps) => {
+        localStorage.setItem("service", nextProps.profile.service);
+        if (nextProps.profile.authorize_url !== this.props.profile.authorize_url) {
+            window.location.href = nextProps.profile.authorize_url;
+        }
+    };
 
     change_view = (view) => this.setState({ view, current: { [view]: "current" } });
     render() {
+        console.log("Props: ", this.props.profile.github);
         return (
             <div>
                 <Header />
-                <Content {...this.state} change_view={this.change_view} authorizeGithub = {this.authorizeGithub} />
+                <Content {...this.props} {...this.state} change_view={this.change_view} authorizeGithub={this.authorizeGithub} />
                 <Footer />
             </div>
         );
@@ -175,5 +172,11 @@ const Sidebar = (props) => (
 
 
 
+const mapPropsToState = (state) => {
+    return {
+        profile: state.profile
+    };
+}
 
-export default Profile;
+
+export default connect(mapPropsToState)(Profile);

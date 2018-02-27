@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from "react-router-dom";
-// import { connect } from 'react-redux';
 import {
   Events,
   Profile,
@@ -10,16 +9,10 @@ import {
   ResetPassword,
   NewPassword,
   Confirmation,
-  Github,
-  GoogleCalendar
+  Integrations
 } from "./containers";
 import "./App.css";
 
-// const mapStateToProps = (state) => {
-//   return {
-
-//   };
-// }
 
 const Routes = (props) => (
   <div className="main">
@@ -30,8 +23,7 @@ const Routes = (props) => (
     <Route exact path="/events" component={Events} />
     <Route exact path="/resetpassword" component={ResetPassword} />
     <Route exact path="/confirmation" component={Confirmation} />
-    <Route exact path="/github/authorize" component={Github} />
-    <Route exact path="/googlecalendar/authorize" component={GoogleCalendar} />
+    <Route exact path="/authorize" component={Integrations} />
     <Route exact path="/secure/reset?code" component={NewPassword} />
   </div>
 );

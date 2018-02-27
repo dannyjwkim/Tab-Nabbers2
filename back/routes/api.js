@@ -35,21 +35,17 @@ const {
 
 
 const {
-    github,
-    githubToken,
-    googleCalendar,
-    google
+    serviceRedirect,
+    serviceToken,
+    listIntegrations
 } = integrations;
 
-// Github Oauth 2
-router.post("/authorize/github", github);
-router.post("/token/github", githubToken);
+// Oauth 2
+router.post("/authorize", serviceRedirect);
+router.post("/token", verifyCookie, serviceToken);
 
 
-router.post("/authorize/google", google);
-router.post("/token/google", googleCalendar);
-
-
+router.get("/list/integrations",verifyCookie, listIntegrations);
 
 router.post("/signup", signup);
 
