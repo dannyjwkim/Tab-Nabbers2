@@ -72,14 +72,9 @@ module.exports = {
         User.findOne({email: req.email})
             .then((user) => {
                 const google = user.google.access_token ? true : false;
-                const github = user.google.access_token ? true : false;
+                const github = user.github.access_token ? true : false;
                 const eventbrite = user.eventbrite.access_token ? true : false;
                 const twitter = user.twitter.access_token ? true : false;
-
-                console.log("Google: ", google);
-                console.log("Github: ", github);
-                console.log("Twitter: ", twitter);
-                console.log("Event Brite: ", eventbrite);
 
                 res.json({
                     google,

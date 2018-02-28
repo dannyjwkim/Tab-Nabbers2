@@ -153,6 +153,7 @@ module.exports = {
             token
         } = req.body;
 
+
         jwt.verify(token, process.env.SECRET, (err, decoded) => {
             if (err) {
                 res.status(409).json({ error: "No valid token" });

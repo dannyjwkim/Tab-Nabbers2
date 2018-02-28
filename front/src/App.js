@@ -24,7 +24,7 @@ const Routes = (props) => (
     <Route exact path="/resetpassword" component={ResetPassword} />
     <Route exact path="/confirmation" component={Confirmation} />
     <Route exact path="/authorize" component={Integrations} />
-    <Route exact path="/secure/reset?code" component={NewPassword} />
+    <Route exact path="/secure/reset/:token" component={NewPassword} />
   </div>
 );
 export default Routes;

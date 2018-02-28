@@ -21,6 +21,7 @@ class NewPassword extends Component {
     submit = (event) => {
         event.preventDefault();
 
+
         const url = "/secure/newpassword";
         const data = {
             password: this.state.password,
