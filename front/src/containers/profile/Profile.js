@@ -26,15 +26,7 @@ const Integrations = (props) => {
                      dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
                      laboriosam dolores autem!
                 </p>
-                <p className = {props.profile.github ? "integrated" : ""} onClick={() => props.authorizeGithub("github")}>Github</p>
-            </div>
-            <div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
-                    sed in. Incidunt quae quod deserunt tempore accusantium sapiente doloribus,
-                     dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
-                     laboriosam dolores autem!
-                </p>
-                <p  className = {props.profile.twitter ? "integrated" : ""}>Twitter</p>
+                <p className = {props.profile.github ? "integrated" : ""} onClick={() => props.authorizeService("github")}>Github</p>
             </div>
             <div>
     
@@ -43,7 +35,7 @@ const Integrations = (props) => {
                      dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
                      laboriosam dolores autem!
                 </p>
-                <p className = {props.profile.eventbrite ? "integrated" : ""}>EventBrite</p>
+                <p className = {props.profile.eventbrite ? "integrated" : ""} onClick={() => props.authorizeService("eventbrite")}>EventBrite</p>
             </div>
             <div>
     
@@ -52,7 +44,7 @@ const Integrations = (props) => {
                      dignissimos asperiores temporibus nulla, a reiciendis nesciunt placeat
                      laboriosam dolores autem!
                 </p>
-                <p className = {props.profile.google ? "integrated" : ""} onClick={() => props.authorizeGithub("google")}>Google Calendar</p>
+                <p className = {props.profile.google ? "integrated" : ""} onClick={() => props.authorizeService("google")}>Google Calendar</p>
             </div>
         </section>
     );
@@ -115,7 +107,7 @@ class Profile extends Component {
         this.props.dispatch(getListIntegrations());
     };
 
-    authorizeGithub = (url, service) => {
+    authorizeService = (url, service) => {
         this.props.dispatch(authorize(url, service));
     };
 
@@ -132,7 +124,7 @@ class Profile extends Component {
         return (
             <div>
                 <Header />
-                <Content {...this.props} {...this.state} change_view={this.change_view} authorizeGithub={this.authorizeGithub} />
+                <Content {...this.props} {...this.state} change_view={this.change_view} authorizeService={this.authorizeService} />
                 <Footer />
             </div>
         );

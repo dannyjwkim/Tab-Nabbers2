@@ -126,7 +126,7 @@ module.exports = {
             html: `
             <h2>You requested to reset your password</h2>
             <p>Please click on the following link in order to reset your password<p>
-            <a href="http://localhost:3000/secure/reset/${token}">Reset password</a>
+            <a href="http://bootcruitphase1.herokuapp.com/secure/reset/${token}">Reset password</a>
             `
         };
 
